@@ -1,11 +1,8 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
 const AlignmentGeometry topleft = Alignment.topLeft;
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -19,7 +16,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
       home: Scaffold(
           // body: const Center(
           //   child: Text('Hello World'),
@@ -56,7 +52,7 @@ class MyApp extends StatelessWidget {
           // Image.asset('assets/images/back.png',
           //     height: 50, width: 50, alignment: topleft),
 
-          Image.asset('assets/images/logo.png',
+          Image.asset("assets/dsdf.png",
               height: 200, width: 200, alignment: topcenter),
 
           const Padding(
@@ -92,6 +88,8 @@ class MyApp extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
+              obscureText: true,
+              obscuringCharacter: '*',
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your password',
@@ -110,6 +108,8 @@ class MyApp extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
+              obscureText: true,
+              obscuringCharacter: '*',
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Re-enter your password',
@@ -136,7 +136,11 @@ class MyApp extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 200, 200, 200),
               textStyle: TextStyle(fontSize: 16),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return HomeScreen();
+              })));
+            },
             child: const Text('Signup'),
           ),
           // new Container(
@@ -151,17 +155,153 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RandomWords extends StatefulWidget {
-  const RandomWords({super.key});
-
+class HomeScreen extends StatefulWidget {
   @override
-  State<RandomWords> createState() => _RandomWordsState();
+  State<StatefulWidget> createState() {
+    return HomeScreenState();
+  }
 }
 
-class _RandomWordsState extends State<RandomWords> {
+class HomeScreenState extends State<HomeScreen> {
+  // String firstName;
+  // String lastName;
+  // String email;
+  // String phoneNumber;
+  // String county;
+  // String address;
+  // String city;
+  // String state;
+  // String zipCode;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  Widget firstNameTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "First Name"),
+      // validator: (String value) {
+      //   if(value.isEmpty) {
+      //     return "Name is Required";
+      //   }
+      // },
+    );
+  }
+
+  Widget lastNameTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Last Name"),
+    );
+  }
+
+  Widget emailAddressTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Email Address"),
+    );
+  }
+
+  Widget phoneNumTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Phone Number"),
+    );
+  }
+
+  Widget countyTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "County Serving"),
+    );
+  }
+
+  Widget addressTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Delivery Address"),
+    );
+  }
+
+  Widget cityTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "City"),
+    );
+  }
+
+  Widget stateTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "State"),
+    );
+  }
+
+  Widget zipTextField() {
+    return TextFormField(
+      decoration: InputDecoration(labelText: "Zip Code"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(wordPair.asPascalCase);
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.all(24),
+        child: Form(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+                child: Image(image: AssetImage("assets/dsdf.png")),
+                height: 250,
+                width: 250),
+            //Names
+            Row(
+              children: [
+                SizedBox(child: firstNameTextField(), height: 50, width: 150),
+                SizedBox(
+                  width: 50,
+                ),
+                SizedBox(child: lastNameTextField(), height: 50, width: 150)
+              ],
+            ),
+            emailAddressTextField(),
+            phoneNumTextField(),
+            countyTextField(),
+            addressTextField(),
+
+            //City / State info
+            Row(
+              children: [
+                SizedBox(
+                  child: cityTextField(),
+                  height: 50,
+                  width: 150,
+                ),
+                SizedBox(width: 50),
+                SizedBox(
+                  child: stateTextField(),
+                  height: 50,
+                  width: 60,
+                )
+              ],
+            ),
+
+            zipTextField(),
+
+            // SizedBox(
+            //   child: zipTextField(),
+            //   height: 100,
+            //   width: 150,
+            // ),
+
+            SizedBox(height: 100),
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                textStyle: TextStyle(fontSize: 16),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        )),
+      ),
+    );
   }
 }
