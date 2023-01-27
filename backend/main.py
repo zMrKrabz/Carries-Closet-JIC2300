@@ -2,20 +2,17 @@
 
 # Required imports
 import os
-import firebase_admin
-import pyrebase
-import json
 from flask import Flask, request, jsonify
-from firebase_admin import credentials, auth
+from firebase_admin import credentials, firestore, initialize_app, auth
 
 # Initialize Flask app
 app = Flask(__name__)
 
 # Initialize Firestore DB
 cred = credentials.Certificate(os.environ['PATH_TO_KEY'])
-firebase = firebase_admin.initialize_app(cred)
-db = pyrebase.initialize_app(json.load(open(os.environ['PATH_TO_KEY'])))
-todo_ref = db.collection('todos')
+default_app = initialize_app(cred)
+db = firestore.client()
+users_ref = db.collection('users')
 
 @app.route('/add', methods=['POST'])
 def create():
@@ -26,7 +23,8 @@ def create():
     """
     try:
         id = request.json['id']
-        todo_ref.document(id).set(request.json)
+        #should include id, username, password, email, and permissions
+        users_ref.document(id).set(request.json)
         return jsonify({"success": True}), 200
     except Exception as e:
         return f"An Error Occurred: {e}"
@@ -35,18 +33,21 @@ def create():
 def read():
     """
         read() : Fetches documents from Firestore collection as JSON.
-        todo : Return document that matches query ID.
-        all_todos : Return all documents.
     """
     try:
         # Check if ID was passed to URL query
-        todo_id = request.args.get('id')
-        if todo_id:
-            todo = todo_ref.document(todo_id).get()
-            return jsonify(todo.to_dict()), 200
+        user_id = request.args.get('id')
+        username = request.args.get('username')
+        if user_id is None:
+            for doc in users_ref.stream():
+                if doc.get('username') == username:
+                    user_id = doc.id
+        if user_id:
+            user = users_ref.document(user_id).get()
+            return jsonify(user.to_dict()), 200
         else:
-            all_todos = [doc.to_dict() for doc in todo_ref.stream()]
-            return jsonify(all_todos), 200
+            # all_users = [doc.to_dict() for doc in users_ref.stream()]
+            return jsonify("No user found matching given parameters."), 200
     except Exception as e:
         return f"An Error Occurred: {e}"
 
@@ -58,8 +59,13 @@ def update():
         e.g. json={'id': '1', 'title': 'Write a blog post today'}
     """
     try:
-        id = request.json['id']
-        todo_ref.document(id).update(request.json)
+        document_id = request.args.get('id')
+        if document_id is None:
+            username = request.args.get('username')
+            for doc in users_ref.stream():
+                if doc.get('username') == username:
+                    document_id = doc.id
+        users_ref.document(document_id).update(request.json)
         return jsonify({"success": True}), 200
     except Exception as e:
         return f"An Error Occurred: {e}"
@@ -71,8 +77,13 @@ def delete():
     """
     try:
         # Check for ID in URL query
-        todo_id = request.args.get('id')
-        todo_ref.document(todo_id).delete()
+        document_id = request.args.get('id')
+        if document_id is None:
+            username = request.args.get('username')
+            for doc in users_ref.stream():
+                if doc.get('username') == username:
+                    document_id = doc.id
+        users_ref.document(document_id).delete()
         return jsonify({"success": True}), 200
     except Exception as e:
         return f"An Error Occurred: {e}"
