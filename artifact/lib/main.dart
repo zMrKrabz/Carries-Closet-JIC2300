@@ -1,7 +1,10 @@
 // Copyright 2018 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+import 'package:artifact/home_page.dart';
+import 'package:artifact/login_widget.dart';
 import 'package:english_words/english_words.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -13,7 +16,7 @@ Future main() async {
 
     runApp(MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MyApp(),
+        home: main_page(),
     ));
 }
 
@@ -168,4 +171,20 @@ class _RandomWordsState extends State<RandomWords> {
     final wordPair = WordPair.random();
     return Text(wordPair.asPascalCase);
   }
+}
+
+class main_page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return HomePage();
+        } else {
+          return LoginWidget(); 
+        }
+      },
+    ),
+  );
 }
