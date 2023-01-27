@@ -1,6 +1,3 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
 import 'package:artifact/home_page.dart';
 import 'package:artifact/login_widget.dart';
 import 'package:english_words/english_words.dart';
@@ -8,16 +5,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:artifact/Screens/open_page.dart';
+import 'package:artifact/Screens/profile_page.dart';
+import 'admin_login.dart';
+
 const AlignmentGeometry topcenter = Alignment.topCenter;
 const AlignmentGeometry topleft = Alignment.topLeft;
-Future main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
 
-    runApp(MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: main_page(),
-    ));
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: OpenPage(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,59 +28,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-          // body: const Center(
-          //   child: Text('Hello World'),
-          // body: Center(
-          //   child: Text(wordPair.asPascalCase),
-          // body: const Center(
-          //   child: RandomWords(),
-          // ),
           body: Column(
         children: [
-          // RandomWords(),
-
-          // IconButton(
-          //   icon: Image.asset('assets/images/back.png'),
-          //   iconSize: 100,
-          //   onPressed: () {},
-          // )
-
-          // child: const FlatButton(
-          //   onPressed: null,
-          //   padding: EdgeInsets.all(0.0),
-          //   child: Image.asset('assets/images/back.png')
-          // ),
-
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
-          //   // Image.asset('assets/images/back.png', height: 50, width: 50, alignment: topleft),
-          //   child: Text(
-          //   'Back',
-          //   style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          SizedBox(height: 100),
-          // Image.asset('assets/images/back.png',
-          //     height: 50, width: 50, alignment: topleft),
-
-          Image.asset('assets/images/logo.png',
+          SizedBox(height: 35),
+          Row(children: [
+            SizedBox(width: 10),
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back)),
+          ]),
+          SizedBox(height: 65),
+          Image.asset("assets/dsdf1.png",
               height: 200, width: 200, alignment: topcenter),
 
           const Padding(
             padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
             child: Text(
               'Username',
-              // textAlign: TextAlign.left,
-              // overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
 
           const Padding(
-            // padding: EdgeInsets.symmetric(horizontal: 80, vertical: 4),
-            // padding: EdgeInsets.fromLTRB(80, 4, 80, 100),
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
               decoration: InputDecoration(
@@ -99,6 +74,8 @@ class MyApp extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
+              obscureText: true,
+              obscuringCharacter: '*',
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter your password',
@@ -117,6 +94,8 @@ class MyApp extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
+              obscureText: true,
+              obscuringCharacter: '*',
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Re-enter your password',
@@ -143,7 +122,11 @@ class MyApp extends StatelessWidget {
               backgroundColor: Color.fromARGB(255, 200, 200, 200),
               textStyle: TextStyle(fontSize: 16),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return ProfileForm();
+              })));
+            },
             child: const Text('Signup'),
           ),
           // new Container(
@@ -158,20 +141,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RandomWords extends StatefulWidget {
-  const RandomWords({super.key});
-
-  @override
-  State<RandomWords> createState() => _RandomWordsState();
-}
-
-class _RandomWordsState extends State<RandomWords> {
-  @override
-  Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(wordPair.asPascalCase);
-  }
-}
 
 class main_page extends StatelessWidget {
   @override
