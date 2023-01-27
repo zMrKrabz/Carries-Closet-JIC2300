@@ -3,14 +3,18 @@
 // found in the LICENSE file.
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
 const AlignmentGeometry topleft = Alignment.topLeft;
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ));
+Future main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
+    runApp(MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyApp(),
+    ));
 }
 
 class MyApp extends StatelessWidget {
