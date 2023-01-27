@@ -1,12 +1,21 @@
+import 'package:artifact/home_page.dart';
+import 'package:artifact/login_widget.dart';
+import 'package:english_words/english_words.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
-import 'package:flutter/material.dart';
 import 'admin_login.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
 const AlignmentGeometry topleft = Alignment.topLeft;
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: OpenPage(),
@@ -130,4 +139,21 @@ class MyApp extends StatelessWidget {
       )),
     );
   }
+}
+
+
+class main_page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return HomePage();
+        } else {
+          return LoginWidget(); 
+        }
+      },
+    ),
+  );
 }
