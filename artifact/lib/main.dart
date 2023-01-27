@@ -17,58 +17,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-          // body: const Center(
-          //   child: Text('Hello World'),
-          // body: Center(
-          //   child: Text(wordPair.asPascalCase),
-          // body: const Center(
-          //   child: RandomWords(),
-          // ),
           body: Column(
         children: [
-          // RandomWords(),
-
-          // IconButton(
-          //   icon: Image.asset('assets/images/back.png'),
-          //   iconSize: 100,
-          //   onPressed: () {},
-          // )
-
-          // child: const FlatButton(
-          //   onPressed: null,
-          //   padding: EdgeInsets.all(0.0),
-          //   child: Image.asset('assets/images/back.png')
-          // ),
-
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
-          //   // Image.asset('assets/images/back.png', height: 50, width: 50, alignment: topleft),
-          //   child: Text(
-          //   'Back',
-          //   style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          SizedBox(height: 100),
-          // Image.asset('assets/images/back.png',
-          //     height: 50, width: 50, alignment: topleft),
-
-          Image.asset("assets/dsdf.png",
+          SizedBox(height: 35),
+          Row(children: [
+            SizedBox(width: 10),
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back)),
+          ]),
+          SizedBox(height: 65),
+          Image.asset("assets/dsdf1.png",
               height: 200, width: 200, alignment: topcenter),
 
           const Padding(
             padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
             child: Text(
               'Username',
-              // textAlign: TextAlign.left,
-              // overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
 
           const Padding(
-            // padding: EdgeInsets.symmetric(horizontal: 80, vertical: 4),
-            // padding: EdgeInsets.fromLTRB(80, 4, 80, 100),
             padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
             child: TextField(
               decoration: InputDecoration(
@@ -244,8 +218,16 @@ class HomeScreenState extends State<HomeScreen> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(children: [
+              SizedBox(width: 10),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
+            ]),
             SizedBox(
-                child: Image(image: AssetImage("assets/dsdf.png")),
+                child: Image(image: AssetImage("assets/dsdf1.png")),
                 height: 250,
                 width: 250),
             //Names
@@ -296,7 +278,9 @@ class HomeScreenState extends State<HomeScreen> {
                 textStyle: TextStyle(fontSize: 16),
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return OpenPage();
+                })));
               },
               child: const Text('Save'),
             ),
