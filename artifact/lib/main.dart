@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/open_page.dart';
 import 'package:flutter/material.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
@@ -6,7 +7,7 @@ const AlignmentGeometry topleft = Alignment.topLeft;
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: OpenPage(),
   ));
 }
 
