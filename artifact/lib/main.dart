@@ -1,4 +1,5 @@
 import 'package:artifact/Screens/open_page.dart';
+import 'package:artifact/Screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
@@ -113,7 +114,7 @@ class MyApp extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                return HomeScreen();
+                return ProfileForm();
               })));
             },
             child: const Text('Signup'),
