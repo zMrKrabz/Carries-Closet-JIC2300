@@ -74,19 +74,3 @@ class AdminLogin extends StatelessWidget {
     );
   }
 }
-
-// class AdminLogin extends StatefulWidget {
-//   const AdminLogin({super.key});
-
-//   @override
-//   AdminLoginState createState() =>  AdminLoginState();
-// }
-
-// class  AdminLoginState extends State<AdminLogin> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-      
-//     );
-//   }
-// }
