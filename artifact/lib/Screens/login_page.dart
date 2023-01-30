@@ -1,6 +1,6 @@
 import 'package:artifact/Screens/open_page.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
+//import "package:artifact/main.dart";
 
 class LoginPage extends StatelessWidget {
   @override
@@ -10,16 +10,16 @@ class LoginPage extends StatelessWidget {
       home: Scaffold(
         body: Column(
           children: [
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Row(children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back)),
+                  icon: const Icon(Icons.arrow_back)),
             ]),
-            SizedBox(height: 65),
+            const SizedBox(height: 65),
             Image.asset("assets/dsdf1.png",
                 height: 100, width: 100, alignment: Alignment.topCenter),
             SizedBox(height: 50),
