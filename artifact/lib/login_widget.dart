@@ -1,6 +1,5 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth_email/main.dart';
 // import 'package:firebase_auth_email/utils/utils.dart';

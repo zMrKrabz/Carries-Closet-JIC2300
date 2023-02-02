@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/login_page.dart';
 import 'package:artifact/home_page.dart';
 import 'package:artifact/login_widget.dart';
 import 'package:english_words/english_words.dart';
@@ -18,7 +19,7 @@ Future main() async {
   
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: OpenPage(),
+    home: main_page(),
   ));
 }
 
@@ -151,7 +152,7 @@ class main_page extends StatelessWidget {
         if (snapshot.hasData) {
           return HomePage();
         } else {
-          return LoginWidget(); 
+          return LoginPage(); 
         }
       },
     ),
