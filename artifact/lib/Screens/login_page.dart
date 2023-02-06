@@ -1,5 +1,6 @@
 import 'package:artifact/Screens/open_page.dart';
 import "package:flutter/material.dart";
+import "package:artifact/home_page.dart";
 //import "package:artifact/main.dart";
 
 class LoginPage extends StatelessWidget {
@@ -72,7 +73,7 @@ class LoginPage extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return OpenPage();
+                  return HomePage();
                 })));
               },
               child: const Text('Login'),
