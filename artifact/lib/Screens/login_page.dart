@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 class LoginPage extends StatefulWidget {
   @override
+
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -31,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         Row(children: [
           SizedBox(width: 10),
           IconButton(
+
               onPressed: () {
                 Navigator.pop(context);
               },

@@ -152,7 +152,7 @@ class main_page extends StatelessWidget {
         if (snapshot.hasData) {
           return HomePage();
         } else {
-          return LoginPage(); 
+          return LoginPage();
         }
       },
     ),

@@ -72,12 +72,6 @@ class ProfileFormState extends State<ProfileForm> {
 
             zipTextField(),
 
-            // SizedBox(
-            //   child: zipTextField(),
-            //   height: 100,
-            //   width: 150,
-            // ),
-
             SizedBox(height: 100),
             TextButton(
               style: TextButton.styleFrom(
@@ -86,9 +80,12 @@ class ProfileFormState extends State<ProfileForm> {
                 textStyle: TextStyle(fontSize: 16),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return OpenPage();
-                })));
+                if (_formKey.currentState!.validate()) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) {
+                    return OpenPage();
+                  })));
+                }
               },
               child: const Text('Save'),
             ),
