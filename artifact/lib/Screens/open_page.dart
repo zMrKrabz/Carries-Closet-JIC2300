@@ -26,9 +26,8 @@ class OpenPage extends StatelessWidget {
                           textStyle: TextStyle(fontSize: 28)),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) {
-                          return LoginPage();
-                        })));
+                            MaterialPageRoute(builder: ((context) => LoginPage()
+                        )));
                       },
                       child:
                           Text("Login", style: TextStyle(color: Colors.black))),
@@ -40,7 +39,7 @@ class OpenPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
-                          return MyApp();
+                          return LoginPage();
                         })));
                       },
                       child: Text(
