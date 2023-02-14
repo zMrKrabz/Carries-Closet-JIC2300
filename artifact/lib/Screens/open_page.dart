@@ -1,5 +1,3 @@
-// import 'dart:html';
-
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import "package:artifact/Screens/login_page.dart";
@@ -11,6 +9,7 @@ class OpenPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           alignment: Alignment.center,
@@ -27,7 +26,9 @@ class OpenPage extends StatelessWidget {
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
-                      textStyle: TextStyle(fontSize: 28)),
+                      foregroundColor: Colors.black,
+                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                     onPressed: () {
                       Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
@@ -41,7 +42,9 @@ class OpenPage extends StatelessWidget {
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
-                      textStyle: TextStyle(fontSize: 28)),
+                      foregroundColor: Colors.black,
+                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: ((context) {
                         return MyApp();
