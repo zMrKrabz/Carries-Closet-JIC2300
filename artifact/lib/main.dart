@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/SignUp_Page.dart';
 import 'package:artifact/Screens/login_page.dart';
 import 'package:artifact/home_page.dart';
 import 'package:artifact/login_widget.dart';
@@ -5,7 +6,6 @@ import 'package:english_words/english_words.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'admin_login.dart';
@@ -19,7 +19,7 @@ Future main() async {
   
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: main_page(),
+    home: OpenPage(),
   ));
 }
 
@@ -143,7 +143,11 @@ class MyApp extends StatelessWidget {
 }
 
 
-class main_page extends StatelessWidget {
+class MainPage extends StatelessWidget {
+  final bool isLogin;
+  
+  const MainPage({super.key, required this.isLogin});
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: StreamBuilder<User?>(
@@ -151,8 +155,10 @@ class main_page extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return HomePage();
-        } else {
+        } else if (isLogin) {
           return LoginPage();
+        } else {
+          return SignUpPage();
         }
       },
     ),

@@ -4,15 +4,14 @@ import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import 'package:firebase_core/firebase_core.dart';
 
-// To do: Figure out why this page wont render when login button is pressed in
-// open_page when you press login
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
@@ -42,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 100, width: 100, alignment: Alignment.topCenter),
         SizedBox(height: 50),
         Text(
-          "User Login",
+          "User Sign Up",
           style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
         ),
         SizedBox(
@@ -93,16 +92,23 @@ class _LoginPageState extends State<LoginPage> {
             backgroundColor: Color.fromARGB(255, 200, 200, 200),
             textStyle: TextStyle(fontSize: 16),
           ),
-          onPressed: signIn,
-          child: const Text('Login'),
+          onPressed: signUp,
+          child: const Text('Sign Up!'),
         ),
       ],
     ),
   );
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
     );
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: ((context) {
+        return const MainPage(isLogin: true);
+      }
+    )));
   }
 }

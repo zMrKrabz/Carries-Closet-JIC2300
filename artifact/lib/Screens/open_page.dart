@@ -1,11 +1,19 @@
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import "package:artifact/Screens/login_page.dart";
+import 'package:artifact/Screens/signup_page.dart';
 
-class OpenPage extends StatelessWidget {
+class OpenPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  _OpenPageState createState() => _OpenPageState();
+}
+
+class _OpenPageState extends State<OpenPage> {
+  bool isLogin = true;
+
+  @override
+  Widget build(BuildContext context) => 
+    Scaffold(
         body: Container(
             alignment: Alignment.center,
             child: Column(
@@ -24,11 +32,11 @@ class OpenPage extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                           minimumSize: Size(280, 80),
                           textStyle: TextStyle(fontSize: 28)),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) => LoginPage()
-                        )));
-                      },
+                          onPressed: () {
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) => MainPage(isLogin: isLogin)
+                          )));
+                        },
                       child:
                           Text("Login", style: TextStyle(color: Colors.black))),
                   SizedBox(height: 50),
@@ -36,18 +44,17 @@ class OpenPage extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                           minimumSize: Size(280, 80),
                           textStyle: TextStyle(fontSize: 28)),
-                      onPressed: () {
-                        Navigator.push(context,
+                          onPressed: () => {
+                            Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
-                          return LoginPage();
-                        })));
-                      },
-                      child: Text(
+                              return MainPage(isLogin: !isLogin);
+                            })))
+                          },
+                      child: const Text(
                         "Signup",
                         style: TextStyle(color: Colors.black),
-                      )),
+                  )),
                 ])
               ],
             )));
   }
-}
