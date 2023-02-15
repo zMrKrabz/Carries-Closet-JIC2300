@@ -5,49 +5,116 @@ import "package:artifact/Screens/login_page.dart";
 class OpenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
         body: Container(
-            alignment: Alignment.center,
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 100,
-                ),
-                Image.asset("assets/dsdf1.png",
-                    height: 350, width: 350, alignment: topcenter),
-                SizedBox(
-                  height: 100,
-                ),
-                Column(children: [
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset("assets/dsdf1.png",
+                alignment: topcenter,
+                width: width * 3.0 / 4.0,
+                height: width * 3.0 / 4.0
+              ),
+              Column(
+                children: [
                   OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(280, 80),
-                          textStyle: TextStyle(fontSize: 28)),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) => LoginPage()
-                        )));
-                      },
-                      child:
-                          Text("Login", style: TextStyle(color: Colors.black))),
-                  SizedBox(height: 50),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
+                      foregroundColor: Colors.black,
+                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                    onPressed: () {
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) {
+                        return LoginPage();
+                      })));
+                    },
+                    child:
+                      Text("Login", style: TextStyle(color: Colors.black))
+                  ),
+                  SizedBox(height: height * 1.0 / 18.0),
                   OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(280, 80),
-                          textStyle: TextStyle(fontSize: 28)),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) {
-                          return LoginPage();
-                        })));
-                      },
-                      child: Text(
-                        "Signup",
-                        style: TextStyle(color: Colors.black),
-                      )),
-                ])
-              ],
-            )));
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
+                      foregroundColor: Colors.black,
+                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                        return MyApp();
+                      })));
+                    },
+                    child: Text("Signup", style: TextStyle(color: Colors.black))
+                  ),
+                ],
+              )
+            ],
+          )
+        )
+      )
+    );
   }
 }
+// class OpenPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // double densityAmt = 0.0;
+//     //   VisualDensity density = VisualDensity(horizontal: densityAmt, vertical: densityAmt);
+//     return MaterialApp(
+//       // theme: ThemeData(visualDensity: density),
+//       home: Scaffold(
+//         body: Container(
+//             alignment: Alignment.center,
+//             child: Column(
+//               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               children: [
+//                 SizedBox(
+//                   height: 100,
+//                 ),
+//                 Image.asset("assets/dsdf1.png",
+//                     height: 350, width: 350, alignment: topcenter),
+//                 SizedBox(
+//                   height: 100,
+//                 ),
+//                 Column(children: [
+//                   OutlinedButton(
+//                       style: OutlinedButton.styleFrom(
+//                           minimumSize: Size(280, 80),
+//                           textStyle: TextStyle(fontSize: 28)),
+//                       onPressed: () {
+//                         Navigator.push(context,
+//                             MaterialPageRoute(builder: ((context) {
+//                           return LoginPage();
+//                         })));
+//                       },
+//                       child:
+//                           Text("Login", style: TextStyle(color: Colors.black))),
+//                   SizedBox(height: 50),
+//                   OutlinedButton(
+//                       style: OutlinedButton.styleFrom(
+//                           minimumSize: Size(280, 80),
+//                           textStyle: TextStyle(fontSize: 28)),
+//                       onPressed: () {
+//                         Navigator.push(context,
+//                             MaterialPageRoute(builder: ((context) {
+//                           return MyApp();
+//                         })));
+//                       },
+//                       child: Text(
+//                         "Signup",
+//                         style: TextStyle(color: Colors.black),
+//                       )),
+//                 ])
+//               ],
+//             )
+//           )
+//         )
+//       );
+//   }
+// }
