@@ -30,80 +30,85 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) => Material(
     child: Column(
-      children: [
+          children: [
         SizedBox(height: 35),
-        Row(children: [
+            Row(children: [
           SizedBox(width: 10),
-          IconButton(
+              IconButton(
 
-              onPressed: () {
+                  onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return HomePage();
+                  return OpenPage();
                 })));
-              },
+                  },
               icon: Icon(Icons.arrow_back)),
-        ]),
+            ]),
         SizedBox(height: 65),
-        Image.asset("assets/dsdf1.png",
-            height: 100, width: 100, alignment: Alignment.topCenter),
-        SizedBox(height: 50),
-        Text(
-          "User Login",
-          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
-          child: Text(
-            'Username',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
+            Image.asset("assets/dsdf1.png",
+                height: 100, width: 100, alignment: Alignment.topCenter),
+            SizedBox(height: 50),
+            Text(
+              "User Login",
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
+              child: Text(
+                'Username',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
         Padding(
-          padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-          child: TextField(
+              padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
+              child: TextField(
             controller: emailController,
             textInputAction: TextInputAction.done,
             cursorColor: Colors.white,
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter your username',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your username',
+                ),
+              ),
             ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 0, top: 0, right: 200, bottom: 0),
-          child: Text(
-            'Password',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
+            const Padding(
+              padding: EdgeInsets.only(left: 0, top: 0, right: 200, bottom: 0),
+              child: Text(
+                'Password',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
         Padding(
-          padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-          child: TextField(
+              padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
+              child: TextField(
             controller: passwordController,
             textInputAction: TextInputAction.done,
-            obscureText: true,
-            obscuringCharacter: '*',
+                obscureText: true,
+                obscuringCharacter: '*',
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter your password',
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your password',
+                ),
+              ),
             ),
-          ),
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                textStyle: TextStyle(fontSize: 16),
+              ),
+              onPressed: () {
+                signIn;
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                    return HomePage();
+                })));
+              },
+              child: const Text('Login'),
+            ),
+          ],
         ),
-        TextButton(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 200, 200, 200),
-            textStyle: TextStyle(fontSize: 16),
-          ),
-          onPressed: signIn,
-          child: const Text('Login'),
-        ),
-      ],
-    ),
   );
   Future signIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -113,101 +118,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-//     return MaterialApp(
-//       home: Scaffold(
-//         body: ListView(
-//           children: [
-//             Row(
-//               children: [
-//                 SizedBox(width: width * 1.0 / 24.0),
-//                 IconButton(
-//                   iconSize: width * 1.0 / 18.0,
-//                   onPressed: () {
-//                     Navigator.pop(context);
-//                   },
-//                   icon: const Icon(Icons.arrow_back)
-//                 ),
-//               ],
-//             ),
-//             Image.asset("assets/dsdf1.png",
-//               height: width * 1.0 / 3.0, 
-//               width: width * 1.0 / 3.0, 
-//               alignment: Alignment.topCenter
-//             ),
-//             SizedBox(height: height * 1.0 / 18.0),
-//             const Text(
-//               "User Login",
-//               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-//               textAlign: TextAlign.center
-//             ),
-//             SizedBox(height: height * 1.0 / 18.0),
-//             Container(alignment: Alignment.center,
-//             width: )
-//             Column(
-//               children: const [
-//                 Padding(
-//                   padding: EdgeInsets.only(left: 0, top: 0, right: 190, bottom: 0),
-//                   child: Text(
-//                     'Username',
-//                     style: TextStyle(fontWeight: FontWeight.bold),
-//                   ),
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-//                   child: TextField(
-//                     decoration: InputDecoration(
-//                       border: OutlineInputBorder(),
-//                       hintText: 'Enter your username',
-//                     ),
-//                   ),
-//                 ),
-//               ]
-//             ),
-//             Column(
-//               children: const[
-//                 Padding(
-//                   padding: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 0),
-//                   child: Text(
-//                     'Password',
-//                     style: TextStyle(fontWeight: FontWeight.bold),
-//                   ),
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-//                   child: TextField(
-//                     obscureText: true,
-//                     obscuringCharacter: '*',
-//                     decoration: InputDecoration(
-//                       border: OutlineInputBorder(),
-//                       hintText: 'Enter your password',
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             Container(
-//               alignment: Alignment.center,
-//               width: width * 1.0 / 6.0,
-//               height: height * 1.0 / 9.0,
-//               child: TextButton(
-//                 style: TextButton.styleFrom(
-//                   foregroundColor: Colors.black,
-//                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
-//                   textStyle: TextStyle(fontSize: 16),
-//                 ),
-//                 onPressed: () {
-//                   Navigator.push(context, MaterialPageRoute(builder: ((context) {
-//                     return HomePage();
-//                   })));
-//               },
-//                 child: const Text('Login'))
-//             )
-//           ]
-//         )
-//       )
-//     );
-//   }
-// }
 // class LoginPage extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
