@@ -1,3 +1,4 @@
+import 'package:artifact/main.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,9 +31,10 @@ class HomePage extends StatelessWidget {
                     backgroundColor: Color.fromARGB(255, 200, 200, 200),
                     textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   onPressed: () {
+                    FirebaseAuth.instance.signOut();
                     Navigator.push(context,
                     MaterialPageRoute(builder: ((context) {
-                      return LoginPage();
+                      return const MainPage(isLogin: true);
                     })));
                   },
                   child: const Text('Logout')
