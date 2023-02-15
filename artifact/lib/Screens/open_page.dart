@@ -1,16 +1,19 @@
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import "package:artifact/Screens/login_page.dart";
+import 'package:artifact/Screens/signup_page.dart';
 
-class OpenPage extends StatelessWidget {
+class OpenPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+  _OpenPageState createState() => _OpenPageState();
+}
+
+class _OpenPageState extends State<OpenPage> {
+  bool isLogin = true;
+
+  @override
+  Widget build(BuildContext context) => 
+    Scaffold(
         body: Container(
           alignment: Alignment.center,
           child: Column(

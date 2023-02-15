@@ -9,7 +9,6 @@ import "package:artifact/main.dart";
 
 class LoginPage extends StatefulWidget {
   @override
-
   _LoginPageState createState() => _LoginPageState();
 }
 
