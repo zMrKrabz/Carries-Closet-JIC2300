@@ -12,8 +12,11 @@ class _OpenPageState extends State<OpenPage> {
   bool isLogin = true;
 
   @override
-  Widget build(BuildContext context) => 
-    Scaffold(
+  Widget build(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+  return Scaffold(
+
         body: Container(
           alignment: Alignment.center,
           child: Column(
@@ -35,7 +38,7 @@ class _OpenPageState extends State<OpenPage> {
                     onPressed: () {
                       Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                        return LoginPage();
+                        return MainPage(isLogin: isLogin);
                       })));
                     },
                     child:
@@ -50,7 +53,7 @@ class _OpenPageState extends State<OpenPage> {
                       textStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                        return MyApp();
+                        return MainPage(isLogin: !isLogin);
                       })));
                     },
                     child: Text("Signup", style: TextStyle(color: Colors.black))
@@ -60,7 +63,6 @@ class _OpenPageState extends State<OpenPage> {
             ],
           )
         )
-      )
     );
   }
 }

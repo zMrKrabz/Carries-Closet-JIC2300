@@ -101,12 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
                   textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {
-                  signIn;
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                    return HomePage();
-                  })));
-                },
+                onPressed: signIn,
+              
+                  // Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  //   return HomePage();
+                  // })));
                 child: const Text('Login'),
               ),
             ]
@@ -117,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
+    print("this function is being called");
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
