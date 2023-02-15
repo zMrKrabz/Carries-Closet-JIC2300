@@ -10,6 +10,7 @@ import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'Screens/sign_up_page.dart';
 import 'admin_login.dart';
+import 'home_page.dart';
 
 const AlignmentGeometry topcenter = Alignment.topCenter;
 const AlignmentGeometry topleft = Alignment.topLeft;
