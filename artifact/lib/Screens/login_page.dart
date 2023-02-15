@@ -1,8 +1,11 @@
 import 'package:artifact/Screens/open_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+
+import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 import 'package:firebase_core/firebase_core.dart';
+
 
 // To do: Figure out why this page wont render when login button is pressed in
 // open_page when you press login
@@ -34,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
           IconButton(
 
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return HomePage();
+                })));
               },
               icon: Icon(Icons.arrow_back)),
         ]),
