@@ -97,7 +97,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                       cursorColor: Colors.white,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Hygenic Item',
+                        labelText: 'Article of Clothing',
                         hintText: 'Enter the item',
                       ),
                     ),
