@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
+import 'package:artifact/Screens/clothing_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -55,7 +56,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return HygienePage();
+                    return ClothingPage();
                   })));
                 },
                 child: const Text('Create a Request')),
