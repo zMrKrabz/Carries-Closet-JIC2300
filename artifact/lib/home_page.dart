@@ -58,10 +58,9 @@ class HomePage extends StatelessWidget {
                 backgroundColor: Color.fromARGB(255, 200, 200, 200),
                 textStyle: const TextStyle(fontSize: 24)),
               onPressed: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: ((context) {
-                  return HomePage();
-                 })));
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => RequestPopUp(context));
               },
               child: const Text('Create a Request')
             ),
@@ -101,6 +100,57 @@ class HomePage extends StatelessWidget {
           ],
         )
       )
+    );
+  }
+
+  Widget RequestPopUp(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    
+    return AlertDialog(
+      //title: const Text('Please select the type of request form:'),
+      actions: [
+        SizedBox(height: height * 1.0 / 40.0),
+        const Text(
+          'What type of item are you requesting?',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
+        ),
+        SizedBox(height: height * 1.0 / 40.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                    minimumSize: Size(width * 7.0 / 24.0, height * 1.0 / 10.0),
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return HomePage();
+                })));
+              },
+              child: const Text('Clothing'),
+            ),
+            SizedBox(width: width * 1.0 / 12.0),
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                    minimumSize: Size(width * 7.0 / 24.0, height * 1.0 / 10.0),
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return HomePage();
+                })));
+              },
+              child: const Text('Hygiene')
+            )
+          ]
+        ),
+        SizedBox(height: height * 1.0 / 40.0)
+      ]
     );
   }
 }
