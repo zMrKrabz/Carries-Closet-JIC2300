@@ -13,6 +13,13 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final emailController = TextEditingController();
+
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -52,8 +59,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               SizedBox(height: height * 1.0 / 5.0),
               Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-              child: const TextField(
-                //controller: passwordController,
+              child: TextField(
+                controller: emailController,
                 textInputAction: TextInputAction.done,
                 // obscureText: true,
                 // obscuringCharacter: '*',
@@ -64,9 +71,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ),
             ),
+            SizedBox(height: height * 1.0 / 9.0),
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
+                foregroundColor: Colors.black,
+                backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              onPressed: resetPassword,
+              child: const Text('Reset Password'),
+            ),
             ]
           )
         )
     );
+  }
+  Future resetPassword() async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text.trim());
   }
 }
