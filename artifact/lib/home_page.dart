@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
+                        return ProfileForm();
                       })));
                     },
                     child: const Text('Profile')),
