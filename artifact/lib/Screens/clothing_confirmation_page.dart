@@ -191,7 +191,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      submitClothing();
+                      submitDB();
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HomePage();
@@ -202,7 +202,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 ]))));
   }
 
-  Future submitClothing() async {
+  Future submitDB() async {
     print('submit clothing called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS

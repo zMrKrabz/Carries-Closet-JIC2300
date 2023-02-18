@@ -191,7 +191,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      submitHygiene();
+                      submitDB();
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HomePage();
@@ -202,7 +202,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                 ]))));
   }
 
-  Future submitHygiene() async {
+  Future submitDB() async {
     print('submit hygiene called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
