@@ -2,7 +2,7 @@ import 'package:artifact/Screens/open_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
-import 'package:artifact/Screens/hygiene_confirmation_page.dart';
+import 'package:artifact/Screens/clothing_confirmation_page.dart';
 import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 
@@ -172,7 +172,7 @@ class _ClothingPageState extends State<ClothingPage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HygieneConfirmationPage(
+                        return ClothingConfirmationPage(
                           gender: genderController.text,
                           age: ageController.text,
                           item: itemController.text,

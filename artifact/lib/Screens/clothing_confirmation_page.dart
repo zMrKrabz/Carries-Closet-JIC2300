@@ -6,6 +6,8 @@ import 'package:artifact/Screens/clothing_page.dart';
 import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 
+import 'package:http/http.dart' as http;
+
 class ClothingConfirmationPage extends StatefulWidget {
   final String gender, age, item, size, emergency, address, notes;
   const ClothingConfirmationPage(
@@ -189,6 +191,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
+                      submitClothing();
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HomePage();
@@ -197,5 +200,25 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                     child: const Text('Submit Request'),
                   ),
                 ]))));
+  }
+
+  Future submitClothing() async {
+    print('submit clothing called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/requests/clothing/create')
+        : Uri.parse('http://10.0.2.2:8080/requests/clothing/create');
+
+    var response = await http.post(url, body: {
+      'gender': widget.gender,
+      'age': widget.age,
+      'item': widget.item,
+      'size': widget.size,
+      'emergency': widget.emergency,
+      'address': widget.address,
+      'notes': widget.notes
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 }

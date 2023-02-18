@@ -6,6 +6,8 @@ import 'package:artifact/Screens/hygiene_page.dart';
 import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 
+import 'package:http/http.dart' as http;
+
 class HygieneConfirmationPage extends StatefulWidget {
   final String gender, age, item, size, emergency, address, notes;
   const HygieneConfirmationPage(
@@ -189,6 +191,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
+                      submitHygiene();
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HomePage();
@@ -197,5 +200,25 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     child: const Text('Submit Request'),
                   ),
                 ]))));
+  }
+
+  Future submitHygiene() async {
+    print('submit hygiene called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/requests/hygiene/create')
+        : Uri.parse('http://10.0.2.2:8080/requests/hygiene/create');
+
+    var response = await http.post(url, body: {
+      'gender': widget.gender,
+      'age': widget.age,
+      'item': widget.item,
+      'size': widget.size,
+      'emergency': widget.emergency,
+      'address': widget.address,
+      'notes': widget.notes
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 }
