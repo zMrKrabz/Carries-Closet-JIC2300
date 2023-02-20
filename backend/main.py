@@ -37,7 +37,7 @@ def add_user():
     try:
         # should include username, password, email, and permissions
         doc_id = users_ref.add(request.form)
-        return jsonify({"success": True, "id": doc_id}), 201
+        return jsonify({"success": True, "id": doc_id[1].id}), 201
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
@@ -124,7 +124,7 @@ def create_hygiene_request():
         form_data['type'] = 'hygiene'
         form_data['status'] = 'submitted'
         doc_id = requests_ref.add(form_data)
-        return jsonify({"success": True, "id": doc_id}), 201
+        return jsonify({"success": True, "id": doc_id[1].id}), 201
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
@@ -142,7 +142,7 @@ def create_clothing_request():
         form_data['type'] = 'clothing'
         form_data['status'] = 'submitted'
         doc_id = requests_ref.add(form_data)
-        return jsonify({"success": True, "id": doc_id}), 201
+        return jsonify({"success": True, "id": doc_id[1].id}), 201
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
