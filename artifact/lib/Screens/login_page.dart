@@ -2,7 +2,7 @@ import 'package:artifact/Screens/open_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
-
+import "package:artifact/Screens/forgot_password.dart";
 import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 
@@ -22,12 +22,11 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
         child: Column(
@@ -98,7 +97,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: height * 1.0 / 9.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 40.0),
+              child: TextButton(
+                child: Text('Forgot Password?'),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                      return ForgotPassword();
+                  })));
+                }
+              )
+            ),
+            SizedBox(height: height * 2.0 / 27.0),
             TextButton(
               style: TextButton.styleFrom(
                 minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
