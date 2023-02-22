@@ -1,8 +1,11 @@
 // import 'dart:html';
 import 'package:artifact/home_page.dart';
 import 'package:artifact/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/Screens/open_page.dart';
+
+import 'package:http/http.dart' as http;
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -14,7 +17,31 @@ class ProfileForm extends StatefulWidget {
 }
 
 class ProfileFormState extends State<ProfileForm> {
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
+  static final firstNameController = TextEditingController();
+  static final lastNameController = TextEditingController();
+  static final emailController = TextEditingController();
+  static final phoneController = TextEditingController();
+  static final countryController = TextEditingController();
+  static final addressController = TextEditingController();
+  static final cityController = TextEditingController();
+  static final stateController = TextEditingController();
+  static final zipController = TextEditingController();
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    countryController.dispose();
+    addressController.dispose();
+    cityController.dispose();
+    stateController.dispose();
+    zipController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +109,9 @@ class ProfileFormState extends State<ProfileForm> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return HomePage();
-                      })));
+                      bool isIOS =
+                          Theme.of(context).platform == TargetPlatform.iOS;
+                      update_user_info(isIOS, context);
                     }
                   },
                   child: const Text('Save'),
@@ -97,8 +123,39 @@ class ProfileFormState extends State<ProfileForm> {
   }
 }
 
+Future update_user_info(bool isIOS, var context) async {
+  var uid = FirebaseAuth.instance.currentUser!.uid;
+  if (uid == null || uid == "") {
+    print("failed: no current user");
+    return;
+  }
+
+  Uri url = isIOS
+      ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
+      : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
+
+  var response = await http.patch(url, body: {
+    'firstName': ProfileFormState.firstNameController.text,
+    'lastName': ProfileFormState.lastNameController.text,
+    //email would require special handling to change the firebase auth email, so ignoring for now
+    'phone': ProfileFormState.phoneController.text,
+    'country': ProfileFormState.countryController.text,
+    'address': ProfileFormState.addressController.text,
+    'city': ProfileFormState.cityController.text,
+    'state': ProfileFormState.stateController.text,
+    'zip': ProfileFormState.zipController.text
+  });
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
+
+  Navigator.push(context, MaterialPageRoute(builder: ((context) {
+    return HomePage();
+  })));
+}
+
 Widget firstNameTextField() {
   return TextFormField(
+    controller: ProfileFormState.firstNameController,
     decoration: const InputDecoration(
       labelText: "First Name",
       border: OutlineInputBorder(),
@@ -114,6 +171,7 @@ Widget firstNameTextField() {
 
 Widget lastNameTextField() {
   return TextFormField(
+    controller: ProfileFormState.lastNameController,
     decoration: const InputDecoration(
       labelText: "Last Name",
       border: OutlineInputBorder(),
@@ -129,6 +187,7 @@ Widget lastNameTextField() {
 
 Widget emailAddressTextField() {
   return TextFormField(
+    controller: ProfileFormState.emailController,
     decoration: const InputDecoration(
       labelText: "Email Address",
       border: OutlineInputBorder(),
@@ -144,6 +203,7 @@ Widget emailAddressTextField() {
 
 Widget phoneNumTextField() {
   return TextFormField(
+    controller: ProfileFormState.phoneController,
     decoration: const InputDecoration(
       labelText: "Phone Number",
       border: OutlineInputBorder(),
@@ -159,6 +219,7 @@ Widget phoneNumTextField() {
 
 Widget countyTextField() {
   return TextFormField(
+    controller: ProfileFormState.countryController,
     decoration: const InputDecoration(
       labelText: "County Serving",
       border: OutlineInputBorder(),
@@ -174,6 +235,7 @@ Widget countyTextField() {
 
 Widget addressTextField() {
   return TextFormField(
+    controller: ProfileFormState.addressController,
     decoration: const InputDecoration(
       labelText: "Delivery Address",
       border: OutlineInputBorder(),
@@ -189,6 +251,7 @@ Widget addressTextField() {
 
 Widget cityTextField() {
   return TextFormField(
+    controller: ProfileFormState.cityController,
     decoration: const InputDecoration(
       labelText: "City",
       border: OutlineInputBorder(),
@@ -204,6 +267,7 @@ Widget cityTextField() {
 
 Widget stateTextField() {
   return TextFormField(
+    controller: ProfileFormState.stateController,
     decoration: const InputDecoration(
       labelText: "State",
       border: OutlineInputBorder(),
@@ -219,6 +283,7 @@ Widget stateTextField() {
 
 Widget zipTextField() {
   return TextFormField(
+    controller: ProfileFormState.zipController,
     decoration: const InputDecoration(
       labelText: "Zip Code",
       border: OutlineInputBorder(),
