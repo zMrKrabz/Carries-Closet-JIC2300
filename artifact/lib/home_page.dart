@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
+import 'package:artifact/Screens/view_users.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -17,9 +18,9 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            body: Column(children: [
-          SizedBox(height: height * 1.0 / 13.5),
-          Row(textDirection: TextDirection.rtl, children: [
+          body: Column(children: [
+            SizedBox(height: height * 1.0 / 13.5),
+            Row(textDirection: TextDirection.rtl, children: [
             SizedBox(width: width * 1.0 / 12.0),
             OutlinedButton(
                 style: OutlinedButton.styleFrom(
@@ -91,10 +92,13 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
+                        //return HomePage();
+                        return ViewUsersPage();
                       })));
                     },
-                    child: const Text('Profile')),
+                    //child: const Text('Profile')),
+                    child: const Text('View Users')
+                )
               ])
             ],
           )
