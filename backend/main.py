@@ -161,7 +161,19 @@ def list_clothing_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        if document_id is None:
+        uid = request.args.get('uid')
+        if uid is not None:
+            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
+            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
+            removed_documents = []
+            for i in range(len(all_requests)):
+                request_document = all_requests[i]
+                if request_document['type'].lower() != 'clothing' or request_document['uid'] != uid:
+                    removed_documents.append(request_document)
+            for document in removed_documents:
+                all_requests.remove(document)
+            return jsonify(all_requests), 200
+        elif document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             removed_documents = []
@@ -185,7 +197,19 @@ def list_hygiene_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        if document_id is None:
+        uid = request.args.get('uid')
+        if uid is not None:
+            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
+            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
+            removed_documents = []
+            for i in range(len(all_requests)):
+                request_document = all_requests[i]
+                if request_document['type'].lower() != 'hygiene' or request_document['uid'] != uid:
+                    removed_documents.append(request_document)
+            for document in removed_documents:
+                all_requests.remove(document)
+            return jsonify(all_requests), 200
+        elif document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             removed_documents = []
@@ -209,7 +233,19 @@ def list_all_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        if document_id is None:
+        uid = request.args.get('uid')
+        if uid is not None:
+            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
+            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
+            removed_documents = []
+            for i in range(len(all_requests)):
+                request_document = all_requests[i]
+                if request_document['uid'] != uid:
+                    removed_documents.append(request_document)
+            for document in removed_documents:
+                all_requests.remove(document)
+            return jsonify(all_requests), 200
+        elif document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             return jsonify(all_requests), 200
