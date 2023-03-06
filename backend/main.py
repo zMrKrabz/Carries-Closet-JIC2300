@@ -38,8 +38,9 @@ def add_user():
     try:
         # should include username, password, email, and permissions
         if request.form.get('id') is None:
-            doc_id = users_ref.add(request.form)
-            return jsonify({"success": True, "id": doc_id[1].id}), 201
+            #doc_id = users_ref.add(request.form)
+            #return jsonify({"success": True, "id": doc_id[1].id}), 201
+            return jsonify({"success": False, "reason": "No UID provided."}), 400
         else:
             users_ref.document(request.form['id']).set(request.form)
             return jsonify({"success": True, "id": request.form['id']}), 201
@@ -49,6 +50,7 @@ def add_user():
 
 
 @app.route('/users', methods=['GET'])
+@app.route('/users/list', methods=['GET'])
 def get_user():
     """
         get_user() : Fetches documents from Firestore collection as JSON.
@@ -65,8 +67,9 @@ def get_user():
             user = users_ref.document(user_id).get()
             return jsonify(user.to_dict()), 200
         else:
-            # all_users = [doc.to_dict() for doc in users_ref.stream()]
-            return jsonify("No user found matching given parameters."), 404
+            all_users = [doc.to_dict() for doc in users_ref.stream()]
+            return jsonify(all_users), 200
+            # return jsonify("No user found matching given parameters."), 404
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
