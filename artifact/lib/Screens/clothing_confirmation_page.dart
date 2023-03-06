@@ -209,6 +209,12 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
         ? Uri.parse('http://127.0.0.1:8080/requests/clothing/create')
         : Uri.parse('http://10.0.2.2:8080/requests/clothing/create');
 
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    if (uid == null || uid == "") {
+      print("failed: no current user");
+      return;
+    }
+
     var response = await http.post(url, body: {
       'gender': widget.gender,
       'age': widget.age,
@@ -216,7 +222,8 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
       'size': widget.size,
       'emergency': widget.emergency,
       'address': widget.address,
-      'notes': widget.notes
+      'notes': widget.notes,
+      'uid': uid
     });
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
