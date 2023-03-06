@@ -38,8 +38,8 @@ def add_user():
     try:
         # should include username, password, email, and permissions
         if request.form.get('id') is None:
-            #doc_id = users_ref.add(request.form)
-            #return jsonify({"success": True, "id": doc_id[1].id}), 201
+            # doc_id = users_ref.add(request.form)
+            # return jsonify({"success": True, "id": doc_id[1].id}), 201
             return jsonify({"success": False, "reason": "No UID provided."}), 400
         else:
             users_ref.document(request.form['id']).set(request.form)
@@ -59,11 +59,11 @@ def get_user():
         # Check if ID was passed to URL query
         user_id = request.args.get('id')
         username = request.args.get('username')
-        if user_id is None:
+        if user_id is None and username is not None:
             for doc in users_ref.stream():
                 if doc.get('username') == username:
                     user_id = doc.id
-        if user_id:
+        if user_id is not None:
             user = users_ref.document(user_id).get()
             return jsonify(user.to_dict()), 200
         else:
