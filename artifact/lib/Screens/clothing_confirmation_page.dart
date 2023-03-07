@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import 'package:artifact/Screens/clothing_page.dart';
-import 'package:artifact/admin_home_page.dart';
+import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
-import 'package:artifact/home_page.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -44,10 +43,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: ((context) {
-                                return HomePage();
-                              })));
+                              Navigator.pop(context);
                             },
                             icon: const Icon(Icons.arrow_back))),
                     Align(

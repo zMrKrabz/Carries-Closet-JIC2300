@@ -17,8 +17,17 @@ class ClothingPage extends StatefulWidget {
 }
 
 class _ClothingPageState extends State<ClothingPage> {
-  final List genders = ["Male", "Female", "Other"];
-  String? genderValue = "Male";
+  final List genders = ["Male", "Female", "Non-binary", "Other"];
+  String? genderValue;
+
+  final List items = ["Shirt", "Pants", "Jacket"];
+  String? itemValue;
+
+  final List sizes = ["Small", "Medium", "Large", "X-Large"];
+  String? sizeValue;
+
+  final List emergency = ["Yes", "No"];
+  String? emergencyValue;
 
   final genderController = TextEditingController();
   final ageController = TextEditingController();
@@ -62,30 +71,21 @@ class _ClothingPageState extends State<ClothingPage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    // child: DropdownButton(
-                    //   hint: Text("Please select a gender"),
-                    //   value: genderValue,
-                    //   onChanged: (val) {
-                    //     setState(() {
-                    //       genderValue = val as String;
-                    //     });
-                    //   },
-                    //   items: genders.map((valueItem) {
-                    //     return DropdownMenuItem(
-                    //       value: valueItem,
-                    //       child: Text(valueItem),
-                    //     );
-                    //   }).toList(),
-                    // ),
-                    child: TextField(
-                      controller: genderController,
-                      textInputAction: TextInputAction.done,
-                      cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Gender',
-                        hintText: 'Enter the gender',
-                      ),
+                    child: DropdownButtonFormField(
+                      hint: Text("Please select a gender"),
+                      value: genderValue,
+                      onChanged: (val) {
+                        setState(() {
+                          genderValue = val as String;
+                        });
+                      },
+                      items: genders.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      decoration: InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -107,45 +107,63 @@ class _ClothingPageState extends State<ClothingPage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: TextField(
-                      controller: itemController,
-                      textInputAction: TextInputAction.done,
-                      cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Article of Clothing',
-                        hintText: 'Enter the item',
-                      ),
+                    child: DropdownButtonFormField(
+                      hint: Text("Please select a piece of clothing"),
+                      value: itemValue,
+                      onChanged: (val) {
+                        setState(() {
+                          itemValue = val as String;
+                        });
+                      },
+                      items: items.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      decoration: InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: TextField(
-                      controller: sizeController,
-                      textInputAction: TextInputAction.done,
-                      cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Size',
-                        hintText: 'Enter the size or N/A if not needed',
-                      ),
+                    child: DropdownButtonFormField(
+                      hint: Text("Please select a size"),
+                      value: sizeValue,
+                      onChanged: (val) {
+                        setState(() {
+                          sizeValue = val as String;
+                        });
+                      },
+                      items: sizes.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      decoration: InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: TextField(
-                      controller: emergencyController,
-                      textInputAction: TextInputAction.done,
-                      cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Emergency',
-                        hintText: 'Yes or No',
-                      ),
+                    child: DropdownButtonFormField(
+                      hint: Text("Please select if it's an Emergency"),
+                      value: emergencyValue,
+                      onChanged: (val) {
+                        setState(() {
+                          emergencyValue = val as String;
+                        });
+                      },
+                      items: emergency.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                      decoration: InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -189,14 +207,26 @@ class _ClothingPageState extends State<ClothingPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
+                      // if (genderValue.toString().compareTo("null") == 0) {
+                      //   genderValue = "N/A";
+                      // }
+                      // if (itemValue.toString().compareTo("null") == 0) {
+                      //   itemValue = "N/A";
+                      // }
+                      // if (sizeValue.toString().compareTo("null") == 0) {
+                      //   sizeValue = "N/A";
+                      // }
+                      // if (emergencyValue.toString().compareTo("null") == 0) {
+                      //   emergencyValue = "N/A";
+                      // }
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return ClothingConfirmationPage(
-                          gender: genderController.text,
+                          gender: genderValue.toString(),
                           age: ageController.text,
-                          item: itemController.text,
-                          size: sizeController.text,
-                          emergency: emergencyController.text,
+                          item: itemValue.toString(),
+                          size: sizeValue.toString(),
+                          emergency: emergencyValue.toString(),
                           address: addressController.text,
                           notes: notesController.text,
                         );
