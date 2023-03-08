@@ -1,10 +1,5 @@
-import 'package:artifact/Screens/open_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
 import 'package:artifact/Screens/clothing_confirmation_page.dart';
-import 'package:artifact/admin_home_page.dart';
-import "package:artifact/main.dart";
 import 'package:artifact/home_page.dart';
 
 class ClothingPage extends StatefulWidget {
@@ -37,6 +32,7 @@ class _ClothingPageState extends State<ClothingPage> {
   final addressController = TextEditingController();
   final notesController = TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
