@@ -149,9 +149,6 @@ class ProfileFormState extends State<ProfileForm> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    if (FirebaseAuth.instance.currentUser != null) {
-                      signUp();
-                    }
                     bool isIOS =
                         Theme.of(context).platform == TargetPlatform.iOS;
                     update_user_info(isIOS, context);
@@ -192,39 +189,43 @@ class ProfileFormState extends State<ProfileForm> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
-}
+    Future update_user_info(bool isIOS, var context) async {
+    if (await FirebaseAuth.instance.currentUser == null) {
+      signUp();
+    }
+    var uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null || uid == "") {
+      print("failed: no current user");
+      return;
+    }
 
+    Uri url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
 
+    var response = await http.patch(url, body: {
+      'firstName': ProfileFormState.firstNameController.text,
+      'lastName': ProfileFormState.lastNameController.text,
+      //email would require special handling to change the firebase auth email, so ignoring for now
+      'phone': ProfileFormState.phoneController.text,
+      'country': ProfileFormState.countryController.text,
+      'address': ProfileFormState.addressController.text,
+      'city': ProfileFormState.cityController.text,
+      'state': ProfileFormState.stateController.text,
+      'zip': ProfileFormState.zipController.text
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
 
-Future update_user_info(bool isIOS, var context) async {
-  var uid = FirebaseAuth.instance.currentUser?.uid;
-  if (uid == null || uid == "") {
-    print("failed: no current user");
-    return;
+    Navigator.push(context, MaterialPageRoute(builder: ((context) {
+      return HomePage();
+    })));
   }
 
-  Uri url = isIOS
-      ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
-      : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
-
-  var response = await http.patch(url, body: {
-    'firstName': ProfileFormState.firstNameController.text,
-    'lastName': ProfileFormState.lastNameController.text,
-    //email would require special handling to change the firebase auth email, so ignoring for now
-    'phone': ProfileFormState.phoneController.text,
-    'country': ProfileFormState.countryController.text,
-    'address': ProfileFormState.addressController.text,
-    'city': ProfileFormState.cityController.text,
-    'state': ProfileFormState.stateController.text,
-    'zip': ProfileFormState.zipController.text
-  });
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
-
-  Navigator.push(context, MaterialPageRoute(builder: ((context) {
-    return HomePage();
-  })));
 }
+
+
+
 
 Widget firstNameTextField() {
   return TextFormField(
