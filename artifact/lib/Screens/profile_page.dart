@@ -45,28 +45,41 @@ class ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.all(24),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(children: [
-                  SizedBox(width: 10),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Icons.arrow_back)),
-                ]),
-                SizedBox(
-                    child: Image(image: AssetImage("assets/dsdf1.png")),
-                    height: 250,
-                    width: 250),
-                //Names
-                Row(
+        body: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Form(
+        key: _formKey,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+            Widget>[
+          Column(
+            children: [
+              SizedBox(height: height * 1.0 / 18.0),
+              Stack(alignment: Alignment.topLeft, children: [
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                        iconSize: width * 1.0 / 18.0,
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: ((context) {
+                            return HomePage();
+                          })));
+                        },
+                        icon: const Icon(Icons.arrow_back))),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset("assets/dsdf1.png",
+                        height: height * 1.0 / 6.75,
+                        width: height * 1.0 / 6.75,
+                        alignment: Alignment.center))
+              ]),
+              //Names
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: Row(
                   children: [
                     SizedBox(
                         child: firstNameTextField(), height: 50, width: 150),
@@ -76,13 +89,32 @@ class ProfileFormState extends State<ProfileForm> {
                     SizedBox(child: lastNameTextField(), height: 50, width: 150)
                   ],
                 ),
-                emailAddressTextField(),
-                phoneNumTextField(),
-                countyTextField(),
-                addressTextField(),
+              ),
 
-                //City / State info
-                Row(
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: emailAddressTextField(),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: phoneNumTextField(),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: countyTextField(),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: addressTextField(),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: Row(
                   children: [
                     SizedBox(
                       child: cityTextField(),
@@ -97,29 +129,36 @@ class ProfileFormState extends State<ProfileForm> {
                     )
                   ],
                 ),
+              ), //City / State info
 
-                zipTextField(),
+              SizedBox(height: height * 1.0 / 72.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: zipTextField(),
+              ),
 
-                SizedBox(height: 100),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                    textStyle: TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      bool isIOS =
-                          Theme.of(context).platform == TargetPlatform.iOS;
-                      update_user_info(isIOS, context);
-                    }
-                  },
-                  child: const Text('Save'),
+              SizedBox(height: height * 1.0 / 72.0),
+              TextButton(
+                style: TextButton.styleFrom(
+                  minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  textStyle: TextStyle(fontSize: 16),
                 ),
-              ],
-            )),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    bool isIOS =
+                        Theme.of(context).platform == TargetPlatform.iOS;
+                    update_user_info(isIOS, context);
+                  }
+                },
+                child: const Text('Save'),
+              ),
+            ],
+          )
+        ]),
       ),
-    );
+    ));
   }
 }
 
