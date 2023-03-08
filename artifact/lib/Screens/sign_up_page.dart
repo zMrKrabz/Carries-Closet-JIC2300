@@ -103,7 +103,7 @@ class _SignUpPageState extends State<SignUp_Page> {
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (reEnter) => 
-                reEnter != null && reEnter != passwordController.text.trim()
+                reEnter != null && !(reEnter == passwordController.text.trim())
                   ? 'Passwords must match'
                   : null,
               controller: reEnterController,
@@ -126,7 +126,7 @@ class _SignUpPageState extends State<SignUp_Page> {
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            onPressed: signUp,
+            onPressed: goToProfilePage,
             child: const Text('Signup'),
           ),
           // const Padding(
@@ -193,36 +193,14 @@ class _SignUpPageState extends State<SignUp_Page> {
     ),
     );
   }
-
-  Future signUp() async {
-    print('signing up...');
-
-    var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-    print(credential.user!.uid);
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    Uri url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/create')
-        : Uri.parse('http://10.0.2.2:8080/users/create');
-
-    if (credential.user == null) {
-      print("Failed.");
-      return;
+  void goToProfilePage() {
+    final isValidForm = _formKey.currentState!.validate();
+    if (isValidForm) {
+      String emailString = emailController.text.trim();
+      String passwordString = passwordController.text.trim();
+      dispose();
+      Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => ProfileForm(email: emailString, password: passwordString)));
     }
-
-    var response = await http.post(url, body: {
-      'id': credential.user!.uid,
-      'email': credential.user!.email,
-      'permissions': 'false'
-    });
-    print("posted response");
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    // ignore: use_build_context_synchronously
-    Navigator.push(context, MaterialPageRoute(builder: ((context) {
-      return const MainPage(isLogin: true);
-    })));
   }
 }

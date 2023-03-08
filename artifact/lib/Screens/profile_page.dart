@@ -8,7 +8,9 @@ import 'package:artifact/Screens/open_page.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileForm extends StatefulWidget {
-  const ProfileForm({super.key});
+  final String email;
+  final String password;
+  const ProfileForm({super.key, required this.email, required this.password});
 
   @override
   ProfileFormState createState() {
@@ -147,6 +149,9 @@ class ProfileFormState extends State<ProfileForm> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      signUp();
+                    }
                     bool isIOS =
                         Theme.of(context).platform == TargetPlatform.iOS;
                     update_user_info(isIOS, context);
@@ -160,7 +165,36 @@ class ProfileFormState extends State<ProfileForm> {
       ),
     ));
   }
+  Future signUp() async {
+    print('signing up...');
+
+    var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: widget.email,
+      password: widget.password,
+    );
+    print(credential.user!.uid);
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    Uri url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/create')
+        : Uri.parse('http://10.0.2.2:8080/users/create');
+
+    if (credential.user == null) {
+      print("Failed.");
+      return;
+    }
+
+    var response = await http.post(url, body: {
+      'id': credential.user!.uid,
+      'email': credential.user!.email,
+      'permissions': 'false'
+    });
+    print("posted response");
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
 }
+
+
 
 Future update_user_info(bool isIOS, var context) async {
   var uid = FirebaseAuth.instance.currentUser!.uid;
