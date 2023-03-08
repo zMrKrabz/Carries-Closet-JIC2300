@@ -197,7 +197,7 @@ class ProfileFormState extends State<ProfileForm> {
 
 
 Future update_user_info(bool isIOS, var context) async {
-  var uid = FirebaseAuth.instance.currentUser!.uid;
+  var uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null || uid == "") {
     print("failed: no current user");
     return;

@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUp_Page> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
             child: TextFormField(
-              autovalidateMode: AutovalidateMode.always,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (email) =>
                 email != null && !EmailValidator.validate(email)
                   ? 'Please enter a valid email'
@@ -83,7 +83,7 @@ class _SignUpPageState extends State<SignUp_Page> {
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (password) => 
-                password != null && !(password.length < 6)
+                password != null && (password.length < 6)
                   ? 'Passwords must be at least 6 characters'
                   : null,
               controller: passwordController,
@@ -198,9 +198,9 @@ class _SignUpPageState extends State<SignUp_Page> {
     if (isValidForm) {
       String emailString = emailController.text.trim();
       String passwordString = passwordController.text.trim();
-      dispose();
       Navigator.push(context, 
       MaterialPageRoute(builder: (context) => ProfileForm(email: emailString, password: passwordString)));
     }
+    // dispose();
   }
 }

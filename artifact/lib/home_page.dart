@@ -12,7 +12,8 @@ import 'package:artifact/Screens/clothing_page.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final userEmail = FirebaseAuth.instance.currentUser!.email.toString();
+    final userId = FirebaseAuth.instance.currentUser?.email;
+    final userEmail = userId != null ? userId.toString() : "*****@gmail.com";
     final String dummyPassword = "*******";
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
