@@ -80,7 +80,12 @@ class _SignUpPageState extends State<SignUp_Page> {
           SizedBox(height: height * 1.0 / 18.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (password) => 
+                password != null && !(password.length < 6)
+                  ? 'Passwords must be at least 6 characters'
+                  : null,
               controller: passwordController,
               // textInputAction: TextInputAction.done,
               obscureText: true,
@@ -95,8 +100,13 @@ class _SignUpPageState extends State<SignUp_Page> {
           SizedBox(height: height * 1.0 / 18.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
-              controller: passwordController,
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (reEnter) => 
+                reEnter != null && reEnter != passwordController.text.trim()
+                  ? 'Passwords must match'
+                  : null,
+              controller: reEnterController,
               // textInputAction: TextInputAction.done,
               obscureText: true,
               obscuringCharacter: '*',
