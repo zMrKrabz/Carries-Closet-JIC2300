@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/home_page.dart";
 
@@ -12,6 +11,7 @@ class AdminRequestPage extends StatefulWidget {
 }
 
 class _AdminRequestPageState extends State<AdminRequestPage> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -57,6 +57,7 @@ class RequestWidget extends StatefulWidget {
 }
 
 class _RequestWidgetState extends State<RequestWidget> {
+  @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
@@ -75,13 +76,13 @@ class _RequestWidgetState extends State<RequestWidget> {
           Text("Address:"),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             ElevatedButton(
-              child: const Text('Complete'),
               onPressed: null,
+              child: const Text('Complete'),
             ),
             const SizedBox(width: 8),
             ElevatedButton(
-              child: const Text('Deny'),
               onPressed: null,
+              child: Text('Deny'),
             ),
             const SizedBox(width: 8),
           ])
