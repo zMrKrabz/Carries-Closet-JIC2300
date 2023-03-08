@@ -1,10 +1,6 @@
-import 'package:artifact/Screens/open_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
-import 'package:artifact/Screens/clothing_page.dart';
 import "package:artifact/home_page.dart";
-import "package:artifact/main.dart";
 
 import 'package:http/http.dart' as http;
 
@@ -26,6 +22,7 @@ class ClothingConfirmationPage extends StatefulWidget {
 }
 
 class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -200,7 +197,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
   }
 
   Future submitDB() async {
-    print('submit clothing called');
+    //print('submit clothing called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/requests/clothing/create')
@@ -208,7 +205,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
 
     var uid = FirebaseAuth.instance.currentUser!.uid;
     if (uid == null || uid == "") {
-      print("failed: no current user");
+      //print("failed: no current user");
       return;
     }
 
@@ -222,7 +219,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
       'notes': widget.notes,
       'uid': uid
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
   }
 }
