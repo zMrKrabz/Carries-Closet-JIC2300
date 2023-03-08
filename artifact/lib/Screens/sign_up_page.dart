@@ -1,5 +1,6 @@
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
@@ -34,6 +35,7 @@ class _SignUpPageState extends State<SignUp_Page> {
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(
         children: [
           SizedBox(height: height * 1.0 / 18.0),
@@ -59,7 +61,12 @@ class _SignUpPageState extends State<SignUp_Page> {
           SizedBox(height: height * 1.0 / 13.5),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.always,
+              validator: (email) =>
+                email != null && !EmailValidator.validate(email)
+                  ? 'Please enter a valid email'
+                  : null,
               controller: emailController,
               textInputAction: TextInputAction.done,
               cursorColor: Colors.white,
