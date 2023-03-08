@@ -13,8 +13,10 @@ class SignUp_Page extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUp_Page> {
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final reEnterController = TextEditingController();
   @override
   void dispose() {
     emailController.dispose();
@@ -31,6 +33,7 @@ class _SignUpPageState extends State<SignUp_Page> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
+        child: Form(
           child: Column(
         children: [
           SizedBox(height: height * 1.0 / 18.0),
@@ -168,7 +171,9 @@ class _SignUpPageState extends State<SignUp_Page> {
           //   onPressed: null,
           // ))
         ],
-      )),
+      )
+      ),
+    ),
     );
   }
 
