@@ -41,9 +41,9 @@ class MainPage extends StatelessWidget {
             if (snapshot.hasData) {
               return AdminHomePage();
             } else if (isLogin) {
-              return AdminHomePage();
+              return LoginPage();
             } else {
-              return AdminHomePage();
+              return SignUpPage();
             }
             // if (snapshot.hasData) {
             //   return AdminHomePage();
