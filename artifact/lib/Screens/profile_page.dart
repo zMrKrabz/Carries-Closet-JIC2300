@@ -189,6 +189,8 @@ class ProfileFormState extends State<ProfileForm> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
+  // TO DO: 
+  // make sure sign up is followed up by creating post request via flask server
     Future update_user_info(bool isIOS, var context) async {
     if (await FirebaseAuth.instance.currentUser == null) {
       signUp();
