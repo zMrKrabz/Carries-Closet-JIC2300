@@ -80,24 +80,208 @@ class _ViewUsersState extends State<ViewUsers> {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      // remove const when we add info from 
-      children: const [
-        
+      children: [
         Card(
           child: ListTile(
             title: Text("George Orwell"),
             subtitle: Text("georgewell@gmail.com"),
-            trailing: Icon(Icons.more_vert)
+            trailing: Icon(Icons.more_vert),
+            onTap: () {
+              Navigator.push(context,
+                MaterialPageRoute(builder: ((context) {
+                  return IndividualUserPage(context);
+              })));
+            }
           ),
         ),
         Card(
           child: ListTile(
             title: Text("Mary Shelley"),
             subtitle: Text("mshelley@gmail.com"),
-            trailing: Icon(Icons.more_vert)
+            trailing: Icon(Icons.more_vert),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return IndividualUserPage(context);
+              })));
+            }
           ),
         )
       ],
+    );
+  }
+
+  Widget IndividualUserPage(BuildContext build) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              SizedBox(height: height * 1.0 / 18.0),
+              Stack(
+                alignment: Alignment.topLeft,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      iconSize: width * 1.0 / 18.0,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back)
+                    )
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset("assets/dsdf1.png",
+                      height: width * 1.0 / 2.0,
+                      width: width * 1.0 / 2.0,
+                      alignment: Alignment.center
+                    )
+                  )
+                ]
+              ),
+              SizedBox(height: height * 1.0 / 24.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'Name:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert name here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'Email Address:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert EA here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'Phone Number:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  ),
+                ]
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert # here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'County Serving:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert county here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'Delivery Address:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert address here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'City:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert city here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 36.0),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 20.0),
+                  Text(
+                    'Zip Code:  ',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(width: width * 1.0 / 10.0),
+                  Text(
+                    '*insert ZC here*',
+                    style: TextStyle(fontSize: 15)
+                  )
+                ],
+              ),
+            ]
+          )
+        )
+      )
     );
   }
 }
