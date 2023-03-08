@@ -44,10 +44,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: ((context) {
-                                return HomePage();
-                              })));
+                              Navigator.pop(context);
                             },
                             icon: const Icon(Icons.arrow_back))),
                     Align(
