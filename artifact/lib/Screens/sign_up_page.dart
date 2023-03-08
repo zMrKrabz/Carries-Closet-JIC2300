@@ -1,18 +1,18 @@
 import 'package:artifact/Screens/open_page.dart';
-import 'package:artifact/Screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
-import 'package:firebase_core/firebase_core.dart';
 
 import 'package:http/http.dart' as http;
 
-class SignUp_Page extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUp_Page> {
+class _SignUpPageState extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
