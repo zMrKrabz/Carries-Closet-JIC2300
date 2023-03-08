@@ -1,11 +1,12 @@
+import 'package:artifact/Screens/admin_request_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
-import 'package:english_words/english_words.dart';
+//import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:artifact/Screens/open_page.dart';
+//import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
 
@@ -76,7 +77,7 @@ class AdminHomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return AdminHomePage();
+                        return AdminRequestPage();
                       })));
                     },
                     child: const Text('History')),
