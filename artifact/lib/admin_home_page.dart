@@ -12,6 +12,8 @@ import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
 
 class AdminHomePage extends StatelessWidget {
+  const AdminHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -58,7 +60,7 @@ class AdminHomePage extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) => RequestPopUp(context));
+                    builder: (BuildContext context) => requestPopUp(context));
               },
               child: const Text('Create a Request')),
           SizedBox(height: height * 1.0 / 40.0),
@@ -118,7 +120,7 @@ class AdminHomePage extends StatelessWidget {
         ])));
   }
 
-  Widget RequestPopUp(BuildContext context) {
+  Widget requestPopUp(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
