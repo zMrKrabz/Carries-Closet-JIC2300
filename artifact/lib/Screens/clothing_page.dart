@@ -32,16 +32,21 @@ class _ClothingPageState extends State<ClothingPage> {
   final addressController = TextEditingController();
   final notesController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+  bool _autovalidate = false;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+    return Scaffold(
+        // debugShowCheckedModeBanner: false,
+        // home: Container(
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Form(
+                key: _formKey,
                 child: Column(children: [
                   SizedBox(height: height * 1.0 / 18.0),
                   Stack(alignment: Alignment.topLeft, children: [
@@ -74,6 +79,11 @@ class _ClothingPageState extends State<ClothingPage> {
                         setState(() {
                           genderValue = val as String;
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return "Gender is required";
+                        }
                       },
                       items: genders.map((valueItem) {
                         return DropdownMenuItem(
@@ -111,6 +121,11 @@ class _ClothingPageState extends State<ClothingPage> {
                           itemValue = val as String;
                         });
                       },
+                      validator: (value) {
+                        if (value == null) {
+                          return "Piece of clothing is required";
+                        }
+                      },
                       items: items.map((valueItem) {
                         return DropdownMenuItem(
                           value: valueItem,
@@ -132,6 +147,11 @@ class _ClothingPageState extends State<ClothingPage> {
                           sizeValue = val as String;
                         });
                       },
+                      validator: (value) {
+                        if (value == null) {
+                          return "Size is required";
+                        }
+                      },
                       items: sizes.map((valueItem) {
                         return DropdownMenuItem(
                           value: valueItem,
@@ -152,6 +172,11 @@ class _ClothingPageState extends State<ClothingPage> {
                         setState(() {
                           emergencyValue = val as String;
                         });
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return "Value is required";
+                        }
                       },
                       items: emergency.map((valueItem) {
                         return DropdownMenuItem(
@@ -203,30 +228,25 @@ class _ClothingPageState extends State<ClothingPage> {
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      // if (genderValue.toString().compareTo("null") == 0) {
-                      //   genderValue = "N/A";
-                      // }
-                      // if (itemValue.toString().compareTo("null") == 0) {
-                      //   itemValue = "N/A";
-                      // }
-                      // if (sizeValue.toString().compareTo("null") == 0) {
-                      //   sizeValue = "N/A";
-                      // }
-                      // if (emergencyValue.toString().compareTo("null") == 0) {
-                      //   emergencyValue = "N/A";
-                      // }
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return ClothingConfirmationPage(
-                          gender: genderValue.toString(),
-                          age: ageController.text,
-                          item: itemValue.toString(),
-                          size: sizeValue.toString(),
-                          emergency: emergencyValue.toString(),
-                          address: addressController.text,
-                          notes: notesController.text,
-                        );
-                      })));
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) {
+                          return ClothingConfirmationPage(
+                            gender: genderValue.toString(),
+                            age: ageController.text,
+                            item: itemValue.toString(),
+                            size: sizeValue.toString(),
+                            emergency: emergencyValue.toString(),
+                            address: addressController.text,
+                            notes: notesController.text,
+                          );
+                        })));
+                      } else {
+                        setState(() {
+                          _autovalidate = true;
+                        });
+                      }
                     },
                     child: const Text('Confirm'),
                   ),
