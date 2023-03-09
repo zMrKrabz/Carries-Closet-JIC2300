@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
+import 'package:artifact/Screens/view_users.dart';
 
 class AdminHomePage extends StatelessWidget {
   @override
@@ -108,9 +109,10 @@ class AdminHomePage extends StatelessWidget {
                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
                   textStyle: const TextStyle(fontSize: 24)),
               onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => RequestPopUp(context));
+                Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return ViewUsersPage();
+                      })));
               },
               child: const Text('View Users')),
         ])));

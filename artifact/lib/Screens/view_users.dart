@@ -99,7 +99,14 @@ class _ViewUsersState extends State<ViewUsers> {
                   return ListTile(
                       title: Text(decode[index]['id']),
                       subtitle: Text(decode[index]['email']),
-                      trailing: Icon(Icons.more_vert));
+                      trailing: Icon(Icons.more_vert),
+                      onTap: () {
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                            return IndividualUserPage(context, decode, index);
+                        })));
+                      }
+                  );
                 });
           } else if (snapshot.hasError) {
             children = <Widget>[
@@ -137,9 +144,10 @@ class _ViewUsersState extends State<ViewUsers> {
     );
   }
 
-  Widget IndividualUserPage(BuildContext build) {
+  Widget IndividualUserPage(BuildContext context, List<dynamic> decode, int index) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    //String user = decode[index];
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -176,8 +184,8 @@ class _ViewUsersState extends State<ViewUsers> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'Name:  ',
+                  const Text(
+                    'Name: ',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
                   )
                 ],
@@ -186,7 +194,7 @@ class _ViewUsersState extends State<ViewUsers> {
                 children: [
                   SizedBox(width: width * 1.0 / 10.0),
                   Text(
-                    '*insert name here*',
+                    decode[index]['id'],
                     style: TextStyle(fontSize: 15)
                   )
                 ],
@@ -195,7 +203,7 @@ class _ViewUsersState extends State<ViewUsers> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 20.0),
-                  Text(
+                  const Text(
                     'Email Address:  ',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
                   )
@@ -205,7 +213,7 @@ class _ViewUsersState extends State<ViewUsers> {
                 children: [
                   SizedBox(width: width * 1.0 / 10.0),
                   Text(
-                    '*insert EA here*',
+                    decode[index]['email'],
                     style: TextStyle(fontSize: 15)
                   )
                 ],
