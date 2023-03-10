@@ -5,6 +5,25 @@ through the ability to submit requests, save contact information, view donation 
 
 # Release Notes
 
+## Version 0.3.0
+
+### Features
+
+- View Requests: Admins can now view requests currently in the database
+- View Users: Admins can now view all users currently in the database
+
+### Bug Fixes
+
+- Fixed issue with login crashing when not entering values in email and/or password
+- Fixed re-enter password so that passwords must now match and be typed separately
+- Email used for signup must be a real email
+- Users now to to profile page after clicking sign up 
+
+### Known Issues
+
+- No implemented logic yet to verify if a user has admin permissions or not
+
+
 ## Version 0.2.0
 
 ### Features
