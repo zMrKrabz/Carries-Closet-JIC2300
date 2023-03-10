@@ -20,9 +20,9 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Column(children: [
-            SizedBox(height: height * 1.0 / 13.5),
-            Row(textDirection: TextDirection.rtl, children: [
+            body: Column(children: [
+          SizedBox(height: height * 1.0 / 13.5),
+          Row(textDirection: TextDirection.rtl, children: [
             SizedBox(width: width * 1.0 / 12.0),
             OutlinedButton(
                 style: OutlinedButton.styleFrom(
@@ -98,8 +98,7 @@ class HomePage extends StatelessWidget {
                       })));
                     },
                     //child: const Text('Profile')),
-                    child: const Text('View Users')
-                )
+                    child: const Text('View Users'))
               ])
             ],
           )
