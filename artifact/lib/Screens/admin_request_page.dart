@@ -1,10 +1,5 @@
-import 'package:artifact/Screens/open_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
-import 'package:artifact/Screens/hygiene_confirmation_page.dart';
 import "package:artifact/home_page.dart";
-import "package:artifact/main.dart";
 
 class AdminRequestPage extends StatefulWidget {
   const AdminRequestPage({super.key});
@@ -16,6 +11,7 @@ class AdminRequestPage extends StatefulWidget {
 }
 
 class _AdminRequestPageState extends State<AdminRequestPage> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -46,18 +42,24 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
                             width: height * 1.0 / 6.75,
                             alignment: Alignment.center))
                   ]),
-                  RequestCardWidget(),
+                  RequestWidget(),
                 ]))));
   }
 }
 
-class RequestCardWidget extends StatelessWidget {
-  const RequestCardWidget({super.key});
+class RequestWidget extends StatefulWidget {
+  const RequestWidget({super.key});
 
   @override
+  _RequestWidgetState createState() {
+    return _RequestWidgetState();
+  }
+}
+
+class _RequestWidgetState extends State<RequestWidget> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Card(
+    return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -67,25 +69,25 @@ class RequestCardWidget extends StatelessWidget {
             trailing: Icon(Icons.more_vert),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [Text("Article of Clothing:"), Text("Size")],
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [Text("Article of Clothing:"), Text("Size:")],
           ),
-          Text("Gender"),
-          Text("Address"),
-          Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+          Text("Gender:"),
+          Text("Address:"),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             ElevatedButton(
-              child: const Text('Complete'),
               onPressed: null,
+              child: const Text('Complete'),
             ),
             const SizedBox(width: 8),
-            TextButton(
-              child: const Text('Deny'),
+            ElevatedButton(
               onPressed: null,
+              child: Text('Deny'),
             ),
             const SizedBox(width: 8),
           ])
         ],
       ),
-    ));
+    );
   }
 }

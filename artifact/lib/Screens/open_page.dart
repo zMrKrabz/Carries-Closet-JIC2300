@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
-import 'package:artifact/Screens/hygiene_page.dart';
-import 'package:artifact/Screens/signup_page.dart';
 
 class OpenPage extends StatefulWidget {
+  const OpenPage({super.key});
+
   @override
   _OpenPageState createState() => _OpenPageState();
 }
