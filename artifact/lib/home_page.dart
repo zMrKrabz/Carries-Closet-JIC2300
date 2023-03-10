@@ -1,15 +1,14 @@
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
+import 'package:artifact/Screens/view_users.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.email;
@@ -21,9 +20,9 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            body: Column(children: [
-          SizedBox(height: height * 1.0 / 13.5),
-          Row(textDirection: TextDirection.rtl, children: [
+          body: Column(children: [
+            SizedBox(height: height * 1.0 / 13.5),
+            Row(textDirection: TextDirection.rtl, children: [
             SizedBox(width: width * 1.0 / 12.0),
             OutlinedButton(
                 style: OutlinedButton.styleFrom(
@@ -59,7 +58,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context) => RequestPopUp(context));
+                    builder: (BuildContext context) => requestPopUp(context));
               },
               child: const Text('Create a Request')),
           SizedBox(height: height * 1.0 / 40.0),
@@ -98,14 +97,16 @@ class HomePage extends StatelessWidget {
                         return ProfileForm(email: userEmail, password: dummyPassword);
                       })));
                     },
-                    child: const Text('Profile')),
+                    //child: const Text('Profile')),
+                    child: const Text('View Users')
+                )
               ])
             ],
           )
         ])));
   }
 
-  Widget RequestPopUp(BuildContext context) {
+  Widget requestPopUp(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 

@@ -1,9 +1,7 @@
 // import 'dart:html';
 import 'package:artifact/home_page.dart';
-import 'package:artifact/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:artifact/Screens/open_page.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -84,11 +82,15 @@ class ProfileFormState extends State<ProfileForm> {
                 child: Row(
                   children: [
                     SizedBox(
-                        child: firstNameTextField(), height: 50, width: 150),
+                        height: 50, width: 150, child: firstNameTextField()),
                     SizedBox(
                       width: 50,
                     ),
-                    SizedBox(child: lastNameTextField(), height: 50, width: 150)
+                    SizedBox(
+                      height: 50,
+                      width: 150,
+                      child: lastNameTextField(),
+                    )
                   ],
                 ),
               ),
@@ -119,15 +121,15 @@ class ProfileFormState extends State<ProfileForm> {
                 child: Row(
                   children: [
                     SizedBox(
-                      child: cityTextField(),
                       height: 50,
                       width: 150,
+                      child: cityTextField(),
                     ),
                     SizedBox(width: 50),
                     SizedBox(
-                      child: stateTextField(),
                       height: 50,
                       width: 60,
+                      child: stateTextField(),
                     )
                   ],
                 ),

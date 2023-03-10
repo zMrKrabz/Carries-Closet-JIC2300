@@ -1,13 +1,9 @@
-import 'package:artifact/Screens/open_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
-import "package:artifact/Screens/login_page.dart";
-
-import 'package:artifact/admin_home_page.dart';
-import "package:artifact/main.dart";
 
 class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
+
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
@@ -15,6 +11,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
 
+  @override
   void dispose() {
     emailController.dispose();
     super.dispose();
