@@ -1,4 +1,4 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive",
-  "githubPullRequests.ignoredPullRequestBranches": ["main"]
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cmake.configureOnOpen": false
 }

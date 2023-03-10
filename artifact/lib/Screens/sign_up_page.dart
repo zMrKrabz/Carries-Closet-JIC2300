@@ -1,4 +1,6 @@
 import 'package:artifact/Screens/open_page.dart';
+import 'package:artifact/Screens/profile_page.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
@@ -13,8 +15,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final reEnterController = TextEditingController();
   @override
   void dispose() {
     emailController.dispose();
@@ -31,6 +35,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Column(
         children: [
           SizedBox(height: height * 1.0 / 18.0),
@@ -56,7 +62,12 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(height: height * 1.0 / 13.5),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (email) =>
+                email != null && !EmailValidator.validate(email)
+                  ? 'Please enter a valid email'
+                  : null,
               controller: emailController,
               textInputAction: TextInputAction.done,
               cursorColor: Colors.white,
@@ -70,7 +81,12 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(height: height * 1.0 / 18.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (password) => 
+                password != null && (password.length < 6)
+                  ? 'Passwords must be at least 6 characters'
+                  : null,
               controller: passwordController,
               // textInputAction: TextInputAction.done,
               obscureText: true,
@@ -85,8 +101,13 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(height: height * 1.0 / 18.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-            child: TextField(
-              controller: passwordController,
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (reEnter) => 
+                reEnter != null && !(reEnter == passwordController.text.trim())
+                  ? 'Passwords must match'
+                  : null,
+              controller: reEnterController,
               // textInputAction: TextInputAction.done,
               obscureText: true,
               obscuringCharacter: '*',
@@ -106,7 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            onPressed: signUp,
+            onPressed: goToProfilePage,
             child: const Text('Signup'),
           ),
           // const Padding(
@@ -168,39 +189,19 @@ class _SignUpPageState extends State<SignUpPage> {
           //   onPressed: null,
           // ))
         ],
-      )),
+      )
+      ),
+    ),
     );
   }
-
-  Future signUp() async {
-    print('signing up...');
-
-    var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-    print(credential.user!.uid);
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    Uri url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/create')
-        : Uri.parse('http://10.0.2.2:8080/users/create');
-
-    if (credential.user == null) {
-      print("Failed.");
-      return;
+  void goToProfilePage() {
+    final isValidForm = _formKey.currentState!.validate();
+    if (isValidForm) {
+      String emailString = emailController.text.trim();
+      String passwordString = passwordController.text.trim();
+      Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => ProfileForm(email: emailString, password: passwordString)));
     }
-
-    var response = await http.post(url, body: {
-      'id': credential.user!.uid,
-      'email': credential.user!.email,
-      'permissions': 'false'
-    });
-    print("posted response");
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    // ignore: use_build_context_synchronously
-    Navigator.push(context, MaterialPageRoute(builder: ((context) {
-      return const MainPage(isLogin: true);
-    })));
+    // dispose();
   }
 }

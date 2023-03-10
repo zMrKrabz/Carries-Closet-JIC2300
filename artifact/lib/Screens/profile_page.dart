@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileForm extends StatefulWidget {
-  const ProfileForm({super.key});
+  final String email;
+  final String password;
+  const ProfileForm({super.key, required this.email, required this.password});
 
   @override
   ProfileFormState createState() {
@@ -162,37 +164,72 @@ class ProfileFormState extends State<ProfileForm> {
       ),
     ));
   }
-}
+  Future signUp() async {
+    print('signing up...');
 
-Future update_user_info(bool isIOS, var context) async {
-  var uid = FirebaseAuth.instance.currentUser!.uid;
-  if (uid == null || uid == "") {
-    print("failed: no current user");
-    return;
+    var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: widget.email,
+      password: widget.password,
+    );
+    print(credential.user!.uid);
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    Uri url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/create')
+        : Uri.parse('http://10.0.2.2:8080/users/create');
+
+    if (credential.user == null) {
+      print("Failed.");
+      return;
+    }
+
+    var response = await http.post(url, body: {
+      'id': credential.user!.uid,
+      'email': credential.user!.email,
+      'permissions': 'false'
+    });
+    print("posted response");
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+  // TO DO: 
+  // make sure sign up is followed up by creating post request via flask server
+    Future update_user_info(bool isIOS, var context) async {
+    if (await FirebaseAuth.instance.currentUser == null) {
+      signUp();
+    }
+    var uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null || uid == "") {
+      print("failed: no current user");
+      return;
+    }
+
+    Uri url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
+
+    var response = await http.patch(url, body: {
+      'firstName': ProfileFormState.firstNameController.text,
+      'lastName': ProfileFormState.lastNameController.text,
+      //email would require special handling to change the firebase auth email, so ignoring for now
+      'phone': ProfileFormState.phoneController.text,
+      'country': ProfileFormState.countryController.text,
+      'address': ProfileFormState.addressController.text,
+      'city': ProfileFormState.cityController.text,
+      'state': ProfileFormState.stateController.text,
+      'zip': ProfileFormState.zipController.text
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    Navigator.push(context, MaterialPageRoute(builder: ((context) {
+      return HomePage();
+    })));
   }
 
-  Uri url = isIOS
-      ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
-      : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
-
-  var response = await http.patch(url, body: {
-    'firstName': ProfileFormState.firstNameController.text,
-    'lastName': ProfileFormState.lastNameController.text,
-    //email would require special handling to change the firebase auth email, so ignoring for now
-    'phone': ProfileFormState.phoneController.text,
-    'country': ProfileFormState.countryController.text,
-    'address': ProfileFormState.addressController.text,
-    'city': ProfileFormState.cityController.text,
-    'state': ProfileFormState.stateController.text,
-    'zip': ProfileFormState.zipController.text
-  });
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
-
-  Navigator.push(context, MaterialPageRoute(builder: ((context) {
-    return HomePage();
-  })));
 }
+
+
+
 
 Widget firstNameTextField() {
   return TextFormField(
