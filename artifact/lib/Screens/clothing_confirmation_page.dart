@@ -4,7 +4,6 @@ import "package:artifact/home_page.dart";
 import "package:artifact/main.dart";
 import "package:artifact/admin_home_page.dart";
 
-
 import 'package:http/http.dart' as http;
 
 class ClothingConfirmationPage extends StatefulWidget {
@@ -206,23 +205,36 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
         ? Uri.parse('http://127.0.0.1:8080/requests/clothing/create')
         : Uri.parse('http://10.0.2.2:8080/requests/clothing/create');
 
+    var id_url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/requestno')
+        : Uri.parse('http://10.0.2.2:8080/requestno');
+
     var uid = FirebaseAuth.instance.currentUser!.uid;
     if (uid == null || uid == "") {
       //print("failed: no current user");
       return;
     }
 
-    var response = await http.post(url, body: {
-      'gender': widget.gender,
-      'age': widget.age,
-      'item': widget.item,
-      'size': widget.size,
-      'emergency': widget.emergency,
-      'address': widget.address,
-      'notes': widget.notes,
-      'uid': uid
+    await http.get(id_url).then((value) async {
+      //var a = json.decode(value.toString());
+      //print(a);
+      //print(value.body.toString());
+      var request_number = value.body.toString().substring(
+          value.body.toString().indexOf(':') + 1,
+          value.body.toString().indexOf('}'));
+      var response = await http.post(url, body: {
+        'gender': widget.gender,
+        'age': widget.age,
+        'item': widget.item,
+        'size': widget.size,
+        'emergency': widget.emergency,
+        'address': widget.address,
+        'notes': widget.notes,
+        'uid': uid,
+        'requestno': request_number
+      });
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
     });
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
   }
 }
