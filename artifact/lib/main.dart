@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
             } else if (isLogin) {
               return LoginPage();
             } else {
-              return SignUp_Page();
+              return SignUpPage();
             }
             // if (snapshot.hasData) {
             //   return AdminHomePage();
