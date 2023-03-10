@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.email;
     final userEmail = userId != null ? userId.toString() : "*****@gmail.com";
-    final String dummyPassword = "*******";
+    final String dummyPassword = "password";
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
