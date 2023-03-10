@@ -11,6 +11,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.email;
+    final userEmail = userId != null ? userId.toString() : "*****@gmail.com";
+    final String dummyPassword = "password";
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -91,9 +94,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        //return HomePage();
-                        //return ViewUsersPage();
-                        return ProfileForm();
+                        return ProfileForm(email: userEmail, password: dummyPassword);
                       })));
                     },
                     //child: const Text('Profile')),
