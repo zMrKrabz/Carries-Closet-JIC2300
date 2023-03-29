@@ -69,30 +69,40 @@ class ProfileFormState extends State<ProfileForm> {
                           })));
                         },
                         icon: const Icon(Icons.arrow_back))),
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset("assets/dsdf1.png",
-                        height: height * 1.0 / 6.75,
-                        width: height * 1.0 / 6.75,
-                        alignment: Alignment.center))
               ]),
               //Names
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+              //   child: Row(
+              //     children: [
+              //       SizedBox(
+              //           height: 50, width: 150, child: firstNameTextField()),
+              //       SizedBox(
+              //         width: 50,
+              //       ),
+              //       SizedBox(
+              //         height: 50,
+              //         width: 150,
+              //         child: lastNameTextField(),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              SizedBox(height: height * 1.0 / 32.0),
+              const Text("User Information",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 1.0 / 12.0,
+                    vertical: height * 1.0 / 36.0),
+                child: const Text(
+                    "Please fill out information to edit the account",
+                    textAlign: TextAlign.center),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                        height: 50, width: 150, child: firstNameTextField()),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      width: 150,
-                      child: lastNameTextField(),
-                    )
-                  ],
-                ),
+                child: fullNameTextField(),
               ),
 
               SizedBox(height: height * 1.0 / 72.0),
@@ -121,14 +131,13 @@ class ProfileFormState extends State<ProfileForm> {
                 child: Row(
                   children: [
                     SizedBox(
-                      height: 50,
-                      width: 150,
+                      // height: height *,
+                      width: width * 1.0 / 2.0,
                       child: cityTextField(),
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: width * 1.0 / 7.5),
                     SizedBox(
-                      height: 50,
-                      width: 60,
+                      width: width * 1.0 / 5.0,
                       child: stateTextField(),
                     )
                   ],
@@ -138,8 +147,17 @@ class ProfileFormState extends State<ProfileForm> {
               SizedBox(height: height * 1.0 / 72.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: zipTextField(),
-              ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      // height: height *,
+                      width: width * 1.0 / 2.0,
+                      child: zipTextField(),
+                    ),
+                    SizedBox(width: width * 1.0 / 20.0),
+                  ],
+                ),
+              ), //City / State info
 
               SizedBox(height: height * 1.0 / 72.0),
               TextButton(
@@ -164,6 +182,7 @@ class ProfileFormState extends State<ProfileForm> {
       ),
     ));
   }
+
   Future signUp() async {
     print('signing up...');
 
@@ -191,9 +210,10 @@ class ProfileFormState extends State<ProfileForm> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
-  // TO DO: 
+
+  // TO DO:
   // make sure sign up is followed up by creating post request via flask server
-    Future update_user_info(bool isIOS, var context) async {
+  Future update_user_info(bool isIOS, var context) async {
     if (await FirebaseAuth.instance.currentUser == null) {
       signUp();
     }
@@ -225,38 +245,20 @@ class ProfileFormState extends State<ProfileForm> {
       return HomePage();
     })));
   }
-
 }
 
-
-
-
-Widget firstNameTextField() {
+Widget fullNameTextField() {
   return TextFormField(
     controller: ProfileFormState.firstNameController,
-    decoration: const InputDecoration(
-      labelText: "First Name",
-      border: OutlineInputBorder(),
+    decoration: InputDecoration(
+      labelText: "Full Name",
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
     ),
     validator: (value) {
       if (value == null || value.isEmpty) {
-        return "First Name is Required";
-      }
-      return null;
-    },
-  );
-}
-
-Widget lastNameTextField() {
-  return TextFormField(
-    controller: ProfileFormState.lastNameController,
-    decoration: const InputDecoration(
-      labelText: "Last Name",
-      border: OutlineInputBorder(),
-    ),
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Last Name is Required";
+        return "Name is Required";
       }
       return null;
     },
@@ -266,10 +268,11 @@ Widget lastNameTextField() {
 Widget emailAddressTextField() {
   return TextFormField(
     controller: ProfileFormState.emailController,
-    decoration: const InputDecoration(
-      labelText: "Email Address",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "Email Address",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "Last Name is Required";
@@ -282,10 +285,11 @@ Widget emailAddressTextField() {
 Widget phoneNumTextField() {
   return TextFormField(
     controller: ProfileFormState.phoneController,
-    decoration: const InputDecoration(
-      labelText: "Phone Number",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "Phone Number",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "Phone Number is Required";
@@ -298,10 +302,11 @@ Widget phoneNumTextField() {
 Widget countyTextField() {
   return TextFormField(
     controller: ProfileFormState.countryController,
-    decoration: const InputDecoration(
-      labelText: "County Serving",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "County Serving",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "County is Required";
@@ -314,10 +319,11 @@ Widget countyTextField() {
 Widget addressTextField() {
   return TextFormField(
     controller: ProfileFormState.addressController,
-    decoration: const InputDecoration(
-      labelText: "Delivery Address",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "Delivery Address",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "Address is Required";
@@ -330,10 +336,11 @@ Widget addressTextField() {
 Widget cityTextField() {
   return TextFormField(
     controller: ProfileFormState.cityController,
-    decoration: const InputDecoration(
-      labelText: "City",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "City",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "City is Required";
@@ -346,10 +353,11 @@ Widget cityTextField() {
 Widget stateTextField() {
   return TextFormField(
     controller: ProfileFormState.stateController,
-    decoration: const InputDecoration(
-      labelText: "State",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "State",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "State is Required";
@@ -362,10 +370,11 @@ Widget stateTextField() {
 Widget zipTextField() {
   return TextFormField(
     controller: ProfileFormState.zipController,
-    decoration: const InputDecoration(
-      labelText: "Zip Code",
-      border: OutlineInputBorder(),
-    ),
+    decoration: InputDecoration(
+        labelText: "Zip Code",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
     validator: (value) {
       if (value == null || value.isEmpty) {
         return "Zip Code is Required";
