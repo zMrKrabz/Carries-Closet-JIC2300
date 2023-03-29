@@ -61,54 +61,88 @@ class _ClothingPageState extends State<ClothingPage> {
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Image.asset("assets/dsdf1.png",
-                            height: height * 1.0 / 6.75,
-                            width: height * 1.0 / 6.75,
-                            alignment: Alignment.center))
+                    // Align(
+                    //     alignment: Alignment.bottomCenter,
+                    //     child: Image.asset("assets/dsdf1.png",
+                    //         height: height * 1.0 / 6.75,
+                    //         width: height * 1.0 / 6.75,
+                    //         alignment: Alignment.center))
                   ]),
-                  SizedBox(height: height * 1.0 / 18.0),
+                  const Text("Clothing Request",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: DropdownButtonFormField(
-                      hint: Text("Please select a gender"),
-                      value: genderValue,
-                      onChanged: (val) {
-                        setState(() {
-                          genderValue = val as String;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return "Gender is required";
-                        }
-                      },
-                      items: genders.map((valueItem) {
-                        return DropdownMenuItem(
-                          value: valueItem,
-                          child: Text(valueItem),
-                        );
-                      }).toList(),
-                      decoration: InputDecoration(border: OutlineInputBorder()),
-                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 1.0 / 12.0,
+                        vertical: height * 1.0 / 36.0),
+                    child: const Text(
+                        "Please fill out information to request a clothing item. If you chose a teenager size, please the specific size in the “Other Notes” section.",
+                        textAlign: TextAlign.center),
                   ),
-                  SizedBox(height: height * 1.0 / 72.0),
+                  SizedBox(height: height * 1.0 / 9.0),
+
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: TextField(
-                      controller: ageController,
-                      textInputAction: TextInputAction.done,
-                      cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Age',
-                        hintText: 'Enter the age',
-                      ),
-                    ),
-                  ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              flex: 2,
+                              child: DropdownButtonFormField(
+                                hint: Text("Please select a gender"),
+                                value: genderValue,
+                                onChanged: (val) {
+                                  setState(() {
+                                    genderValue = val as String;
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "Gender is required";
+                                  }
+                                },
+                                items: genders.map((valueItem) {
+                                  return DropdownMenuItem(
+                                    value: valueItem,
+                                    child: Text(valueItem),
+                                  );
+                                }).toList(),
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder()),
+                              )),
+                          SizedBox(
+                            width: width * 1.0 / 72.0,
+                          ),
+                          Expanded(
+                            child: TextField(
+                              controller: ageController,
+                              textInputAction: TextInputAction.done,
+                              cursorColor: Colors.white,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Age',
+                                hintText: 'Enter the age',
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                  // SizedBox(height: height * 1.0 / 72.0),
+                  // Padding(
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                  //   child: TextField(
+                  //     controller: ageController,
+                  //     textInputAction: TextInputAction.done,
+                  //     cursorColor: Colors.white,
+                  //     decoration: const InputDecoration(
+                  //       border: OutlineInputBorder(),
+                  //       labelText: 'Age',
+                  //       hintText: 'Enter the age',
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(height: height * 1.0 / 72.0),
                   Padding(
                     padding:
