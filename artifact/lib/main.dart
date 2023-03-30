@@ -5,6 +5,7 @@ import 'package:artifact/Screens/login_page.dart';
 import 'package:artifact/admin_home_page.dart';
 import 'package:artifact/admin_login.dart';
 import 'package:artifact/home_page.dart';
+import 'package:artifact/app_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +27,6 @@ Future main() async {
 
 class MainPage extends StatelessWidget {
   final bool isLogin;
-  
   const MainPage({super.key, required this.isLogin});
 
   @override
@@ -35,11 +35,13 @@ class MainPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+            AppUser user = AppUser();
             if (snapshot.hasData) {
               return FutureBuilder(
                 future: checkPermissions(context, uid),
                 builder: (context, snapshot) {
                   if (snapshot.data == true) {
+                    user.setAdminStatus(true);
                     return AdminHomePage();
                   } else if (snapshot.data == false) {
                     return HomePage();
@@ -47,7 +49,7 @@ class MainPage extends StatelessWidget {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height / 1.3,
                       child: const Center(
-                      child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(),
                       ),
                     );
                   }
