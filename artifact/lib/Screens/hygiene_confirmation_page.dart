@@ -4,6 +4,9 @@ import 'package:artifact/home_page.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../admin_home_page.dart';
+import '../app_user.dart';
+
 class HygieneConfirmationPage extends StatefulWidget {
   final String gender, age, item, size, emergency, address, notes;
   const HygieneConfirmationPage(
@@ -22,6 +25,7 @@ class HygieneConfirmationPage extends StatefulWidget {
 }
 
 class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -186,10 +190,17 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     ),
                     onPressed: () {
                       submitDB();
-                      Navigator.push(context,
+                      if (AppUser.isAdmin) {
+                          Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
-                      })));
+                          return AdminHomePage();
+                        })));
+                      } else {
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                          return HomePage();
+                        })));
+                      }
                     },
                     child: const Text('Submit Request'),
                   ),
