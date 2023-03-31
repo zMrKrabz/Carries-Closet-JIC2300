@@ -102,11 +102,10 @@ class _ViewUsersState extends State<ViewUsers> {
                       trailing: Icon(Icons.more_vert),
                       onTap: () {
                         Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                            return IndividualUserPage(context, decode, index);
+                            MaterialPageRoute(builder: ((context) {
+                          return IndividualUserPage(context, decode, index);
                         })));
-                      }
-                  );
+                      });
                 });
           } else if (snapshot.hasError) {
             children = <Widget>[
@@ -144,180 +143,204 @@ class _ViewUsersState extends State<ViewUsers> {
     );
   }
 
-  Widget IndividualUserPage(BuildContext context, List<dynamic> decode, int index) {
+  Widget IndividualUserPage(
+      BuildContext context, List<dynamic> decode, int index) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     //String user = decode[index];
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              SizedBox(height: height * 1.0 / 18.0),
-              Stack(
-                alignment: Alignment.topLeft,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      iconSize: width * 1.0 / 18.0,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back)
-                    )
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            body: Container(
+                alignment: Alignment.center,
+                child: Column(children: [
+                  SizedBox(height: height * 1.0 / 18.0),
+                  Stack(alignment: Alignment.topLeft, children: [
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                            iconSize: width * 1.0 / 18.0,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back))),
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.asset("assets/dsdf1.png",
+                            height: width * 1.0 / 2.0,
+                            width: width * 1.0 / 2.0,
+                            alignment: Alignment.center))
+                  ]),
+                  SizedBox(height: height * 1.0 / 24.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      const Text('Name: ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Image.asset("assets/dsdf1.png",
-                      height: width * 1.0 / 2.0,
-                      width: width * 1.0 / 2.0,
-                      alignment: Alignment.center
-                    )
-                  )
-                ]
-              ),
-              SizedBox(height: height * 1.0 / 24.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  const Text(
-                    'Name: ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    decode[index]['id'],
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  const Text(
-                    'Email Address:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    decode[index]['email'],
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'Phone Number:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text(decode[index]['id'], style: TextStyle(fontSize: 15))
+                    ],
                   ),
-                ]
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    '*insert # here*',
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'County Serving:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    '*insert county here*',
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'Delivery Address:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    '*insert address here*',
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'City:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    '*insert city here*',
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-              SizedBox(height: height * 1.0 / 36.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 20.0),
-                  Text(
-                    'Zip Code:  ',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 10.0),
-                  Text(
-                    '*insert ZC here*',
-                    style: TextStyle(fontSize: 15)
-                  )
-                ],
-              ),
-            ]
-          )
-        )
-      )
-    );
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      const Text('Email Address:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text(decode[index]['email'],
+                          style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(children: [
+                    SizedBox(width: width * 1.0 / 20.0),
+                    Text('Phone Number:  ',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                  ]),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text('*insert # here*', style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      Text('County Serving:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text('*insert county here*',
+                          style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      Text('Delivery Address:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text('*insert address here*',
+                          style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      Text('City:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text('*insert city here*', style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      Text('Zip Code:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text('*insert ZC here*', style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+                  // SizedBox(height: height * 1.0 / 18.0),
+                  // TextButton(
+                  //   style: TextButton.styleFrom(
+                  //     // minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
+                  //     foregroundColor: Colors.black,
+                  //     backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  //     textStyle: const TextStyle(
+                  //         fontSize: 20, fontWeight: FontWeight.bold),
+                  //   ),
+                  //   onPressed: () {
+                  //   },
+                  //   child: const Text('Delete'),
+                  // ),
+
+                  // IconButton(
+                  //     iconSize: width * 1.0 / 18.0,
+                  //     onPressed: () {
+                  //       Navigator.push(context,
+                  //           MaterialPageRoute(builder: ((context) {
+                  //         // return AdminHomePage();
+                  //       })));
+                  //     },
+                  //     icon: const Icon(Icons.arrow_back)),
+
+                  SizedBox(height: height * 1.0 / 36.0),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 20.0),
+                      const Text('permissions:  ',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: width * 1.0 / 10.0),
+                      Text(decode[index]['permissions'],
+                          style: TextStyle(fontSize: 15))
+                    ],
+                  ),
+
+                  SizedBox(height: height * 1.0 / 18.0),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            makeAdmin(decode[index]['id']);
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Make administrator'),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                            deleteUser(decode[index]['id']);
+                            Navigator.pop(context);
+                          },
+                          child: Text('Delete'),
+                        ),
+                        const SizedBox(width: 8),
+                      ])
+                ]))));
   }
 
   Future<String> parseUsers() async {
@@ -331,5 +354,30 @@ class _ViewUsersState extends State<ViewUsers> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     return response.body;
+  }
+
+  void makeAdmin(String id) async {
+    //need to implement logic of make admin button greyed out if they're alrdy admin
+    print('make admin called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/update?id=' + id)
+        : Uri.parse('http://10.0.2.2:8080/users/update?id=' + id);
+
+    var response = await http.put(url, body: {'permissions': 'true'});
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+
+  void deleteUser(String id) async {
+    print('delete user called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
+        : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
+
+    var response = await http.delete(url);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 }
