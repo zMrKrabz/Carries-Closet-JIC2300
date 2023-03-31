@@ -59,7 +59,6 @@ class HomePage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
-
               child: const Text('Submit a Request')),
           SizedBox(height: height * 1.0 / 25.0),
           OutlinedButton(
@@ -87,11 +86,10 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return HomePage();
+                  return UserRequestsPage();
                 })));
               },
               child: const Text('View my Requests')),
-
         ])));
   }
   // Row(

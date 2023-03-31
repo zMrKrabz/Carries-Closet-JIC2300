@@ -1,5 +1,4 @@
 import 'package:artifact/Screens/admin_request_page.dart';
-import 'package:artifact/Screens/full_request_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
 //import 'package:english_words/english_words.dart';
@@ -134,7 +133,7 @@ class AdminHomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return FullRequestPage();
+                  return AdminHomePage();
                 })));
               },
               child: const Text('View Orders')),
