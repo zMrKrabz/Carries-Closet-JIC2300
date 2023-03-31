@@ -68,11 +68,11 @@ class MainPage extends StatelessWidget {
               return SignUpPage();
             }
             // if (snapshot.hasData) {
-            //   return AdminHomePage();
+            //   return HomePage();
             // } else if (isLogin) {
-            //   return AdminHomePage();
+            //   return HomePage();
             // } else {
-            //   return AdminHomePage();
+            //   return HomePage();
             // }
           },
         ),
