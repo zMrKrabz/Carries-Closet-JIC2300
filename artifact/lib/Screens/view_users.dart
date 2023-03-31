@@ -27,11 +27,12 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            body: SingleChildScrollView(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SingleChildScrollView(
           child: Column(children: [
-            SizedBox(height: height * 1.0 / 18.0),
+            SizedBox(height: height * 1.0 / 13.5),
+
             Stack(alignment: Alignment.topLeft, children: [
               Align(
                   alignment: Alignment.topLeft,
@@ -45,11 +46,22 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                       },
                       icon: const Icon(Icons.arrow_back))),
               Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Image.asset("assets/dsdf1.png",
-                      height: height * 1.0 / 6.75,
-                      width: height * 1.0 / 6.75,
-                      alignment: Alignment.center))
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 1.0 / 100.0),
+                    const Text(
+                      'Users',
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
+                    )
+                  ]
+                )
+                  // alignment: Alignment.bottomCenter,
+                  // child: Image.asset("assets/dsdf1.png",
+                  //     height: height * 1.0 / 6.75,
+                  //     width: height * 1.0 / 6.75,
+                  //     alignment: Alignment.center)
+              )
             ]),
             ViewUsers(),
           ]),
@@ -79,26 +91,26 @@ class _ViewUsersState extends State<ViewUsers> {
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
-            // children = <Widget>[
-            //   const Icon(
-            //     Icons.check_circle_outline,
-            //     color: Colors.green,
-            //     size: 60,
-            //   ),
-            //   Padding(
-            //     padding: const EdgeInsets.only(top: 16),
-            //     child: Text('Result: ${snapshot.data}'),
-            //   ),
-            // ];
-
             List<dynamic> decode = json.decode(snapshot.data.toString());
             return ListView.builder(
+                padding: EdgeInsets.all(20.0),
                 shrinkWrap: true,
                 itemCount: decode.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
+                  return Card (
+                    elevation: 0,
+                    child: ListTile(
                       title: Text(decode[index]['id']),
                       subtitle: Text(decode[index]['email']),
+                      visualDensity: VisualDensity(vertical: 1.0, horizontal: 0.25),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          bottomLeft: Radius.circular(16),
+                          topRight: Radius.circular(16), 
+                          bottomRight: Radius.circular(16))
+                      ),
+                      tileColor: Color.fromRGBO(238, 224, 255, 1.0),
                       trailing: Icon(Icons.more_vert),
                       onTap: () {
                         Navigator.push(context,
