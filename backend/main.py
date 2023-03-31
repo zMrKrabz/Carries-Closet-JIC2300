@@ -7,6 +7,7 @@ import traceback
 from flask import Flask, request, jsonify
 from firebase_admin import credentials, initialize_app, firestore
 from datetime import date
+import time
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -45,6 +46,7 @@ def add_user():
 
 
 @app.route('/users', methods=['GET'])
+@app.route('/users/list', methods=['GET'])
 def get_user():
     """
         get_user() : Fetches documents from Firestore collection as JSON.
@@ -53,11 +55,11 @@ def get_user():
         # Check if ID was passed to URL query
         user_id = request.args.get('id')
         username = request.args.get('username')
-        if user_id is None:
+        if user_id is None and username is not None:
             for doc in users_ref.stream():
                 if doc.get('username') == username:
                     user_id = doc.id
-        if user_id:
+        if user_id is not None:
             user = users_ref.document(user_id).get()
             return jsonify(user.to_dict()), 200
         else:
@@ -83,8 +85,11 @@ def update_user():
             for doc in users_ref.stream():
                 if doc.get('username') == username:
                     document_id = doc.id
-        users_ref.document(document_id).update(request.form)
-        return jsonify({"success": True}), 200
+        if document_id is not None:
+            users_ref.document(document_id).update(request.form)
+            return jsonify({"success": True}), 200
+        else:
+            return jsonify("No user found matching given parameters."), 404
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
