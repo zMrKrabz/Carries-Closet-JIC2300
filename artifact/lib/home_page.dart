@@ -44,66 +44,94 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.topCenter,
               width: width * 2.0 / 3.0,
               height: width * 2.0 / 3.0),
-          const Text(
-            'Welcome!',
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: height * 1.0 / 15.0),
+          SizedBox(height: height * 1.0 / 6.0),
           OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 10.0),
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24)),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
-              child: const Text('Create a Request')),
-          SizedBox(height: height * 1.0 / 40.0),
-          Row(
-            children: [
-              SizedBox(height: height * 1.0 / 40.0),
-              Row(children: [
-                SizedBox(width: width * 1.0 / 8.0),
-                OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
-                        foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return HomePage();
-                      })));
-                    },
-                    child: const Text('History')),
-                SizedBox(width: width * 1.0 / 16.0),
-                OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
-                        foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return ProfileForm(email: userEmail, password: dummyPassword);
-                      })));
-                    },
-                    //child: const Text('Profile')),
-                    child: const Text('View Users'))
-              ])
-            ],
-          )
+              child: const Text('Submit a Request')),
+          SizedBox(height: height * 1.0 / 25.0),
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return ProfileForm(email: userEmail, password: dummyPassword);
+                })));
+              },
+              child: const Text('Edit your Profile')),
+          SizedBox(height: height * 1.0 / 25.0),
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return HomePage();
+                })));
+              },
+              child: const Text('View my Requests')),
         ])));
   }
+  // Row(
+  //   children: [
+  //     SizedBox(height: height * 1.0 / 40.0),
+  //     Row(children: [
+  //       SizedBox(width: width * 1.0 / 8.0),
+  //       OutlinedButton(
+  //           style: OutlinedButton.styleFrom(
+  //               minimumSize:
+  //                   Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
+  //               foregroundColor: Colors.black,
+  //               backgroundColor:
+  //                   const Color.fromARGB(255, 200, 200, 200),
+  //               textStyle: const TextStyle(fontSize: 24)),
+  //           onPressed: () {
+  //             Navigator.push(context,
+  //                 MaterialPageRoute(builder: ((context) {
+  //               return HomePage();
+  //             })));
+  //           },
+  //           child: const Text('History')),
+  //       SizedBox(width: width * 1.0 / 16.0),
+  //       OutlinedButton(
+  //           style: OutlinedButton.styleFrom(
+  //               minimumSize:
+  //                   Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
+  //               foregroundColor: Colors.black,
+  //               backgroundColor:
+  //                   const Color.fromARGB(255, 200, 200, 200),
+  //               textStyle: const TextStyle(fontSize: 24)),
+  //           onPressed: () {
+  //             Navigator.push(context,
+  //                 MaterialPageRoute(builder: ((context) {
+  //               return ProfileForm(
+  //                   email: userEmail, password: dummyPassword);
+  //             })));
+  //           },
+  //           //child: const Text('Profile')),
+  //           child: const Text('View Users'))
+  //     ])
+  //   ],
+  // )
 
   Widget requestPopUp(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
