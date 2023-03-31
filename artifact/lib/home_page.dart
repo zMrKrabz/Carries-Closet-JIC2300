@@ -1,10 +1,11 @@
 import 'package:artifact/Screens/profile_page.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
-import 'package:artifact/Screens/view_users.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -78,10 +79,10 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
+                        return UserRequestsPage();
                       })));
                     },
-                    child: const Text('History')),
+                    child: const Text('Requests')),
                 SizedBox(width: width * 1.0 / 16.0),
                 OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -94,7 +95,8 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return ProfileForm(email: userEmail, password: dummyPassword);
+                        return ProfileForm(
+                            email: userEmail, password: dummyPassword);
                       })));
                     },
                     //child: const Text('Profile')),
