@@ -17,6 +17,7 @@ default_app = initialize_app(cred)
 db = firestore.client()
 users_ref = db.collection('users')
 requests_ref = db.collection('requests')
+requestno_ref = db.collection('requestno')
 
 error_500 = """<!doctype html>
 <html lang=en>
@@ -253,6 +254,20 @@ def update_request():
         print(f"An Error Occurred: {e}")
         return error_500, 500
 
+@app.route('/requestno', methods=['GET'])
+def get_next_requestno():
+    try:
+        document_id = 'requestnum'
+        next_id = requestno_ref.document(document_id).get().to_dict()
+        next_id = next_id['nextID']
+        update_id = dict()
+        update_id['nextID'] = next_id + 1
+        requestno_ref.document('requestnum').update(update_id)
+
+        return jsonify({'id': next_id}), 200
+    except Exception as e:
+        print(f"An Error Occurred: {e}")
+        return error_500, 500
 
 # Dev server setup
 port = int(os.environ.get('PORT', 8080))
