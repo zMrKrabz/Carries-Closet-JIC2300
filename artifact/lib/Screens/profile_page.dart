@@ -1,9 +1,13 @@
 // import 'dart:html';
 import 'package:artifact/home_page.dart';
+import 'package:artifact/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+
+import '../admin_home_page.dart';
+import '../app_user.dart';
 
 class ProfileForm extends StatefulWidget {
   final String email;
@@ -63,10 +67,18 @@ class ProfileFormState extends State<ProfileForm> {
                     child: IconButton(
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                            return HomePage();
+                          if (AppUser.isAdmin) {
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) {
+                            return AdminHomePage();
                           })));
+                          } else {
+                            Navigator.push(context,
+                              MaterialPageRoute(builder: ((context) {
+                                return HomePage();
+                          })));
+                          }
+                          
                         },
                         icon: const Icon(Icons.arrow_back))),
                 Align(
@@ -220,12 +232,17 @@ class ProfileFormState extends State<ProfileForm> {
     });
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
-
-    Navigator.push(context, MaterialPageRoute(builder: ((context) {
-      return HomePage();
-    })));
-  }
-
+    
+      if (AppUser.isAdmin) {
+        Navigator.push(context, MaterialPageRoute(builder: ((context) {
+        return AdminHomePage();
+          })));
+        } else {
+          Navigator.push(context, MaterialPageRoute(builder: ((context) {
+          return HomePage();
+          })));
+        }
+      }
 }
 
 

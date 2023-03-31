@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:artifact/Screens/SignUp_Page.dart';
+// import 'package:artifact/Screens/SignUp_Page.dart';
+import 'package:artifact/Screens/sign_up_page.dart';
 import 'package:artifact/Screens/login_page.dart';
 import 'package:artifact/admin_home_page.dart';
 import 'package:artifact/admin_login.dart';
@@ -83,8 +84,12 @@ class MainPage extends StatelessWidget {
         : Uri.parse('http://10.0.2.2:8080/users?id=$uid');
       var response = await http.get(url);
       var data = jsonDecode(response.body);
-      return data['permissions'] == "true"
-        ? true
-        : false;
+      try {
+        return data['permissions'] == 'true'
+          ? true
+          : false;
+      } catch (e) {
+        return false;
+      }
   }
 }
