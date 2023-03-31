@@ -17,7 +17,7 @@ class AdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.email;
-    final String userEmail; 
+    final String userEmail;
     userEmail = userId != null ? userId.toString() : "*****@gmail.com";
     const String dummyPassword = "********";
     double width = MediaQuery.of(context).size.width;
@@ -50,23 +50,21 @@ class AdminHomePage extends StatelessWidget {
               alignment: Alignment.topCenter,
               width: width * 2.0 / 3.0,
               height: width * 2.0 / 3.0),
-          const Text(
-            'Welcome!',
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
           SizedBox(height: height * 1.0 / 15.0),
           OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 10.0),
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24)),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
-              child: const Text('Create a Request')),
+              child: const Text('Submit a Request')),
           SizedBox(height: height * 1.0 / 40.0),
           Row(
             children: [
@@ -76,51 +74,69 @@ class AdminHomePage extends StatelessWidget {
                 OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
+                            Size(width * 11.0 / 32.0, height * 1.0 / 8.0),
                         foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
+                        backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                        textStyle: const TextStyle(fontSize: 24),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return ViewUsersPage();
+                      })));
+                    },
+                    child: const Text('View Users')),
+                SizedBox(width: width * 1.0 / 16.0),
+                OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        minimumSize:
+                            Size(width * 11.0 / 32.0, height * 1.0 / 8.0),
+                        foregroundColor: Colors.black,
+                        backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                        textStyle: const TextStyle(fontSize: 15),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12))),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return AdminRequestPage();
                       })));
                     },
-                    child: const Text('History')),
-                SizedBox(width: width * 1.0 / 16.0),
-                OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
-                        foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return ProfileForm(email: userEmail, password: dummyPassword);
-                      })));
-                    },
-                    child: const Text('Profile')),
+                    child: const Text('View Requests')),
               ])
             ],
           ),
           SizedBox(height: height * 1.0 / 40.0),
           OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  minimumSize: Size(width * 3.0 / 48.0, height * 1.0 / 10.0),
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
                   backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24)),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
               onPressed: () {
-                Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return ViewUsersPage();
-                      })));
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return ProfileForm(email: userEmail, password: dummyPassword);
+                })));
               },
-              child: const Text('View Users')),
+              child: const Text('Edit Profile')),
+          SizedBox(height: height * 1.0 / 40.0),
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return AdminHomePage();
+                })));
+              },
+              child: const Text('View Orders')),
         ])));
   }
 
