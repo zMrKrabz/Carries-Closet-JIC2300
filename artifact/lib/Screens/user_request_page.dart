@@ -25,8 +25,8 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
-                  SizedBox(height: height * 1.0 / 18.0),
-                  Stack(alignment: Alignment.topLeft, children: [
+                  SizedBox(height: height * 1.0 / 13.0),
+                  Stack(alignment: Alignment.centerLeft, children: [
                     Align(
                         alignment: Alignment.topLeft,
                         child: IconButton(
@@ -38,13 +38,15 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
-                    Align(
+                    const Align(
                         alignment: Alignment.bottomCenter,
-                        child: Image.asset("assets/dsdf1.png",
-                            height: height * 1.0 / 6.75,
-                            width: height * 1.0 / 6.75,
-                            alignment: Alignment.center))
+                        child: Text(
+                          "Requests",
+                          style: TextStyle(
+                              fontSize: 32, fontWeight: FontWeight.bold),
+                        ))
                   ]),
+                  SizedBox(height: height * 1.0 / 55.0),
                   RequestWidget(),
                 ]))));
   }
@@ -158,12 +160,11 @@ class _RequestWidgetState extends State<RequestWidget> {
       padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
       child: Card(
         child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: width * 1.0 / 11.0, vertical: height * 1.0 / 55.0),
+            padding: EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
             child: Column(children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Request #1",
@@ -184,7 +185,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     TextButton(
                       onPressed: null,
@@ -205,10 +206,12 @@ class _RequestWidgetState extends State<RequestWidget> {
                 )
               ]),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width * 1.0 / 12.0,
+                      vertical: height * 1.0 / 55.0),
                   child: Column(
                     //single item
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Item #: ",
@@ -222,6 +225,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text(
                                   "Size: ",
@@ -238,6 +242,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                               ],
                             ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   "*insert size*",
