@@ -1,6 +1,7 @@
 import 'package:artifact/Screens/SignUp_Page.dart';
 import 'package:artifact/Screens/login_page.dart';
 import 'package:artifact/admin_home_page.dart';
+import 'package:artifact/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,11 +38,11 @@ class MainPage extends StatelessWidget {
               return SignUpPage();
             }
             // if (snapshot.hasData) {
-            //   return AdminHomePage();
+            //   return HomePage();
             // } else if (isLogin) {
-            //   return AdminHomePage();
+            //   return HomePage();
             // } else {
-            //   return AdminHomePage();
+            //   return HomePage();
             // }
           },
         ),

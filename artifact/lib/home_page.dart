@@ -1,10 +1,11 @@
 import 'package:artifact/Screens/profile_page.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
-import 'package:artifact/Screens/view_users.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -58,6 +59,7 @@ class HomePage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
+
               child: const Text('Submit a Request')),
           SizedBox(height: height * 1.0 / 25.0),
           OutlinedButton(
@@ -89,6 +91,7 @@ class HomePage extends StatelessWidget {
                 })));
               },
               child: const Text('View my Requests')),
+
         ])));
   }
   // Row(
