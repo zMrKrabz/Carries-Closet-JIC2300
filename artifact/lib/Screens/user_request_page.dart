@@ -46,6 +46,10 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                               fontSize: 32, fontWeight: FontWeight.bold),
                         ))
                   ]),
+                  const Text(
+                      "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
+                      style:
+                          TextStyle(fontSize: 13.5, color: Color(0xFF2E2E2E))),
                   SizedBox(height: height * 1.0 / 55.0),
                   RequestWidget(),
                 ]))));

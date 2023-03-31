@@ -30,20 +30,20 @@ class MainPage extends StatelessWidget {
         body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            // if (snapshot.hasData) {
-            //   return AdminHomePage();
-            // } else if (isLogin) {
-            //   return LoginPage();
-            // } else {
-            //   return SignUpPage();
-            // }
             if (snapshot.hasData) {
-              return HomePage();
+              return AdminHomePage();
             } else if (isLogin) {
-              return HomePage();
+              return LoginPage();
             } else {
-              return HomePage();
+              return SignUpPage();
             }
+            // if (snapshot.hasData) {
+            //   return HomePage();
+            // } else if (isLogin) {
+            //   return HomePage();
+            // } else {
+            //   return HomePage();
+            // }
           },
         ),
       );
