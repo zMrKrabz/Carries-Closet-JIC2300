@@ -196,6 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
   void goToProfilePage() {
     final isValidForm = _formKey.currentState!.validate();
+    print('going to profile page');
     if (isValidForm) {
       String emailString = emailController.text.trim();
       String passwordString = passwordController.text.trim();
