@@ -46,10 +46,14 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                               fontSize: 32, fontWeight: FontWeight.bold),
                         ))
                   ]),
-                  const Text(
-                      "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
-                      style:
-                          TextStyle(fontSize: 13.5, color: Color(0xFF2E2E2E))),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
+                    child: const Text(
+                        "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
+                        style: TextStyle(
+                            fontSize: 13.5, color: Color(0xFF2E2E2E))),
+                  ),
                   SizedBox(height: height * 1.0 / 55.0),
                   RequestWidget(),
                 ]))));
@@ -294,16 +298,16 @@ class _RequestWidgetState extends State<RequestWidget> {
     );
   }
 
-  // Future<String> parseRequests() async {
-  //   print('parse requests called');
-  //   bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-  //   var url = isIOS
-  //       ? Uri.parse('http://127.0.0.1:8080/requests/list')
-  //       : Uri.parse('http://10.0.2.2:8080/requests/list');
+  Future<String> parseRequests() async {
+    print('parse requests called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/requests/list')
+        : Uri.parse('http://10.0.2.2:8080/requests/list');
 
-  //   var response = await http.get(url);
-  //   print('Response status: ${response.statusCode}');
-  //   print('Response body: ${response.body}');
-  //   return response.body;
-  // }
+    var response = await http.get(url);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    return response.body;
+  }
 }
