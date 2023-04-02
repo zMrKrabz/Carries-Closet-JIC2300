@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/main.dart";
 import 'package:firebase_core/firebase_core.dart';
+import '../admin_home_page.dart';
 
 import 'package:artifact/home_page.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +41,7 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
-                          return HomePage();
+                          return AdminHomePage();
                         })));
                       },
                       icon: const Icon(Icons.arrow_back))),
@@ -221,7 +222,8 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text('*insert # here*', style: TextStyle(fontSize: 15))
+                      Text(decode[index]['phone'],
+                          style: TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -252,7 +254,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text('*insert address here*',
+                      Text(decode[index]['address'],
                           style: TextStyle(fontSize: 15))
                     ],
                   ),
@@ -268,7 +270,8 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text('*insert city here*', style: TextStyle(fontSize: 15))
+                      Text(decode[index]['city'],
+                          style: TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -283,33 +286,9 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text('*insert ZC here*', style: TextStyle(fontSize: 15))
+                      Text(decode[index]['zip'], style: TextStyle(fontSize: 15))
                     ],
                   ),
-                  // SizedBox(height: height * 1.0 / 18.0),
-                  // TextButton(
-                  //   style: TextButton.styleFrom(
-                  //     // minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-                  //     foregroundColor: Colors.black,
-                  //     backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  //     textStyle: const TextStyle(
-                  //         fontSize: 20, fontWeight: FontWeight.bold),
-                  //   ),
-                  //   onPressed: () {
-                  //   },
-                  //   child: const Text('Delete'),
-                  // ),
-
-                  // IconButton(
-                  //     iconSize: width * 1.0 / 18.0,
-                  //     onPressed: () {
-                  //       Navigator.push(context,
-                  //           MaterialPageRoute(builder: ((context) {
-                  //         // return AdminHomePage();
-                  //       })));
-                  //     },
-                  //     icon: const Icon(Icons.arrow_back)),
-
                   SizedBox(height: height * 1.0 / 36.0),
                   Row(
                     children: [
@@ -326,7 +305,6 @@ class _ViewUsersState extends State<ViewUsers> {
                           style: TextStyle(fontSize: 15))
                     ],
                   ),
-
                   SizedBox(height: height * 1.0 / 18.0),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -334,15 +312,21 @@ class _ViewUsersState extends State<ViewUsers> {
                         ElevatedButton(
                           onPressed: () {
                             makeAdmin(decode[index]['id']);
-                            Navigator.pop(context);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return ViewUsersPage();
+                            })));
                           },
                           child: const Text('Make administrator'),
                         ),
                         const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: () {
-                            deleteUser(decode[index]['id']);
-                            Navigator.pop(context);
+                            // deleteUser(decode[index]['id']);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return ViewUsersPage();
+                            })));
                           },
                           child: Text('Delete'),
                         ),
@@ -377,15 +361,15 @@ class _ViewUsersState extends State<ViewUsers> {
     print('Response body: ${response.body}');
   }
 
-  void deleteUser(String id) async {
-    print('delete user called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
-        : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
+  // void deleteUser(String id) async {
+  //   print('delete user called');
+  //   bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+  //   var url = isIOS
+  //       ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
+  //       : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
 
-    var response = await http.delete(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-  }
+  //   var response = await http.delete(url);
+  //   print('Response status: ${response.statusCode}');
+  //   print('Response body: ${response.body}');
+  // }
 }
