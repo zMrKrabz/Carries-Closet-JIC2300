@@ -322,7 +322,7 @@ class _ViewUsersState extends State<ViewUsers> {
                         const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: () {
-                            // deleteUser(decode[index]['id']);
+                            deleteUser(decode[index]['id']);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
                               return ViewUsersPage();
@@ -361,15 +361,15 @@ class _ViewUsersState extends State<ViewUsers> {
     print('Response body: ${response.body}');
   }
 
-  // void deleteUser(String id) async {
-  //   print('delete user called');
-  //   bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-  //   var url = isIOS
-  //       ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
-  //       : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
+  void deleteUser(String id) async {
+    print('delete user called');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
+        : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
 
-  //   var response = await http.delete(url);
-  //   print('Response status: ${response.statusCode}');
-  //   print('Response body: ${response.body}');
-  // }
+    var response = await http.delete(url);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
 }
