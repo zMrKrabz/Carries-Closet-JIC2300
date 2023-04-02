@@ -70,12 +70,12 @@ class ProfileFormState extends State<ProfileForm> {
                           if (AppUser.isAdmin) {
                             Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
-                            return AdminHomePage();
+                            return const AdminHomePage();
                           })));
                           } else {
                             Navigator.push(context,
                               MaterialPageRoute(builder: ((context) {
-                                return HomePage();
+                                return const HomePage();
                           })));
                           }
                           
@@ -176,8 +176,8 @@ class ProfileFormState extends State<ProfileForm> {
                 style: TextButton.styleFrom(
                   minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                   foregroundColor: Colors.black,
-                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  textStyle: TextStyle(fontSize: 16),
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 16),
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -226,7 +226,7 @@ class ProfileFormState extends State<ProfileForm> {
   // TO DO:
   // make sure sign up is followed up by creating post request via flask server
   Future update_user_info(bool isIOS, var context) async {
-    if (await FirebaseAuth.instance.currentUser == null) {
+    if (FirebaseAuth.instance.currentUser == null) {
       signUp();
     }
     var uid = FirebaseAuth.instance.currentUser?.uid;
@@ -254,11 +254,11 @@ class ProfileFormState extends State<ProfileForm> {
     print('Response body: ${response.body}');    
       if (AppUser.isAdmin) {
         Navigator.push(context, MaterialPageRoute(builder: ((context) {
-        return AdminHomePage();
+        return const AdminHomePage();
           })));
         } else {
           Navigator.push(context, MaterialPageRoute(builder: ((context) {
-          return HomePage();
+          return const HomePage();
           })));
         }
       }
