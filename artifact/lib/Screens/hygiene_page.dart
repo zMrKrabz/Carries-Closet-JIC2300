@@ -38,6 +38,7 @@ class _HygienePageState extends State<HygienePage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+      theme: ThemeData(backgroundColor: Color(0xFFf9f9f9)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: SingleChildScrollView(

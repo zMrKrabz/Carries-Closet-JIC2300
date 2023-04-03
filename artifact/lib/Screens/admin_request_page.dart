@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:artifact/admin_home_page.dart";
+import "package:artifact/Screens/full_request_page.dart";
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -20,6 +21,7 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+        theme: ThemeData(backgroundColor: Color(0xFFf9f9f9)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: SingleChildScrollView(
@@ -87,6 +89,16 @@ class _RequestWidgetState extends State<RequestWidget> {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                       child: Card(
+                        elevation: 0,
+                        color: const Color(0xFFF9F9F9),
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xFFD9D9D9)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            bottomLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                            bottomRight: Radius.circular(16))
+                        ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
                           child: Column(
@@ -193,11 +205,16 @@ class _RequestWidgetState extends State<RequestWidget> {
                                 )
                               ),
                               TextButton(
-                                onPressed: null,
-                                style: ButtonStyle(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                    MaterialPageRoute(builder: ((context) {
+                                      return FullRequestPage();
+                                    })));
+                                },
+                                style: const ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFFC4DBFE))
                                 ),
-                                child: Text(
+                                child: const Text(
                                   'View Full Request',
                                   style: TextStyle(
                                     color: Color(0xFF2E2E2E)
