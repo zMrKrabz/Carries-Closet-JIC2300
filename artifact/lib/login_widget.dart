@@ -21,33 +21,33 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             TextField(
               controller: emailController,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: 'Enter Email'),
+              decoration: const InputDecoration(labelText: 'Enter Email'),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             TextField(
               controller: passwordController,
               textInputAction: TextInputAction.done,
-              decoration: InputDecoration(labelText: 'Enter Password'),
+              decoration: const InputDecoration(labelText: 'Enter Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(50),
+                minimumSize: const Size.fromHeight(50),
               ),
-              icon: Icon(Icons.lock_open, size: 32),
-              label: Text(
+              icon: const Icon(Icons.lock_open, size: 32),
+              label: const Text(
                 'Sign In',
                 style: TextStyle(fontSize: 24),
               ),

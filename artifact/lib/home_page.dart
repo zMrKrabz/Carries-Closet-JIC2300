@@ -1,10 +1,11 @@
 import 'package:artifact/Screens/profile_page.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
-import 'package:artifact/Screens/view_users.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,9 +29,9 @@ class HomePage extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                     minimumSize: Size(width * 1.0 / 6.0, height * 1.0 / 27.0),
                     foregroundColor: Colors.black,
-                    backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                     textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                        const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.push(context,
@@ -44,67 +45,54 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.topCenter,
               width: width * 2.0 / 3.0,
               height: width * 2.0 / 3.0),
-          const Text(
-            'Welcome!',
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: height * 1.0 / 15.0),
+          SizedBox(height: height * 1.0 / 6.0),
           OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 10.0),
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
-                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24)),
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
-              child: const Text('Create a Request')),
-          SizedBox(height: height * 1.0 / 40.0),
-          Row(
-            children: [
-              SizedBox(height: height * 1.0 / 40.0),
-              Row(children: [
-                SizedBox(width: width * 1.0 / 8.0),
-                OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
-                        foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return HomePage();
-                      })));
-                    },
-                    child: const Text('History')),
-                SizedBox(width: width * 1.0 / 16.0),
-                OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize:
-                            Size(width * 11.0 / 32.0, height * 1.0 / 10.0),
-                        foregroundColor: Colors.black,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        textStyle: const TextStyle(fontSize: 24)),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return ProfileForm(email: userEmail, password: dummyPassword);
-                      })));
-                    },
-                    //child: const Text('Profile')),
-                    child: const Text('View Users'))
-              ])
-            ],
-          )
+              child: const Text('Submit a Request')),
+          SizedBox(height: height * 1.0 / 25.0),
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return ProfileForm(email: userEmail, password: dummyPassword);
+                })));
+              },
+              child: const Text('Edit your Profile')),
+          SizedBox(height: height * 1.0 / 25.0),
+          OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
+                  foregroundColor: Colors.black,
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                  textStyle: const TextStyle(fontSize: 24),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return const UserRequestsPage();
+                })));
+              },
+              child: const Text('View my Requests')),
         ])));
   }
-
+  
   Widget requestPopUp(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -127,7 +115,7 @@ class HomePage extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return ClothingPage();
+                  return const ClothingPage();
                 })));
               },
               child: const Text('Clothing'),
@@ -143,7 +131,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return HygienePage();
+                    return const HygienePage();
                   })));
                 },
                 child: const Text('Hygiene'))
@@ -152,78 +140,3 @@ class HomePage extends StatelessWidget {
         ]);
   }
 }
-// class HomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     // final user = FirebaseAuth.instance.currentUser!; 
-//     // above line causing issues, can not figure out
-
-//     return Scaffold(
-//       // appBar: AppBar(
-//       //   title: Text('Home'),
-//       // ),
-//       body: Padding(
-//         padding: EdgeInsets.all(32),
-//         child: Column(
-//           // mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             SizedBox(height: 32),
-//             Row(children: [
-//               IconButton(
-//                   onPressed: () {
-//                     FirebaseAuth.instance.signOut();
-//                     Navigator.push(context, MaterialPageRoute(builder: ((context) {
-//                       return OpenPage();
-//                     })));
-//                   },
-//                   icon: const Icon(Icons.arrow_back)),
-//               SizedBox(width: 40),
-//               Text(
-//                 'Welcome!',
-//                 style: TextStyle(fontSize: 32),
-//               ),
-              
-//               // ElevatedButton.icon(
-//               //   style: ElevatedButton.styleFrom(
-//               //     minimumSize: Size.fromHeight(50),
-//               //   ),
-//               //   icon: Icon(Icons.arrow_back, size: 32),
-//               //   label: Text(
-//               //     'Sign Out',
-//               //     style: TextStyle(fontSize: 24),
-//               //   ),
-//               //   onPressed: () {
-//               //     FirebaseAuth.instance.signOut();
-//               //     Navigator.push(context, MaterialPageRoute(builder: ((context) {
-//               //       return OpenPage();
-//               //     })));
-//               //   } 
-//               // ),
-//             ],),
-//             SizedBox(height: 120),
-//             TextButton(
-//               style: TextButton.styleFrom(
-//                 foregroundColor: Colors.black,
-//                 backgroundColor: Color.fromARGB(255, 200, 200, 200),
-//                 textStyle: TextStyle(fontSize: 16),
-//               ),
-//               child: const Text('Make Request'),
-//               onPressed: () {
-//                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-//                       return HomePage();
-//                     })));
-//               }
-//             )
-//             // SizedBox(height: 8),
-//             // Text(
-//             //   'new user',
-//             //   // user.email!,
-//             //   style: TextStyle(fontSize: 20),
-//             // ),
-//             // SizedBox(height: 40)
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

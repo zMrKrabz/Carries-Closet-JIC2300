@@ -4,6 +4,9 @@ import 'package:artifact/home_page.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../admin_home_page.dart';
+import '../app_user.dart';
+
 class HygieneConfirmationPage extends StatefulWidget {
   final String gender, age, item, size, emergency, address, notes;
   const HygieneConfirmationPage(
@@ -22,6 +25,7 @@ class HygieneConfirmationPage extends StatefulWidget {
 }
 
 class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -168,7 +172,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     style: TextButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                       foregroundColor: Colors.black,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -180,16 +184,23 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     style: TextButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                       foregroundColor: Colors.black,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       submitDB();
-                      Navigator.push(context,
+                      if (AppUser.isAdmin) {
+                          Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
-                      })));
+                          return const AdminHomePage();
+                        })));
+                      } else {
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                          return const HomePage();
+                        })));
+                      }
                     },
                     child: const Text('Submit Request'),
                   ),

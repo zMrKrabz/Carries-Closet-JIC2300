@@ -32,8 +32,8 @@ class _OpenPageState extends State<OpenPage> {
                             minimumSize:
                                 Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
                             foregroundColor: Colors.black,
-                            backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                            textStyle: TextStyle(
+                            backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                            textStyle: const TextStyle(
                                 fontSize: 28, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(context,
@@ -41,7 +41,7 @@ class _OpenPageState extends State<OpenPage> {
                             return MainPage(isLogin: isLogin);
                           })));
                         },
-                        child: Text("Login",
+                        child: const Text("Login",
                             style: TextStyle(color: Colors.black))),
                     SizedBox(height: height * 1.0 / 18.0),
                     OutlinedButton(
@@ -49,8 +49,8 @@ class _OpenPageState extends State<OpenPage> {
                             minimumSize:
                                 Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
                             foregroundColor: Colors.black,
-                            backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                            textStyle: TextStyle(
+                            backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                            textStyle: const TextStyle(
                                 fontSize: 28, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(context,
@@ -58,7 +58,7 @@ class _OpenPageState extends State<OpenPage> {
                             return MainPage(isLogin: !isLogin);
                           })));
                         },
-                        child: Text("Signup",
+                        child: const Text("Signup",
                             style: TextStyle(color: Colors.black))),
                   ],
                 )
@@ -66,60 +66,3 @@ class _OpenPageState extends State<OpenPage> {
             )));
   }
 }
-// class OpenPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     // double densityAmt = 0.0;
-//     //   VisualDensity density = VisualDensity(horizontal: densityAmt, vertical: densityAmt);
-//     return MaterialApp(
-//       // theme: ThemeData(visualDensity: density),
-//       home: Scaffold(
-//         body: Container(
-//             alignment: Alignment.center,
-//             child: Column(
-//               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 SizedBox(
-//                   height: 100,
-//                 ),
-//                 Image.asset("assets/dsdf1.png",
-//                     height: 350, width: 350, alignment: topcenter),
-//                 SizedBox(
-//                   height: 100,
-//                 ),
-//                 Column(children: [
-//                   OutlinedButton(
-//                       style: OutlinedButton.styleFrom(
-//                           minimumSize: Size(280, 80),
-//                           textStyle: TextStyle(fontSize: 28)),
-//                       onPressed: () {
-//                         Navigator.push(context,
-//                             MaterialPageRoute(builder: ((context) {
-//                           return LoginPage();
-//                         })));
-//                       },
-//                       child:
-//                           Text("Login", style: TextStyle(color: Colors.black))),
-//                   SizedBox(height: 50),
-//                   OutlinedButton(
-//                       style: OutlinedButton.styleFrom(
-//                           minimumSize: Size(280, 80),
-//                           textStyle: TextStyle(fontSize: 28)),
-//                       onPressed: () {
-//                         Navigator.push(context,
-//                             MaterialPageRoute(builder: ((context) {
-//                           return MyApp();
-//                         })));
-//                       },
-//                       child: Text(
-//                         "Signup",
-//                         style: TextStyle(color: Colors.black),
-//                       )),
-//                 ])
-//               ],
-//             )
-//           )
-//         )
-//       );
-//   }
-// }

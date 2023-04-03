@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return OpenPage();
+                        return const OpenPage();
                       })));
                     },
                     icon: const Icon(Icons.arrow_back))),
@@ -90,11 +90,11 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 40.0),
               child: TextButton(
-                  child: Text('Forgot Password?'),
+                  child: const Text('Forgot Password?'),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) {
-                      return ForgotPassword();
+                      return const ForgotPassword();
                     })));
                   })),
           SizedBox(height: height * 2.0 / 27.0),
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextButton.styleFrom(
               minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
               foregroundColor: Colors.black,
-              backgroundColor: Color.fromARGB(255, 200, 200, 200),
+              backgroundColor: const Color.fromARGB(255, 200, 200, 200),
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
