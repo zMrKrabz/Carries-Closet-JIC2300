@@ -56,12 +56,13 @@ class _LoginPageState extends State<LoginPage> {
             child: TextField(
               controller: emailController,
               textInputAction: TextInputAction.done,
-              cursorColor: Colors.white,
+              // cursorColor: Colors.white,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color(0xFFF1F1F1),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                    borderSide:
+                        const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                     borderRadius: BorderRadius.circular(10)),
                 labelText: 'Email',
                 hintText: 'Enter your email',
@@ -80,7 +81,8 @@ class _LoginPageState extends State<LoginPage> {
                 filled: true,
                 fillColor: const Color(0xFFF1F1F1),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                  borderSide:
+                      const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 labelText: 'Password',
