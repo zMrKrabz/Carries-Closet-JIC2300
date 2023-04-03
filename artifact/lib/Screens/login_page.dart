@@ -38,26 +38,17 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return OpenPage();
+                        return const OpenPage();
                       })));
                     },
                     icon: const Icon(Icons.arrow_back))),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Image.asset("assets/dsdf1.png",
-                    height: height * 1.0 / 6.75,
-                    width: height * 1.0 / 6.75,
+                    height: height * 1.0 / 4.0,
+                    width: height * 1.0 / 4.0,
                     alignment: Alignment.center))
           ]),
-          SizedBox(height: height * 1.0 / 18.0),
-          const Text(
-            "User Login",
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.none),
-          ),
           SizedBox(height: height * 1.0 / 9.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
@@ -65,10 +56,14 @@ class _LoginPageState extends State<LoginPage> {
               controller: emailController,
               textInputAction: TextInputAction.done,
               cursorColor: Colors.white,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Username',
-                hintText: 'Enter your username',
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: const Color(0xFFF1F1F1),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                    borderRadius: BorderRadius.circular(10)),
+                labelText: 'Email',
+                hintText: 'Enter your email',
               ),
             ),
           ),
@@ -80,35 +75,47 @@ class _LoginPageState extends State<LoginPage> {
               textInputAction: TextInputAction.done,
               obscureText: true,
               obscuringCharacter: '*',
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: const Color(0xFFF1F1F1),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 labelText: 'Password',
                 hintText: 'Enter your password',
               ),
             ),
           ),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 40.0),
+              padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
               child: TextButton(
-                  child: Text('Forgot Password?'),
+                  child: const Text('Forgot Password?'),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) {
-                      return ForgotPassword();
+                      return const ForgotPassword();
                     })));
                   })),
           SizedBox(height: height * 2.0 / 27.0),
-          TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-              foregroundColor: Colors.black,
-              backgroundColor: Color.fromARGB(255, 200, 200, 200),
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            onPressed: signIn,
-            child: const Text('Login'),
-          ),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    minimumSize: Size(width / 2, height * 1.0 / 16),
+                    backgroundColor: const Color(0xFF7EA5F4),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                onPressed: signIn,
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Color(0xFFF9F9F9)),
+                ),
+              )),
         ])));
   }
 
@@ -119,19 +126,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-// class LoginPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Scaffold(
-//         body: Column(
-//           children: [
-//             const SizedBox(height: 35),
-//             Row(children: [
-//               const SizedBox(width: 10),
-//               IconButton(
-//                   onPressed: () {
-//                     Navigator.pop(context);
-

@@ -35,7 +35,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: ((context) {
-                                return HomePage();
+                                return const HomePage();
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
@@ -56,7 +56,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                             fontSize: 13.5, color: Color(0xFF2E2E2E))),
                   ),
                   SizedBox(height: height * 1.0 / 55.0),
-                  RequestWidget(),
+                  const RequestWidget(),
                 ]))));
   }
 }
@@ -107,7 +107,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         Text(
                                           "Request #" +
                                               decode[index]['requestno'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xFF2E2E2E)),
@@ -115,7 +115,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         ),
                                         Text(
                                           decode[index]['date'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 14,
                                               fontStyle: FontStyle.italic,
                                               color: Color(0xFF2E2E2E)),
@@ -140,7 +140,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                                 const Color(0xFFFFF3C8),
                                           ),
                                           child: Text(decode[index]['status'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.bold,
                                                   color: Color(0xFFDCB631))),
@@ -159,7 +159,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                     children: [
                                       Text(
                                         "Item #: " + decode[index]['item'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xFF2E2E2E)),
@@ -196,14 +196,14 @@ class _RequestWidgetState extends State<RequestWidget> {
                                                 Text(
                                                   decode[index]['size'],
                                                   textAlign: TextAlign.right,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 14,
                                                       color: Color(0xFF2E2E2E)),
                                                 ),
                                                 Text(
                                                   decode[index]['gender'],
                                                   textAlign: TextAlign.right,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 14,
                                                       color: Color(0xFF2E2E2E)),
                                                 ),
@@ -218,7 +218,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   child: Column(children: [
                                     Text(
                                       "Address: " + decode[index]['address'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xFF2E2E2E)),
@@ -229,8 +229,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   deleteRequest(decode[index]['requestno']);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: ((context) {
-                                    // return HomePage();
-                                    return UserRequestsPage();
+                                    return const UserRequestsPage();
                                   })));
                                 },
                                 style: TextButton.styleFrom(
@@ -303,9 +302,9 @@ class _RequestWidgetState extends State<RequestWidget> {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
         ? Uri.parse(
-            'http://127.0.0.1:8080/requests/remove?requestno=' + requestno)
+            'http://127.0.0.1:8080/requests/remove?requestno=$requestno')
         : Uri.parse(
-            'http://10.0.2.2:8080/requests/remove?requestno=' + requestno);
+            'http://10.0.2.2:8080/requests/remove?requestno=$requestno');
 
     var response = await http.delete(url);
     print('Response status: ${response.statusCode}');

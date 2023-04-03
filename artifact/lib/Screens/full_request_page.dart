@@ -26,17 +26,16 @@ class _FullRequestPageState extends State<FullRequestPage> {
                 child: Column(children: [
                   SizedBox(height: height * 1.0 / 12.0),
                   Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Align(
                         alignment: Alignment.topCenter,
                         child: IconButton(
-                            color: Color(0xFF2E2E2E),
+                            color: const Color(0xFF2E2E2E),
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: ((context) {
-                                return AdminRequestPage();
+                                return const AdminRequestPage();
                               })));
                             },
                             icon: const Icon(Icons.arrow_back)),
@@ -44,21 +43,21 @@ class _FullRequestPageState extends State<FullRequestPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Request #1",
+                          const Text("Request #1",
                               style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF2E2E2E))),
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 "Date Created: 3/31/23",
                                 style: TextStyle(
                                     fontSize: 18, color: Color(0xFF2E2E2E)),
                                 textAlign: TextAlign.left,
                               ),
                               SizedBox(width: width * 2.0 / 7.0, height: 1),
-                              TextButton(
+                              const TextButton(
                                   onPressed: null,
                                   child: Align(
                                       alignment: Alignment.bottomRight,
@@ -75,7 +74,6 @@ class _FullRequestPageState extends State<FullRequestPage> {
                       ),
                     ],
                   ),
-                  //SizedBox(height: height * 1.0 / 55.0),
                   Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: width * 1.0 / 17.0,
@@ -84,12 +82,11 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.person_outline,
                                 color: Color(0xFF808080),
                               ),
-                              //SizedBox(width: 2, height: 1),
                               Text("Contact Information",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
@@ -101,7 +98,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             padding: EdgeInsets.only(
                                 left: width * 1.0 / 16,
                                 top: height * 1.0 / 90.0),
-                            child: Text("Name",
+                            child: const Text("Name",
                                 style: TextStyle(
                                     color: Color(0xFF2E2E2E), fontSize: 14)),
                           ),
@@ -109,7 +106,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             padding: EdgeInsets.only(
                                 left: width * 1.0 / 16,
                                 top: height * 1.0 / 130.0),
-                            child: Text("(123)-456-7890",
+                            child: const Text("(123)-456-7890",
                                 style: TextStyle(
                                     color: Color(0xFF2E2E2E), fontSize: 14)),
                           ),
@@ -117,7 +114,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             padding: EdgeInsets.only(
                                 left: width * 1.0 / 16,
                                 top: height * 1.0 / 130.0),
-                            child: Text("Nname@gmail.com",
+                            child: const Text("Nname@gmail.com",
                                 style: TextStyle(
                                     color: Color(0xFF2E2E2E), fontSize: 14)),
                           ),
@@ -132,7 +129,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.location_pin,
                                 color: Color(0xFF808080),
@@ -148,7 +145,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             padding: EdgeInsets.only(
                                 left: width * 1.0 / 16,
                                 top: height * 1.0 / 90.0),
-                            child: Text("7292 Dictum Av.",
+                            child: const Text("7292 Dictum Av.",
                                 style: TextStyle(
                                     color: Color(0xFF2E2E2E), fontSize: 14)),
                           ),
@@ -156,7 +153,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             padding: EdgeInsets.only(
                                 left: width * 1.0 / 16,
                                 top: height * 1.0 / 130.0),
-                            child: Text("San Antonio, MI 47096",
+                            child: const Text("San Antonio, MI 47096",
                                 style: TextStyle(
                                     color: Color(0xFF2E2E2E), fontSize: 14)),
                           ),
@@ -171,7 +168,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.shopping_cart_outlined,
                                 color: Color(0xFF808080),
@@ -187,7 +184,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                               padding: EdgeInsets.only(
                                   left: width * 1.0 / 40,
                                   top: height * 1.0 / 130.0),
-                              child: ItemWidget()),
+                              child: const ItemWidget()),
                         ],
                       )),
                   SizedBox(height: height / 20.0),
@@ -200,7 +197,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                             Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
                         backgroundColor: const Color(0xFF7EA5F4),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Complete Request",
                         style:
                             TextStyle(fontSize: 18, color: Color(0xFFF9F9F9)),
@@ -225,7 +222,7 @@ class _ItemWidgetState extends State<ItemWidget> {
     double height = MediaQuery.of(context).size.height;
 
     return Card(
-        color: Color(0xFFF9F9F9),
+        color: const Color(0xFFF9F9F9),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
             padding: EdgeInsets.only(
@@ -238,26 +235,26 @@ class _ItemWidgetState extends State<ItemWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Item Name",
+                    const Text("Item Name",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF2E2E2E))),
                     Padding(
                       padding: EdgeInsets.only(top: height * 1.0 / 130.0),
-                      child: Text("gender",
+                      child: const Text("gender",
                           style: TextStyle(
                               color: Color(0xFF2E2E2E), fontSize: 14)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: height * 1.0 / 130.0),
-                      child: Text("size",
+                      child: const Text("size",
                           style: TextStyle(
                               color: Color(0xFF2E2E2E), fontSize: 14)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: height * 1.0 / 130.0),
-                      child: Text("other notes",
+                      child: const Text("other notes",
                           style: TextStyle(
                               color: Color(0xFF2E2E2E), fontSize: 14)),
                     ),

@@ -2,12 +2,8 @@ import 'package:artifact/Screens/admin_request_page.dart';
 import 'package:artifact/Screens/full_request_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
-//import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-//import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
@@ -35,9 +31,9 @@ class AdminHomePage extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                     minimumSize: Size(width * 1.0 / 6.0, height * 1.0 / 27.0),
                     foregroundColor: Colors.black,
-                    backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                     textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                        const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.push(context,
@@ -56,7 +52,7 @@ class AdminHomePage extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
-                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                   textStyle: const TextStyle(fontSize: 24),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12))),
@@ -77,14 +73,14 @@ class AdminHomePage extends StatelessWidget {
                         minimumSize:
                             Size(width * 11.0 / 32.0, height * 1.0 / 8.0),
                         foregroundColor: Colors.black,
-                        backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                        backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                         textStyle: const TextStyle(fontSize: 24),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return ViewUsersPage();
+                        return const ViewUsersPage();
                       })));
                     },
                     child: const Text('View Users')),
@@ -94,14 +90,14 @@ class AdminHomePage extends StatelessWidget {
                         minimumSize:
                             Size(width * 11.0 / 32.0, height * 1.0 / 8.0),
                         foregroundColor: Colors.black,
-                        backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                        backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                         textStyle: const TextStyle(fontSize: 15),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return AdminRequestPage();
+                        return const AdminRequestPage();
                       })));
                     },
                     child: const Text('View Requests')),
@@ -113,7 +109,7 @@ class AdminHomePage extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
-                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                   textStyle: const TextStyle(fontSize: 24),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12))),
@@ -128,13 +124,13 @@ class AdminHomePage extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
                   foregroundColor: Colors.black,
-                  backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                   textStyle: const TextStyle(fontSize: 24),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return FullRequestPage();
+                  return const FullRequestPage();
                 })));
               },
               child: const Text('View Orders')),
@@ -146,7 +142,6 @@ class AdminHomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return AlertDialog(
-        //title: const Text('Please select the type of request form:'),
         actions: [
           SizedBox(height: height * 1.0 / 40.0),
           const Text('What type of item are you requesting?',
@@ -163,7 +158,7 @@ class AdminHomePage extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return ClothingPage();
+                  return const ClothingPage();
                 })));
               },
               child: const Text('Clothing'),
@@ -179,7 +174,7 @@ class AdminHomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return HygienePage();
+                    return const HygienePage();
                   })));
                 },
                 child: const Text('Hygiene'))

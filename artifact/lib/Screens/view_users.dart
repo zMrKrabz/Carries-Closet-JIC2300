@@ -1,15 +1,5 @@
-//import 'dart:html';
-
-import 'dart:ffi';
-
-import 'package:artifact/Screens/open_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
-import 'package:firebase_core/firebase_core.dart';
 import '../admin_home_page.dart';
-
-import 'package:artifact/home_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -23,6 +13,7 @@ class ViewUsersPage extends StatefulWidget {
 }
 
 class _ViewUsersPageState extends State<ViewUsersPage> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -41,7 +32,7 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
-                          return AdminHomePage();
+                          return const AdminHomePage();
                         })));
                       },
                       icon: const Icon(Icons.arrow_back))),
@@ -53,14 +44,9 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold))
                   ])
-                  // alignment: Alignment.bottomCenter,
-                  // child: Image.asset("assets/dsdf1.png",
-                  //     height: height * 1.0 / 6.75,
-                  //     width: height * 1.0 / 6.75,
-                  //     alignment: Alignment.center)
                   )
             ]),
-            ViewUsers(),
+            const ViewUsers(),
           ]),
         )));
   }
@@ -90,7 +76,7 @@ class _ViewUsersState extends State<ViewUsers> {
           if (snapshot.hasData) {
             List<dynamic> decode = json.decode(snapshot.data.toString());
             return ListView.builder(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 shrinkWrap: true,
                 itemCount: decode.length,
                 itemBuilder: (context, index) {
@@ -100,15 +86,15 @@ class _ViewUsersState extends State<ViewUsers> {
                           title: Text(decode[index]['id']),
                           subtitle: Text(decode[index]['email']),
                           visualDensity:
-                              VisualDensity(vertical: 1.0, horizontal: 0.25),
+                              const VisualDensity(vertical: 1.0, horizontal: 0.25),
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(16),
                                   bottomLeft: Radius.circular(16),
                                   topRight: Radius.circular(16),
                                   bottomRight: Radius.circular(16))),
-                          tileColor: Color.fromRGBO(238, 224, 255, 1.0),
-                          trailing: Icon(Icons.more_vert),
+                          tileColor: const Color.fromRGBO(238, 224, 255, 1.0),
+                          trailing: const Icon(Icons.more_vert),
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
@@ -196,7 +182,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text(decode[index]['id'], style: TextStyle(fontSize: 15))
+                      Text(decode[index]['id'], style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -212,13 +198,13 @@ class _ViewUsersState extends State<ViewUsers> {
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
                       Text(decode[index]['email'],
-                          style: TextStyle(fontSize: 15))
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
                   Row(children: [
                     SizedBox(width: width * 1.0 / 20.0),
-                    Text('Phone Number:  ',
+                    const Text('Phone Number:  ',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   ]),
@@ -226,14 +212,14 @@ class _ViewUsersState extends State<ViewUsers> {
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
                       Text(decode[index]['phone'],
-                          style: TextStyle(fontSize: 15))
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 20.0),
-                      Text('County Serving:  ',
+                      const Text('County Serving:  ',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold))
                     ],
@@ -241,7 +227,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text('*insert county here*',
+                      const Text('*insert county here*',
                           style: TextStyle(fontSize: 15))
                     ],
                   ),
@@ -249,7 +235,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 20.0),
-                      Text('Delivery Address:  ',
+                      const Text('Delivery Address:  ',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold))
                     ],
@@ -258,14 +244,14 @@ class _ViewUsersState extends State<ViewUsers> {
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
                       Text(decode[index]['address'],
-                          style: TextStyle(fontSize: 15))
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 20.0),
-                      Text('City:  ',
+                      const Text('City:  ',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold))
                     ],
@@ -274,14 +260,14 @@ class _ViewUsersState extends State<ViewUsers> {
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
                       Text(decode[index]['city'],
-                          style: TextStyle(fontSize: 15))
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 20.0),
-                      Text('Zip Code:  ',
+                      const Text('Zip Code:  ',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold))
                     ],
@@ -289,7 +275,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text(decode[index]['zip'], style: TextStyle(fontSize: 15))
+                      Text(decode[index]['zip'], style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -305,7 +291,7 @@ class _ViewUsersState extends State<ViewUsers> {
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
                       Text(decode[index]['permissions'],
-                          style: TextStyle(fontSize: 15))
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 18.0),
@@ -317,7 +303,7 @@ class _ViewUsersState extends State<ViewUsers> {
                             makeAdmin(decode[index]['id']);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
-                              return ViewUsersPage();
+                              return const ViewUsersPage();
                             })));
                           },
                           child: const Text('Make administrator'),
@@ -328,10 +314,10 @@ class _ViewUsersState extends State<ViewUsers> {
                             deleteUser(decode[index]['id']);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
-                              return ViewUsersPage();
+                              return const ViewUsersPage();
                             })));
                           },
-                          child: Text('Delete'),
+                          child: const Text('Delete'),
                         ),
                         const SizedBox(width: 8),
                       ])

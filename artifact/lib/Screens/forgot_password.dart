@@ -32,9 +32,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             child: IconButton(
                 iconSize: width * 1.0 / 18.0,
                 onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  //   return LoginPage();
-                  // })));
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back))),
@@ -51,10 +48,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: TextField(
           controller: emailController,
           textInputAction: TextInputAction.done,
-          // obscureText: true,
-          // obscuringCharacter: '*',
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            filled: true,
+            fillColor: const Color(0xFFF1F1F1),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+              borderRadius: BorderRadius.circular(10),
+            ),
             labelText: 'Email Address',
             hintText: 'Enter your email address',
           ),
@@ -63,13 +63,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       SizedBox(height: height * 1.0 / 9.0),
       TextButton(
         style: TextButton.styleFrom(
-          minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-          foregroundColor: Colors.black,
-          backgroundColor: Color.fromARGB(255, 200, 200, 200),
-          textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            minimumSize: Size(width / 2, height * 1.0 / 16),
+            backgroundColor: const Color(0xFF7EA5F4),
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
         onPressed: resetPassword,
-        child: const Text('Reset Password'),
+        child: const Text('Reset Password',
+            style: TextStyle(color: Color(0xFFF2F2F2))),
       ),
     ])));
   }

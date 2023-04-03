@@ -10,7 +10,7 @@ class AdminLogin extends StatelessWidget {
       home: Scaffold(
         body: Column(
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
 
             Image.asset("assets/dsdf.png",
                 height: 200, width: 200, alignment: Alignment.topCenter),
@@ -56,13 +56,13 @@ class AdminLogin extends StatelessWidget {
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
-                backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                textStyle: TextStyle(fontSize: 16),
+                backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                textStyle: const TextStyle(fontSize: 16),
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: 
                   ((context) {
-                  return AdminLogin();
+                  return const AdminLogin();
                   })
                 ));
               },

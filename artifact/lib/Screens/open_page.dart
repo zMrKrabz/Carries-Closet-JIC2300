@@ -22,104 +22,58 @@ class _OpenPageState extends State<OpenPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image.asset("assets/dsdf1.png",
-                    alignment: topcenter,
-                    width: width * 3.0 / 4.0,
-                    height: width * 3.0 / 4.0),
+                    alignment: Alignment.bottomCenter,
+                    width: width * 3.0 / 4.5,
+                    height: width * 3.0 / 4.5),
+                const Text(
+                  "Welcome",
+                  style: TextStyle(
+                      color: Color(0xFF2E2E2E),
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
                 Column(
                   children: [
-                    OutlinedButton(
-                        style: OutlinedButton.styleFrom(
+                    TextButton(
+                        style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             minimumSize:
-                                Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
-                            foregroundColor: Colors.black,
-                            backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                            textStyle: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold)),
+                                Size(width * 1.25 / 2.0, height * 1.0 / 14.0),
+                            //foregroundColor: Colors.black,
+                            backgroundColor: const Color(0xFF7EA5F4),
+                            textStyle: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: ((context) {
                             return MainPage(isLogin: isLogin);
                           })));
                         },
-                        child: Text("Login",
-                            style: TextStyle(color: Colors.black))),
-                    SizedBox(height: height * 1.0 / 18.0),
-                    OutlinedButton(
-                        style: OutlinedButton.styleFrom(
+                        child: const Text("LOGIN",
+                            style: TextStyle(color: Color(0xFFF9F9F9)))),
+                    SizedBox(height: height * 1.0 / 23.0),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             minimumSize:
-                                Size(width * 1.0 / 2.0, height * 1.0 / 9.0),
-                            foregroundColor: Colors.black,
-                            backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                            textStyle: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold)),
+                                Size(width * 1.25 / 2.0, height * 1.0 / 14.0),
+                            //foregroundColor: Colors.black,
+                            backgroundColor: const Color(0xFFF1F1F1),
+                            textStyle: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: ((context) {
                             return MainPage(isLogin: !isLogin);
                           })));
                         },
-                        child: Text("Signup",
-                            style: TextStyle(color: Colors.black))),
+                        child: const Text("SIGN UP",
+                            style: TextStyle(color: Color(0xFF2E2E2E)))),
                   ],
                 )
               ],
             )));
   }
 }
-// class OpenPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     // double densityAmt = 0.0;
-//     //   VisualDensity density = VisualDensity(horizontal: densityAmt, vertical: densityAmt);
-//     return MaterialApp(
-//       // theme: ThemeData(visualDensity: density),
-//       home: Scaffold(
-//         body: Container(
-//             alignment: Alignment.center,
-//             child: Column(
-//               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 SizedBox(
-//                   height: 100,
-//                 ),
-//                 Image.asset("assets/dsdf1.png",
-//                     height: 350, width: 350, alignment: topcenter),
-//                 SizedBox(
-//                   height: 100,
-//                 ),
-//                 Column(children: [
-//                   OutlinedButton(
-//                       style: OutlinedButton.styleFrom(
-//                           minimumSize: Size(280, 80),
-//                           textStyle: TextStyle(fontSize: 28)),
-//                       onPressed: () {
-//                         Navigator.push(context,
-//                             MaterialPageRoute(builder: ((context) {
-//                           return LoginPage();
-//                         })));
-//                       },
-//                       child:
-//                           Text("Login", style: TextStyle(color: Colors.black))),
-//                   SizedBox(height: 50),
-//                   OutlinedButton(
-//                       style: OutlinedButton.styleFrom(
-//                           minimumSize: Size(280, 80),
-//                           textStyle: TextStyle(fontSize: 28)),
-//                       onPressed: () {
-//                         Navigator.push(context,
-//                             MaterialPageRoute(builder: ((context) {
-//                           return MyApp();
-//                         })));
-//                       },
-//                       child: Text(
-//                         "Signup",
-//                         style: TextStyle(color: Colors.black),
-//                       )),
-//                 ])
-//               ],
-//             )
-//           )
-//         )
-//       );
-//   }
-// }
