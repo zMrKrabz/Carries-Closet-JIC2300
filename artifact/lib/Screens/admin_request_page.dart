@@ -172,8 +172,7 @@ class _RequestWidgetState extends State<RequestWidget> {
     print('delete request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/remove?id=' +
-            '6KEpYXHpb2rJEBRco35D')
+        ? Uri.parse('http://127.0.0.1:8080/requests/remove?id=' + id)
         : Uri.parse('http://10.0.2.2:8080/requests/remove?id=' + id);
 
     var response = await http.delete(url);

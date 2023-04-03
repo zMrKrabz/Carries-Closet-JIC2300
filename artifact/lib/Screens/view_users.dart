@@ -171,7 +171,10 @@ class _ViewUsersState extends State<ViewUsers> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: ((context) {
+                                return ViewUsersPage();
+                              })));
                             },
                             icon: const Icon(Icons.arrow_back))),
                     Align(
