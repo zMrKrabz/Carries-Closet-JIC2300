@@ -1,11 +1,8 @@
 import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import "package:artifact/main.dart";
 
-import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -48,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return OpenPage();
+                        return const OpenPage();
                       })));
                     },
                     icon: const Icon(Icons.arrow_back))),
@@ -123,71 +120,13 @@ class _SignUpPageState extends State<SignUpPage> {
             style: TextButton.styleFrom(
               minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
               foregroundColor: Colors.black,
-              backgroundColor: Color.fromARGB(255, 200, 200, 200),
+              backgroundColor: const Color.fromARGB(255, 200, 200, 200),
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             onPressed: goToProfilePage,
             child: const Text('Signup'),
           ),
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 0, top: 0, right: 200, bottom: 0),
-          //   child: Text(
-          //     'Password',
-          //     style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-          //   child: TextField(
-          //     controller: passwordController,
-          //     obscureText: true,
-          //     obscuringCharacter: '*',
-          //     decoration: InputDecoration(
-          //       border: OutlineInputBorder(),
-          //       hintText: 'Enter your password',
-          //     ),
-          //   ),
-          // ),
-
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 50, top: 0, right: 180, bottom: 0),
-          //   child: Text(
-          //     'Re-enter Password',
-          //     style: TextStyle(fontWeight: FontWeight.bold),
-          //   ),
-          // ),
-
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 80, top: 4, right: 80, bottom: 30),
-          //   child: TextField(
-          //     obscureText: true,
-          //     obscuringCharacter: '*',
-          //     decoration: InputDecoration(
-          //       border: OutlineInputBorder(),
-          //       hintText: 'Re-enter your password',
-          //     ),
-          //   ),
-          // ),
-
-          // const Padding(
-          //   padding: EdgeInsets.only(left: 80, top: 100, right: 80, bottom: 30),
-          // child: TextButton(
-          //   style: TextButton.styleFrom(
-          //     foregroundColor: Colors.black,
-          //     backgroundColor: Colors.grey,
-          //     textStyle: const TextStyle(fontSize: 20),
-          //   ),
-          //   onPressed: () {},
-          //   child: const Text('Signup'),
-          // ),
-          // ),
-          // new Container(
-          //     child: ElevatedButton(
-          //   child: Text("Signup",
-          //       style: TextStyle(color: Colors.black, fontSize: 16)),
-          //   onPressed: null,
-          // ))
         ],
       )
       ),

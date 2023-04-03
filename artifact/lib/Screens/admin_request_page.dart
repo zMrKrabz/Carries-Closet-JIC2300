@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:artifact/home_page.dart";
 import "package:artifact/admin_home_page.dart";
 
 import 'package:http/http.dart' as http;
@@ -35,7 +34,7 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: ((context) {
-                                return AdminHomePage();
+                                return const AdminHomePage();
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
@@ -46,7 +45,7 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
                             width: height * 1.0 / 6.75,
                             alignment: Alignment.center))
                   ]),
-                  RequestWidget(),
+                  const RequestWidget(),
                 ]))));
   }
 }
@@ -78,9 +77,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          title: Text("Request #1"),
+                          title: const Text("Request #1"),
                           subtitle: Text("${decode[index]['date']}"),
-                          trailing: Icon(Icons.more_vert),
+                          trailing: const Icon(Icons.more_vert),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -93,17 +92,17 @@ class _RequestWidgetState extends State<RequestWidget> {
                         Text("Address: ${decode[index]['address']}"),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
+                            children: const <Widget>[
                               ElevatedButton(
                                 onPressed: null,
-                                child: const Text('Complete'),
+                                child: Text('Complete'),
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               ElevatedButton(
                                 onPressed: null,
                                 child: Text('Deny'),
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                             ])
                       ],
                     );

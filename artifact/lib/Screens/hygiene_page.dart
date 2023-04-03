@@ -52,7 +52,7 @@ class _HygienePageState extends State<HygienePage> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: ((context) {
-                                return HomePage();
+                                return const HomePage();
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
@@ -68,7 +68,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: Text("Please select a gender"),
+                      hint: const Text("Please select a gender"),
                       value: genderValue,
                       onChanged: (val) {
                         setState(() {
@@ -81,7 +81,7 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -104,7 +104,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: Text("Please select a piece of clothing"),
+                      hint: const Text("Please select a piece of clothing"),
                       value: itemValue,
                       onChanged: (val) {
                         setState(() {
@@ -117,7 +117,7 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -125,7 +125,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: Text("Please select a size"),
+                      hint: const Text("Please select a size"),
                       value: sizeValue,
                       onChanged: (val) {
                         setState(() {
@@ -138,7 +138,7 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -146,7 +146,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: Text("Please select if it's an Emergency"),
+                      hint: const Text("Please select if it's an Emergency"),
                       value: emergencyValue,
                       onChanged: (val) {
                         setState(() {
@@ -159,7 +159,7 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -198,7 +198,7 @@ class _HygienePageState extends State<HygienePage> {
                     style: TextButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                       foregroundColor: Colors.black,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
