@@ -23,6 +23,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            backgroundColor: Color(0xFFF9F9F9),
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
@@ -48,14 +49,14 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                         ))
                   ]),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width / 10.0,
+                        vertical: height * 1.0 / 55.0),
                     child: const Text(
                         "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
                         style: TextStyle(
                             fontSize: 13.5, color: Color(0xFF2E2E2E))),
                   ),
-                  SizedBox(height: height * 1.0 / 55.0),
                   const RequestWidget(),
                 ]))));
   }
@@ -78,14 +79,16 @@ class _RequestWidgetState extends State<RequestWidget> {
 
     String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
-    return Card(
-      child: FutureBuilder<String>(
-          future: parseRequests(uid),
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            List<Widget> children;
-            if (snapshot.hasData) {
-              List<dynamic> decode = json.decode(snapshot.data.toString());
-              return ListView.builder(
+    return FutureBuilder<String>(
+      future: parseRequests(uid),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        List<Widget> children;
+        if (snapshot.hasData) {
+          List<dynamic> decode = json.decode(snapshot.data.toString());
+          return MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: decode.length,
                   itemBuilder: (context, index) {
@@ -93,6 +96,12 @@ class _RequestWidgetState extends State<RequestWidget> {
                       padding:
                           EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                       child: Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(10), // if you need this
+                          side: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                        ),
                         child: Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: height * 1.0 / 55.0),
@@ -128,15 +137,15 @@ class _RequestWidgetState extends State<RequestWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        if (decode[index]['status'] ==
-                                            "processed")
-                                          processedButton(context)
-                                        else if (decode[index]['status'] ==
-                                            "delivered")
-                                          deliveredButton(context)
-                                        else if (decode[index]['status'] ==
-                                            "denied")
-                                          deniedButton(context)
+                                        processedButton(context)
+                                        // if (decode[index]['status'] == "processed")
+                                        //   processedButton(context)
+                                        // else if (decode[index]['status'] ==
+                                        //     "delivered")
+                                        //   deliveredButton(context)
+                                        // else if (decode[index]['status'] ==
+                                        //     "denied")
+                                        //   deniedButton(context)
                                       ],
                                     )
                                   ]),
@@ -206,13 +215,17 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   )),
                               Padding(
                                   padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0,
                                       vertical: height * 1.0 / 50.0),
-                                  child: Column(children: [
+                                  child: Row(children: [
+                                    Text("Address: ",
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
                                     Text(
-                                      "Address: " + decode[index]['address'],
+                                      decode[index]['address'],
                                       style: const TextStyle(
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
@@ -242,39 +255,39 @@ class _RequestWidgetState extends State<RequestWidget> {
                             ])),
                       ),
                     );
-                  });
-            } else if (snapshot.hasError) {
-              children = <Widget>[
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text('Error: ${snapshot.error}'),
-                ),
-              ];
-            } else {
-              children = const <Widget>[
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text('Awaiting result...'),
-                ),
-              ];
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
-            );
-          }),
+                  }));
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            const Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          ];
+        } else {
+          children = const <Widget>[
+            SizedBox(
+              width: 60,
+              height: 60,
+              child: CircularProgressIndicator(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text('Awaiting result...'),
+            ),
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 

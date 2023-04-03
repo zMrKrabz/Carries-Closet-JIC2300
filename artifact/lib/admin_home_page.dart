@@ -141,7 +141,7 @@ class AdminHomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return const FullRequestPage();
+                  return const AdminRequestPage();
                 })));
               },
               child: const Text('View Orders',

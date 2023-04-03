@@ -19,6 +19,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: SingleChildScrollView(
@@ -226,6 +227,7 @@ class _ItemWidgetState extends State<ItemWidget> {
 
     return Card(
         color: const Color(0xFFF9F9F9),
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
             padding: EdgeInsets.only(
