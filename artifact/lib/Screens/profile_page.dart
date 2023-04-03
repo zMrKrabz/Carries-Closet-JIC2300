@@ -1,11 +1,8 @@
 // import 'dart:html';
 import 'package:artifact/home_page.dart';
-import 'package:artifact/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
-
 import '../admin_home_page.dart';
 import '../app_user.dart';
 
@@ -105,6 +102,7 @@ class ProfileFormState extends State<ProfileForm> {
                   const Text("User Information",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+
 
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -237,8 +235,6 @@ class ProfileFormState extends State<ProfileForm> {
     print('Response body: ${response.body}');
   }
 
-  // TO DO:
-  // make sure sign up is followed up by creating post request via flask server
   Future update_user_info(bool isIOS, var context) async {
     if (FirebaseAuth.instance.currentUser == null) {
       signUp();
@@ -283,9 +279,9 @@ Widget fullNameTextField() {
     controller: ProfileFormState.firstNameController,
     decoration: InputDecoration(
       filled: true,
-      fillColor: Color(0xFFF1F1F1),
+      fillColor: const Color(0xFFF1F1F1),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+        borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
         borderRadius: BorderRadius.circular(10),
       ),
       labelText: "Full Name",
@@ -307,9 +303,9 @@ Widget emailAddressTextField() {
     controller: ProfileFormState.emailController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "Email Address",
@@ -330,9 +326,9 @@ Widget phoneNumTextField() {
     controller: ProfileFormState.phoneController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "Phone Number",
@@ -353,9 +349,9 @@ Widget countyTextField() {
     controller: ProfileFormState.countryController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "County Serving",
@@ -376,9 +372,9 @@ Widget addressTextField() {
     controller: ProfileFormState.addressController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "Delivery Address",
@@ -399,9 +395,9 @@ Widget cityTextField() {
     controller: ProfileFormState.cityController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "City",
@@ -422,9 +418,9 @@ Widget stateTextField() {
     controller: ProfileFormState.stateController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "State",
@@ -445,9 +441,9 @@ Widget zipTextField() {
     controller: ProfileFormState.zipController,
     decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xFFF1F1F1),
+        fillColor: const Color(0xFFF1F1F1),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
           borderRadius: BorderRadius.circular(10),
         ),
         labelText: "Zip Code",

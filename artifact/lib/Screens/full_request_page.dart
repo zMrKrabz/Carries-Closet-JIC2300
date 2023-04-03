@@ -27,7 +27,6 @@ class _FullRequestPageState extends State<FullRequestPage> {
                 child: Column(children: [
                   SizedBox(height: height * 1.0 / 12.0),
                   Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Align(
                         alignment: Alignment.topCenter,
@@ -76,7 +75,6 @@ class _FullRequestPageState extends State<FullRequestPage> {
                       ),
                     ],
                   ),
-                  //SizedBox(height: height * 1.0 / 55.0),
                   Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: width * 1.0 / 17.0,
@@ -85,13 +83,12 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
-                              const Icon(
+                            children: const [
+                              Icon(
                                 Icons.person_outline,
                                 color: Color(0xFF808080),
                               ),
-                              //SizedBox(width: 2, height: 1),
-                              const Text("Contact Information",
+                              Text("Contact Information",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 16,
@@ -133,12 +130,12 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
-                              const Icon(
+                            children: const [
+                              Icon(
                                 Icons.location_pin,
                                 color: Color(0xFF808080),
                               ),
-                              const Text("Address",
+                              Text("Address",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 16,
@@ -172,12 +169,12 @@ class _FullRequestPageState extends State<FullRequestPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
-                              const Icon(
+                            children: const [
+                              Icon(
                                 Icons.shopping_cart_outlined,
                                 color: Color(0xFF808080),
                               ),
-                              const Text("Items",
+                              Text("Items",
                                   style: TextStyle(
                                       color: Color(0xFF808080),
                                       fontSize: 16,

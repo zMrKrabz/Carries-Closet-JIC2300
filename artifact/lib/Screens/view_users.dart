@@ -44,11 +44,6 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold))
                   ])
-                  // alignment: Alignment.bottomCenter,
-                  // child: Image.asset("assets/dsdf1.png",
-                  //     height: height * 1.0 / 6.75,
-                  //     width: height * 1.0 / 6.75,
-                  //     alignment: Alignment.center)
                   )
             ]),
             const ViewUsers(),

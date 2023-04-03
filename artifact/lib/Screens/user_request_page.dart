@@ -229,6 +229,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
+
                               if (decode[index]['status'] == "denied")
                                 TextButton(
                                   onPressed: () {
@@ -520,3 +521,4 @@ class _RequestWidgetState extends State<RequestWidget> {
 //     );
 //   }
 // }
+

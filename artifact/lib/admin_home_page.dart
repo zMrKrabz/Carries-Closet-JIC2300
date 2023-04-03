@@ -154,6 +154,7 @@ class AdminHomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+
     return ButtonBarTheme(
         data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(
@@ -209,5 +210,6 @@ class AdminHomePage extends StatelessWidget {
               ),
               SizedBox(height: height * 1.0 / 40.0)
             ]));
+
   }
 }

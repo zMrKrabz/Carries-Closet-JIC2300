@@ -91,10 +91,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF1F1F1),
+                      fillColor: const Color(0xFFF1F1F1),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       labelText: 'Email Address',
@@ -112,15 +112,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? 'Passwords must be at least 6 characters'
                             : null,
                     controller: passwordController,
-                    // textInputAction: TextInputAction.done,
                     obscureText: true,
                     obscuringCharacter: '*',
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF1F1F1),
+                      fillColor: const Color(0xFFF1F1F1),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       labelText: 'Password',
@@ -143,10 +142,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscuringCharacter: '*',
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF1F1F1),
+                      fillColor: const Color(0xFFF1F1F1),
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       labelText: 'Confirm Password',

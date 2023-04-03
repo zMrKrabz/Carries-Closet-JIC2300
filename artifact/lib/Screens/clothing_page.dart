@@ -41,8 +41,6 @@ class _ClothingPageState extends State<ClothingPage> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        // debugShowCheckedModeBanner: false,
-        // home: Container(
         body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Form(
@@ -106,9 +104,9 @@ class _ClothingPageState extends State<ClothingPage> {
                                 }).toList(),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Color(0xFFF1F1F1),
+                                  fillColor: const Color(0xFFF1F1F1),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         width: 1, color: Color(0xFFF1F1F1)),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -124,9 +122,9 @@ class _ClothingPageState extends State<ClothingPage> {
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 filled: true,
-                                fillColor: Color(0xFFF1F1F1),
+                                fillColor: const Color(0xFFF1F1F1),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       width: 1, color: Color(0xFFF1F1F1)),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -162,10 +160,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                              const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -196,10 +194,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                              const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -230,10 +228,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                              const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -249,10 +247,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                              const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         labelText: 'Address',
@@ -270,10 +268,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                              const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         labelText: 'Other notes',
