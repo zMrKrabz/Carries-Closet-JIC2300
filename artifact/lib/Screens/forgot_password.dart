@@ -32,9 +32,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             child: IconButton(
                 iconSize: width * 1.0 / 18.0,
                 onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  //   return LoginPage();
-                  // })));
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back))),
@@ -51,13 +48,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: TextField(
           controller: emailController,
           textInputAction: TextInputAction.done,
-          // obscureText: true,
-          // obscuringCharacter: '*',
           decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xFFF1F1F1),
+            fillColor: const Color(0xFFF1F1F1),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+              borderSide: const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
               borderRadius: BorderRadius.circular(10),
             ),
             labelText: 'Email Address',

@@ -142,7 +142,6 @@ class AdminHomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return AlertDialog(
-        //title: const Text('Please select the type of request form:'),
         actions: [
           SizedBox(height: height * 1.0 / 40.0),
           const Text('What type of item are you requesting?',

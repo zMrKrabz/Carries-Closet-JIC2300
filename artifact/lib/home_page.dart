@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.email;
     final userEmail = userId != null ? userId.toString() : "*****@gmail.com";
-    final String dummyPassword = "password";
+    const String dummyPassword = "password";
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -106,8 +106,6 @@ class HomePage extends StatelessWidget {
     return ButtonBarTheme(
         data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(
-            // actionsAlignment: MainAxisAlignment.center,
-            //title: const Text('Please select the type of request form:'),
             actions: <Widget>[
               SizedBox(height: height * 1.0 / 40.0),
               const Text('What type of item are you requesting?',

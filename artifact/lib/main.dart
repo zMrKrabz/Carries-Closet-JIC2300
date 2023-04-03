@@ -18,7 +18,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: OpenPage(),
   ));
@@ -41,9 +41,9 @@ class MainPage extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.data == true) {
                       user.setAdminStatus(true);
-                      return AdminHomePage();
+                      return const AdminHomePage();
                     } else if (snapshot.data == false) {
-                      return HomePage();
+                      return const HomePage();
                     } else {
                       return SizedBox(
                         height: MediaQuery.of(context).size.height / 1.3,
@@ -53,23 +53,11 @@ class MainPage extends StatelessWidget {
                       );
                     }
                   });
-              // To do:
-              // get request to the python backend for user id
-              // access the permissions flag
-              // create var that is global/static? can be accessed
-              // or make it a var that is passed between pages (more clunky but easier)
             } else if (isLogin) {
-              return LoginPage();
+              return const LoginPage();
             } else {
-              return SignUpPage();
+              return const SignUpPage();
             }
-            // if (snapshot.hasData) {
-            //   return HomePage();
-            // } else if (isLogin) {
-            //   return HomePage();
-            // } else {
-            //   return HomePage();
-            // }
           },
         ),
       );
