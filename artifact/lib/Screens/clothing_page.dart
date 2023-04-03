@@ -61,19 +61,12 @@ class _ClothingPageState extends State<ClothingPage> {
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
-                    // Align(
-                    //     alignment: Alignment.bottomCenter,
-                    //     child: Image.asset("assets/dsdf1.png",
-                    //         height: height * 1.0 / 6.75,
-                    //         width: height * 1.0 / 6.75,
-                    //         alignment: Alignment.center))
                   ]),
                   const Text("Clothing Request",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 32,
                           color: Color(0xFF2E2E2E))),
-
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: width * 1.0 / 12.0,
@@ -144,21 +137,6 @@ class _ClothingPageState extends State<ClothingPage> {
                           )
                         ],
                       )),
-                  // SizedBox(height: height * 1.0 / 72.0),
-                  // Padding(
-                  //   padding:
-                  //       EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                  //   child: TextField(
-                  //     controller: ageController,
-                  //     textInputAction: TextInputAction.done,
-                  //     cursorColor: Colors.white,
-                  //     decoration: const InputDecoration(
-                  //       border: OutlineInputBorder(),
-                  //       labelText: 'Age',
-                  //       hintText: 'Enter the age',
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(height: height * 1.0 / 72.0),
                   Padding(
                     padding:

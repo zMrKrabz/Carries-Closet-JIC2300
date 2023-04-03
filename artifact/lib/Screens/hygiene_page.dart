@@ -256,18 +256,6 @@ class _HygienePageState extends State<HygienePage> {
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      // if (genderValue.toString().compareTo("null") == 0) {
-                      //   genderValue = "N/A";
-                      // }
-                      // if (itemValue.toString().compareTo("null") == 0) {
-                      //   itemValue = "N/A";
-                      // }
-                      // if (sizeValue.toString().compareTo("null") == 0) {
-                      //   sizeValue = "N/A";
-                      // }
-                      // if (emergencyValue.toString().compareTo("null") == 0) {
-                      //   emergencyValue = "N/A";
-                      // }
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HygieneConfirmationPage(
