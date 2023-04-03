@@ -52,151 +52,161 @@ class ProfileFormState extends State<ProfileForm> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Form(
-        key: _formKey,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-            Widget>[
-          Column(
-            children: [
-              SizedBox(height: height * 1.0 / 18.0),
-              Stack(alignment: Alignment.topLeft, children: [
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                        iconSize: width * 1.0 / 18.0,
-                        onPressed: () {
-                          if (AppUser.isAdmin) {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: ((context) {
-                              return const AdminHomePage();
-                            })));
-                          } else {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: ((context) {
-                              return const HomePage();
-                            })));
-                          }
-                        },
-                        icon: const Icon(Icons.arrow_back))),
-              ]),
-              //Names
-              // Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-              //   child: Row(
-              //     children: [
-              //       SizedBox(
-              //           height: 50, width: 150, child: firstNameTextField()),
-              //       SizedBox(
-              //         width: 50,
-              //       ),
-              //       SizedBox(
-              //         height: 50,
-              //         width: 150,
-              //         child: lastNameTextField(),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              SizedBox(height: height * 1.0 / 32.0),
-              const Text("User Information",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+          scrollDirection: Axis.vertical,
+          child: Form(
+            key: _formKey,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+                    Widget>[
+              Column(
+                children: [
+                  SizedBox(height: height * 1.0 / 18.0),
+                  Stack(alignment: Alignment.topLeft, children: [
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                            iconSize: width * 1.0 / 18.0,
+                            onPressed: () {
+                              if (AppUser.isAdmin) {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: ((context) {
+                                  return const AdminHomePage();
+                                })));
+                              } else {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: ((context) {
+                                  return const HomePage();
+                                })));
+                              }
+                            },
+                            icon: const Icon(Icons.arrow_back))),
+                  ]),
+                  //Names
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                  //   child: Row(
+                  //     children: [
+                  //       SizedBox(
+                  //           height: 50, width: 150, child: firstNameTextField()),
+                  //       SizedBox(
+                  //         width: 50,
+                  //       ),
+                  //       SizedBox(
+                  //         height: 50,
+                  //         width: 150,
+                  //         child: lastNameTextField(),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  SizedBox(height: height * 1.0 / 32.0),
+                  const Text("User Information",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
 
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 1.0 / 12.0,
-                    vertical: height * 1.0 / 36.0),
-                child: const Text(
-                    "Please fill out information to edit the account",
-                    textAlign: TextAlign.center),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: fullNameTextField(),
-              ),
-
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: emailAddressTextField(),
-              ),
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: phoneNumTextField(),
-              ),
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: countyTextField(),
-              ),
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: addressTextField(),
-              ),
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      // height: height *,
-                      width: width * 1.0 / 2.0,
-                      child: cityTextField(),
-                    ),
-                    SizedBox(width: width * 1.0 / 7.5),
-                    SizedBox(
-                      width: width * 1.0 / 5.0,
-                      child: stateTextField(),
-                    )
-                  ],
-                ),
-              ), //City / State info
-
-              SizedBox(height: height * 1.0 / 52.0),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      // height: height *,
-                      width: width * 1.0 / 2.0,
-                      child: zipTextField(),
-                    ),
-                    SizedBox(width: width * 1.0 / 20.0),
-                  ],
-                ),
-              ), //City / State info
-
-              SizedBox(height: height * 1.0 / 20.0),
-              TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    minimumSize: Size(width / 2, height * 1.0 / 16),
-                    backgroundColor: const Color(0xFF7EA5F4),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 1.0 / 12.0,
+                        vertical: height * 1.0 / 36.0),
+                    child: const Text(
+                        "Please fill out information to edit the account",
+                        textAlign: TextAlign.center),
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      bool isIOS =
-                          Theme.of(context).platform == TargetPlatform.iOS;
-                      update_user_info(isIOS, context);
-                    }
-                  },
-                  child: const Text(
-                    'Save',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFF9F9F9)),
-                  )),
-            ],
-          )
-        ]),
-      ),
-    ));
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: fullNameTextField(),
+                  ),
+
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: emailAddressTextField(),
+                  ),
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: phoneNumTextField(),
+                  ),
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: countyTextField(),
+                  ),
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: addressTextField(),
+                  ),
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          // height: height *,
+                          width: width * 1.0 / 2.0,
+                          child: cityTextField(),
+                        ),
+                        SizedBox(width: width * 1.0 / 7.5),
+                        SizedBox(
+                          width: width * 1.0 / 5.0,
+                          child: stateTextField(),
+                        )
+                      ],
+                    ),
+                  ), //City / State info
+
+                  SizedBox(height: height * 1.0 / 52.0),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          // height: height *,
+                          width: width * 1.0 / 2.0,
+                          child: zipTextField(),
+                        ),
+                        SizedBox(width: width * 1.0 / 20.0),
+                      ],
+                    ),
+                  ), //City / State info
+
+                  SizedBox(height: height * 1.0 / 20.0),
+                  TextButton(
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        minimumSize: Size(width / 2, height * 1.0 / 16),
+                        backgroundColor: const Color(0xFF7EA5F4),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          bool isIOS =
+                              Theme.of(context).platform == TargetPlatform.iOS;
+                          update_user_info(isIOS, context);
+                        }
+                      },
+                      child: const Text(
+                        'Save',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFF9F9F9)),
+                      )),
+                ],
+              )
+            ]),
+          ),
+        ));
   }
 
   Future signUp() async {

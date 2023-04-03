@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: SingleChildScrollView(
             child: Column(children: [
@@ -44,12 +45,12 @@ class _LoginPageState extends State<LoginPage> {
                     icon: const Icon(Icons.arrow_back))),
             Align(
                 alignment: Alignment.bottomCenter,
-                child: Image.asset("assets/dsdf1.png",
-                    height: height * 1.0 / 4.0,
-                    width: height * 1.0 / 4.0,
+                child: Image.asset("assets/logo.png",
+                    height: height * 1.0 / 3.0,
+                    width: height * 1.0 / 3.0,
                     alignment: Alignment.center))
           ]),
-          SizedBox(height: height * 1.0 / 9.0),
+          SizedBox(height: height * 1.0 / 12.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
             child: TextField(
@@ -87,16 +88,20 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-              child: TextButton(
-                  child: const Text('Forgot Password?'),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) {
-                      return const ForgotPassword();
-                    })));
-                  })),
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                child: TextButton(
+                    child: const Text('Forgot Password?',
+                        style:
+                            TextStyle(color: Color(0xFF2e2e2e), fontSize: 14)),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return const ForgotPassword();
+                      })));
+                    }))
+          ]),
           SizedBox(height: height * 2.0 / 27.0),
           Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),

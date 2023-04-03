@@ -29,11 +29,13 @@ class _SignUpPageState extends State<SignUpPage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
         child: Form(
             key: _formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: height * 1.0 / 18.0),
                 Stack(alignment: Alignment.topLeft, children: [
@@ -50,12 +52,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           icon: const Icon(Icons.arrow_back))),
                   Align(
                       alignment: Alignment.bottomCenter,
-                      child: Image.asset("assets/dsdf1.png",
-                          height: height * 1.0 / 6.75,
-                          width: height * 1.0 / 6.75,
-                          alignment: Alignment.center))
+                      child: Image.asset("assets/butterfly.png",
+                          height: height * 1.0 / 3,
+                          width: height * 1.0 / 3,
+                          alignment: Alignment.bottomCenter))
                 ]),
-                SizedBox(height: height * 1.0 / 13.5),
+                //SizedBox(height: height * 1.0 / 13.5),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

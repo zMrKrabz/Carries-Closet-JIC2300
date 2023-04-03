@@ -33,26 +33,27 @@ class MainPage extends StatelessWidget {
         body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
-            AppUser user = AppUser();
+            // String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+            // AppUser user = AppUser();
             if (snapshot.hasData) {
-              return FutureBuilder(
-                  future: checkPermissions(context, uid),
-                  builder: (context, snapshot) {
-                    if (snapshot.data == true) {
-                      user.setAdminStatus(true);
-                      return AdminHomePage();
-                    } else if (snapshot.data == false) {
-                      return HomePage();
-                    } else {
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height / 1.3,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                  });
+              return AdminHomePage();
+              // return FutureBuilder(
+              //     future: checkPermissions(context, uid),
+              //     builder: (context, snapshot) {
+              //       if (snapshot.data == true) {
+              //         user.setAdminStatus(true);
+              //         return AdminHomePage();
+              //       } else if (snapshot.data == false) {
+              //         return HomePage();
+              //       } else {
+              //         return SizedBox(
+              //           height: MediaQuery.of(context).size.height / 1.3,
+              //           child: const Center(
+              //             child: CircularProgressIndicator(),
+              //           ),
+              //         );
+              //       }
+              //     });
               // To do:
               // get request to the python backend for user id
               // access the permissions flag
