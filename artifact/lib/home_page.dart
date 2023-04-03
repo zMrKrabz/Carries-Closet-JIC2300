@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
     return ButtonBarTheme(
         data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(
-            actionsAlignment: MainAxisAlignment.center,
+            // actionsAlignment: MainAxisAlignment.center,
             //title: const Text('Please select the type of request form:'),
             actions: <Widget>[
               SizedBox(height: height * 1.0 / 40.0),
@@ -114,8 +114,9 @@ class HomePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               SizedBox(height: height * 1.0 / 40.0),
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                TextButton(
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
@@ -133,8 +134,11 @@ class HomePage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
-                SizedBox(width: width * 1.0 / 12.0),
-                TextButton(
+              ),
+              SizedBox(height: height * 1.0 / 40.0),
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -151,7 +155,7 @@ class HomePage extends StatelessWidget {
                     child: const Text('Hygiene Item',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold))),
-              ]),
+              ),
               SizedBox(height: height * 1.0 / 40.0)
             ]));
   }
