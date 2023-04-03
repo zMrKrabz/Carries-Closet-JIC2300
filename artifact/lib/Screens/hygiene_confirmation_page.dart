@@ -208,7 +208,6 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
   }
 
   Future submitDB() async {
-    //print('submit hygiene called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/requests/hygiene/create')

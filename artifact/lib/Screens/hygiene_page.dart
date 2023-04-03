@@ -92,10 +92,10 @@ class _HygienePageState extends State<HygienePage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
@@ -110,10 +110,10 @@ class _HygienePageState extends State<HygienePage> {
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                         labelText: 'Age',
                         hintText: 'Enter the age',
@@ -140,10 +140,10 @@ class _HygienePageState extends State<HygienePage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
@@ -168,10 +168,10 @@ class _HygienePageState extends State<HygienePage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
@@ -196,10 +196,10 @@ class _HygienePageState extends State<HygienePage> {
                       }).toList(),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
@@ -214,10 +214,10 @@ class _HygienePageState extends State<HygienePage> {
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                         labelText: 'Address',
                         hintText: 'Enter the address',
@@ -234,10 +234,10 @@ class _HygienePageState extends State<HygienePage> {
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color(0xFFF1F1F1),
+                        fillColor: const Color(0xFFF1F1F1),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                                const BorderSide(width: 1, color: Color(0xFFF1F1F1)),
                             borderRadius: BorderRadius.circular(10)),
                         labelText: 'Other notes',
                         hintText:
