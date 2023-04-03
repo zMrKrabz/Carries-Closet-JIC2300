@@ -72,9 +72,7 @@ class MainPage extends StatelessWidget {
       var response = await http.get(url);
       var data = jsonDecode(response.body);
       try {
-        return data['permissions'] == 'true'
-          ? true
-          : false;
+        return data['permissions'] == 'true' ? true : false;
       } catch (e) {
         return false;
       }
