@@ -6,6 +6,8 @@ import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
 
+import 'Screens/clothing_multiform_page.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -155,7 +157,7 @@ class HomePage extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return ClothingPage();
+                  return ClothingMultiPage();
                 })));
               },
               child: const Text('Clothing'),

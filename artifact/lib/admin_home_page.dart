@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
+import 'package:artifact/Screens/clothing_multiform_page.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -162,7 +163,7 @@ class AdminHomePage extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return ClothingPage();
+                  return ClothingMultiPage();
                 })));
               },
               child: const Text('Clothing'),
