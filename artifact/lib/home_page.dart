@@ -24,14 +24,13 @@ class HomePage extends StatelessWidget {
             body: Column(children: [
           SizedBox(height: height * 1.0 / 13.5),
           Row(textDirection: TextDirection.rtl, children: [
-            SizedBox(width: width * 1.0 / 12.0),
-            OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    minimumSize: Size(width * 1.0 / 6.0, height * 1.0 / 27.0),
-                    foregroundColor: Colors.black,
-                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                    textStyle:
-                        const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            SizedBox(width: width * 1.0 / 14.0),
+            TextButton(
+                style: TextButton.styleFrom(
+                    minimumSize: Size(width * 1.0 / 5.0, height * 1.0 / 27.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: const Color(0xFF7EA5F4)),
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.push(context,
@@ -39,104 +38,125 @@ class HomePage extends StatelessWidget {
                     return const MainPage(isLogin: true);
                   })));
                 },
-                child: const Text('Logout'))
+                child: const Text('Logout',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFF9F9F9))))
           ]),
           Image.asset("assets/dsdf1.png",
               alignment: Alignment.topCenter,
               width: width * 2.0 / 3.0,
               height: width * 2.0 / 3.0),
           SizedBox(height: height * 1.0 / 6.0),
-          OutlinedButton(
-              style: OutlinedButton.styleFrom(
+          TextButton(
+              style: TextButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24),
+                  backgroundColor: const Color(0xFFEEE0FF),
+                  textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12))),
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => requestPopUp(context));
               },
-              child: const Text('Submit a Request')),
+              child: const Text('Submit a Request',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Color(0xFF2E2E2E)))),
           SizedBox(height: height * 1.0 / 25.0),
-          OutlinedButton(
-              style: OutlinedButton.styleFrom(
+          TextButton(
+              style: TextButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24),
+                  backgroundColor: const Color(0xFFC4DBFE),
+                  textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12))),
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
                   return ProfileForm(email: userEmail, password: dummyPassword);
                 })));
               },
-              child: const Text('Edit your Profile')),
+              child: const Text('Edit your Profile',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Color(0xFF2E2E2E)))),
           SizedBox(height: height * 1.0 / 25.0),
-          OutlinedButton(
-              style: OutlinedButton.styleFrom(
+          TextButton(
+              style: TextButton.styleFrom(
                   minimumSize: Size(width * 3.0 / 4.0, height * 1.0 / 14.0),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 24),
+                  backgroundColor: const Color(0xFFC4DBFE),
+                  textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12))),
+                      borderRadius: BorderRadius.circular(10))),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
                   return const UserRequestsPage();
                 })));
               },
-              child: const Text('View my Requests')),
+              child: const Text('View my Requests',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Color(0xFF2E2E2E)))),
         ])));
   }
-  
+
   Widget requestPopUp(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return AlertDialog(
-        //title: const Text('Please select the type of request form:'),
-        actions: [
-          SizedBox(height: height * 1.0 / 40.0),
-          const Text('What type of item are you requesting?',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-          SizedBox(height: height * 1.0 / 40.0),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                  minimumSize: Size(width * 7.0 / 24.0, height * 1.0 / 10.0),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return const ClothingPage();
-                })));
-              },
-              child: const Text('Clothing'),
-            ),
-            SizedBox(width: width * 1.0 / 12.0),
-            OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    minimumSize: Size(width * 7.0 / 24.0, height * 1.0 / 10.0),
-                    foregroundColor: Colors.black,
-                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) {
-                    return const HygienePage();
-                  })));
-                },
-                child: const Text('Hygiene'))
-          ]),
-          SizedBox(height: height * 1.0 / 40.0)
-        ]);
+    return ButtonBarTheme(
+        data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
+        child: AlertDialog(
+            // actionsAlignment: MainAxisAlignment.center,
+            //title: const Text('Please select the type of request form:'),
+            actions: <Widget>[
+              SizedBox(height: height * 1.0 / 40.0),
+              const Text('What type of item are you requesting?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              SizedBox(height: height * 1.0 / 40.0),
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
+                    foregroundColor: const Color(0xFF2E2E2E),
+                    backgroundColor: const Color(0xFFC4DBFE),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) {
+                      return const ClothingPage();
+                    })));
+                  },
+                  child: const Text('Clothing Item',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                ),
+              ),
+              SizedBox(height: height * 1.0 / 40.0),
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
+                      foregroundColor: const Color(0xFF2E2E2E),
+                      backgroundColor: const Color(0xFFC4DBFE),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) {
+                        return const HygienePage();
+                      })));
+                    },
+                    child: const Text('Hygiene Item',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold))),
+              ),
+              SizedBox(height: height * 1.0 / 40.0)
+            ]));
   }
 }

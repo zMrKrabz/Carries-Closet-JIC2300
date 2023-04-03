@@ -56,14 +56,23 @@ class _HygienePageState extends State<HygienePage> {
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Image.asset("assets/dsdf1.png",
-                            height: height * 1.0 / 6.75,
-                            width: height * 1.0 / 6.75,
-                            alignment: Alignment.center))
                   ]),
-                  SizedBox(height: height * 1.0 / 18.0),
+                  const Text("Hygiene Request",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                          color: Color(0xFF2E2E2E))),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width * 1.0 / 12.0,
+                        vertical: height * 1.0 / 36.0),
+                    child: const Text(
+                      "Please fill out information to request a hygiene item.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFF2E2E2E)),
+                    ),
+                  ),
+                  SizedBox(height: height * 1.0 / 35.0),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
@@ -81,7 +90,14 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -92,8 +108,13 @@ class _HygienePageState extends State<HygienePage> {
                       controller: ageController,
                       textInputAction: TextInputAction.done,
                       cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
                         labelText: 'Age',
                         hintText: 'Enter the age',
                       ),
@@ -104,7 +125,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: const Text("Please select a piece of clothing"),
+                      hint: const Text("Please select a hygiene item"),
                       value: itemValue,
                       onChanged: (val) {
                         setState(() {
@@ -117,7 +138,14 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -125,7 +153,7 @@ class _HygienePageState extends State<HygienePage> {
                     padding:
                         EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                     child: DropdownButtonFormField(
-                      hint: const Text("Please select a size"),
+                      hint: const Text("Please select a size (if needed)"),
                       value: sizeValue,
                       onChanged: (val) {
                         setState(() {
@@ -138,7 +166,14 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -159,7 +194,14 @@ class _HygienePageState extends State<HygienePage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -170,8 +212,13 @@ class _HygienePageState extends State<HygienePage> {
                       controller: addressController,
                       textInputAction: TextInputAction.done,
                       cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
                         labelText: 'Address',
                         hintText: 'Enter the address',
                       ),
@@ -185,8 +232,13 @@ class _HygienePageState extends State<HygienePage> {
                       controller: notesController,
                       textInputAction: TextInputAction.done,
                       cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                            borderRadius: BorderRadius.circular(10)),
                         labelText: 'Other notes',
                         hintText:
                             'Please enter any extra information if needed',
@@ -196,25 +248,14 @@ class _HygienePageState extends State<HygienePage> {
                   SizedBox(height: height * 1.0 / 18.0),
                   TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-                      foregroundColor: Colors.black,
-                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      minimumSize: Size(width / 2.25, height * 1.0 / 16),
+                      backgroundColor: const Color(0xFF7EA5F4),
                       textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
-                      // if (genderValue.toString().compareTo("null") == 0) {
-                      //   genderValue = "N/A";
-                      // }
-                      // if (itemValue.toString().compareTo("null") == 0) {
-                      //   itemValue = "N/A";
-                      // }
-                      // if (sizeValue.toString().compareTo("null") == 0) {
-                      //   sizeValue = "N/A";
-                      // }
-                      // if (emergencyValue.toString().compareTo("null") == 0) {
-                      //   emergencyValue = "N/A";
-                      // }
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                         return HygieneConfirmationPage(
@@ -228,7 +269,8 @@ class _HygienePageState extends State<HygienePage> {
                         );
                       })));
                     },
-                    child: const Text('Confirm'),
+                    child: const Text('Confirm',
+                        style: TextStyle(color: Color(0xFFF9F9F9))),
                   ),
                 ]))));
   }
