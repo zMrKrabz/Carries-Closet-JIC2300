@@ -185,7 +185,7 @@ class ProfileFormState extends State<ProfileForm> {
       email: widget.email,
       password: widget.password,
     );
-    print(credential.user!.uid);
+    print("uid: " + credential.user!.uid);
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     Uri url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/users/create')
@@ -208,7 +208,7 @@ class ProfileFormState extends State<ProfileForm> {
 
   Future update_user_info(bool isIOS, var context) async {
     if (FirebaseAuth.instance.currentUser == null) {
-      signUp();
+      await signUp();
     }
     var uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null || uid == "") {
@@ -221,8 +221,8 @@ class ProfileFormState extends State<ProfileForm> {
         : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid');
 
     var response = await http.patch(url, body: {
-      'firstName': ProfileFormState.firstNameController.text,
-      'lastName': ProfileFormState.lastNameController.text,
+      'name': ProfileFormState.firstNameController.text,
+      //'lastName': ProfileFormState.lastNameController.text,
       //email would require special handling to change the firebase auth email, so ignoring for now
       'phone': ProfileFormState.phoneController.text,
       'country': ProfileFormState.countryController.text,

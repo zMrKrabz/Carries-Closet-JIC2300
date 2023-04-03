@@ -38,8 +38,9 @@ def add_user():
     """
     try:
         # should include username, password, email, and permissions
-        doc_id = users_ref.add(request.form)
-        return jsonify({"success": True, "id": doc_id[1].id}), 201
+        doc_id = request.form['id']
+        users_ref.document(doc_id).set(request.form)
+        return jsonify({"success": True, "id": doc_id}), 201
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
