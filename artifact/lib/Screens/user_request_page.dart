@@ -75,6 +75,7 @@ class _RequestWidgetState extends State<RequestWidget> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
     return Card(
@@ -127,24 +128,15 @@ class _RequestWidgetState extends State<RequestWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        TextButton(
-                                          onPressed: null,
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7)),
-                                            minimumSize: Size(
-                                                width * 11.0 / 42.0,
-                                                height * 1.0 / 25.0),
-                                            backgroundColor:
-                                                const Color(0xFFFFF3C8),
-                                          ),
-                                          child: Text(decode[index]['status'],
-                                              style: const TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFFDCB631))),
-                                        ),
+                                        if (decode[index]['status'] ==
+                                            "processed")
+                                          processedButton(context)
+                                        else if (decode[index]['status'] ==
+                                            "delivered")
+                                          deliveredButton(context)
+                                        else if (decode[index]['status'] ==
+                                            "denied")
+                                          deniedButton(context)
                                       ],
                                     )
                                   ]),
@@ -224,28 +216,29 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
-                              TextButton(
-                                onPressed: () {
-                                  // deleteRequest(decode[index]['requestno']);
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: ((context) {
-                                    // return HomePage();
-                                    return const UserRequestsPage();
-                                  })));
-                                },
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7)),
-                                  minimumSize: Size(
-                                      width * 11.0 / 42.0, height * 1.0 / 25.0),
-                                  backgroundColor: const Color(0xFFC4DBFE),
+                              if (decode[index]['status'] == "denied")
+                                TextButton(
+                                  onPressed: () {
+                                    // deleteRequest(decode[index]['requestno']);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: ((context) {
+                                      // return HomePage();
+                                      return const UserRequestsPage();
+                                    })));
+                                  },
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(7)),
+                                    minimumSize: Size(width * 11.0 / 42.0,
+                                        height * 1.0 / 25.0),
+                                    backgroundColor: const Color(0xFFC4DBFE),
+                                  ),
+                                  child: const Text(
+                                    'Delete Request',
+                                    style: TextStyle(
+                                        fontSize: 12, color: Color(0xFF2E2E2E)),
+                                  ),
                                 ),
-                                child: const Text(
-                                  'Delete Request',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Color(0xFF2E2E2E)),
-                                ),
-                              ),
                             ])),
                       ),
                     );
@@ -296,6 +289,63 @@ class _RequestWidgetState extends State<RequestWidget> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     return response.body;
+  }
+
+  Widget processedButton(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return TextButton(
+      onPressed: null,
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+        minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+        backgroundColor: const Color(0xFFFFF3C8),
+      ),
+      child: Text("PROCESSED",
+          style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFDCB631))),
+    );
+  }
+
+  Widget deliveredButton(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return TextButton(
+      onPressed: null,
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+        minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+        backgroundColor: const Color(0xFFE8F5E5),
+      ),
+      child: Text("DELIVERED",
+          style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF7EB871))),
+    );
+  }
+
+  Widget deniedButton(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return TextButton(
+      onPressed: null,
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+        minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+        backgroundColor: const Color(0xFFF5E8E5),
+      ),
+      child: Text("DENIED",
+          style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFC36551))),
+    );
   }
 
   // void deleteRequest(String requestno) async {
