@@ -69,16 +69,15 @@ class ProfileFormState extends State<ProfileForm> {
                         onPressed: () {
                           if (AppUser.isAdmin) {
                             Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) {
-                            return const AdminHomePage();
-                          })));
+                                MaterialPageRoute(builder: ((context) {
+                              return const AdminHomePage();
+                            })));
                           } else {
                             Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                                return const HomePage();
-                          })));
+                                MaterialPageRoute(builder: ((context) {
+                              return const HomePage();
+                            })));
                           }
-                          
                         },
                         icon: const Icon(Icons.arrow_back))),
               ]),
@@ -117,27 +116,27 @@ class ProfileFormState extends State<ProfileForm> {
                 child: fullNameTextField(),
               ),
 
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: emailAddressTextField(),
               ),
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: phoneNumTextField(),
               ),
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: countyTextField(),
               ),
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: addressTextField(),
               ),
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: Row(
@@ -156,7 +155,7 @@ class ProfileFormState extends State<ProfileForm> {
                 ),
               ), //City / State info
 
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 52.0),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                 child: Row(
@@ -171,23 +170,28 @@ class ProfileFormState extends State<ProfileForm> {
                 ),
               ), //City / State info
 
-              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(height: height * 1.0 / 20.0),
               TextButton(
-                style: TextButton.styleFrom(
-                  minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                  textStyle: const TextStyle(fontSize: 16),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    bool isIOS =
-                        Theme.of(context).platform == TargetPlatform.iOS;
-                    update_user_info(isIOS, context);
-                  }
-                },
-                child: const Text('Save'),
-              ),
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    minimumSize: Size(width / 2, height * 1.0 / 16),
+                    backgroundColor: const Color(0xFF7EA5F4),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      bool isIOS =
+                          Theme.of(context).platform == TargetPlatform.iOS;
+                      update_user_info(isIOS, context);
+                    }
+                  },
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFF9F9F9)),
+                  )),
             ],
           )
         ]),
@@ -251,23 +255,29 @@ class ProfileFormState extends State<ProfileForm> {
       'zip': ProfileFormState.zipController.text
     });
     print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');    
-      if (AppUser.isAdmin) {
-        Navigator.push(context, MaterialPageRoute(builder: ((context) {
+    print('Response body: ${response.body}');
+    if (AppUser.isAdmin) {
+      Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return const AdminHomePage();
-          })));
-        } else {
-          Navigator.push(context, MaterialPageRoute(builder: ((context) {
-          return const HomePage();
-          })));
-        }
-      }
+      })));
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: ((context) {
+        return const HomePage();
+      })));
+    }
+  }
 }
 
 Widget fullNameTextField() {
   return TextFormField(
     controller: ProfileFormState.firstNameController,
     decoration: InputDecoration(
+      filled: true,
+      fillColor: Color(0xFFF1F1F1),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+        borderRadius: BorderRadius.circular(10),
+      ),
       labelText: "Full Name",
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -286,6 +296,12 @@ Widget emailAddressTextField() {
   return TextFormField(
     controller: ProfileFormState.emailController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "Email Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -303,6 +319,12 @@ Widget phoneNumTextField() {
   return TextFormField(
     controller: ProfileFormState.phoneController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "Phone Number",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -320,6 +342,12 @@ Widget countyTextField() {
   return TextFormField(
     controller: ProfileFormState.countryController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "County Serving",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -337,6 +365,12 @@ Widget addressTextField() {
   return TextFormField(
     controller: ProfileFormState.addressController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "Delivery Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -354,6 +388,12 @@ Widget cityTextField() {
   return TextFormField(
     controller: ProfileFormState.cityController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "City",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -371,6 +411,12 @@ Widget stateTextField() {
   return TextFormField(
     controller: ProfileFormState.stateController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "State",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -388,6 +434,12 @@ Widget zipTextField() {
   return TextFormField(
     controller: ProfileFormState.zipController,
     decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFFF1F1F1),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+          borderRadius: BorderRadius.circular(10),
+        ),
         labelText: "Zip Code",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),

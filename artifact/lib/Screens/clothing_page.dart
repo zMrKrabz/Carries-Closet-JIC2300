@@ -69,19 +69,22 @@ class _ClothingPageState extends State<ClothingPage> {
                     //         alignment: Alignment.center))
                   ]),
                   const Text("Clothing Request",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                          color: Color(0xFF2E2E2E))),
 
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: width * 1.0 / 12.0,
                         vertical: height * 1.0 / 36.0),
                     child: const Text(
-                        "Please fill out information to request a clothing item. If you chose a teenager size, please the specific size in the “Other Notes” section.",
-                        textAlign: TextAlign.center),
+                      "Please fill out information to request a clothing item. If you chose a teenager size, please the specific size in the “Other Notes” section.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFF2E2E2E)),
+                    ),
                   ),
-                  SizedBox(height: height * 1.0 / 9.0),
-
+                  SizedBox(height: height * 1.0 / 35.0),
                   Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
@@ -108,8 +111,15 @@ class _ClothingPageState extends State<ClothingPage> {
                                     child: Text(valueItem),
                                   );
                                 }).toList(),
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder()),
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Color(0xFFF1F1F1),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Color(0xFFF1F1F1)),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
                               )),
                           SizedBox(
                             width: width * 1.0 / 72.0,
@@ -119,8 +129,14 @@ class _ClothingPageState extends State<ClothingPage> {
                               controller: ageController,
                               textInputAction: TextInputAction.done,
                               cursorColor: Colors.white,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Color(0xFFF1F1F1),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1, color: Color(0xFFF1F1F1)),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                                 labelText: 'Age',
                                 hintText: 'Enter the age',
                               ),
@@ -166,7 +182,15 @@ class _ClothingPageState extends State<ClothingPage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -192,7 +216,15 @@ class _ClothingPageState extends State<ClothingPage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -218,7 +250,15 @@ class _ClothingPageState extends State<ClothingPage> {
                           child: Text(valueItem),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
@@ -229,8 +269,14 @@ class _ClothingPageState extends State<ClothingPage> {
                       controller: addressController,
                       textInputAction: TextInputAction.done,
                       cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         labelText: 'Address',
                         hintText: 'Enter the address',
                       ),
@@ -244,8 +290,14 @@ class _ClothingPageState extends State<ClothingPage> {
                       controller: notesController,
                       textInputAction: TextInputAction.done,
                       cursorColor: Colors.white,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF1F1F1),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFFF1F1F1)),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         labelText: 'Other notes',
                         hintText:
                             'Please enter any extra information if needed',
@@ -255,11 +307,12 @@ class _ClothingPageState extends State<ClothingPage> {
                   SizedBox(height: height * 1.0 / 18.0),
                   TextButton(
                     style: TextButton.styleFrom(
-                      minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-                      foregroundColor: Colors.black,
-                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      minimumSize: Size(width / 2.25, height * 1.0 / 16),
+                      backgroundColor: const Color(0xFF7EA5F4),
                       textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -282,7 +335,10 @@ class _ClothingPageState extends State<ClothingPage> {
                         });
                       }
                     },
-                    child: const Text('Confirm'),
+                    child: const Text(
+                      'Confirm',
+                      style: TextStyle(color: Color(0xFFF9F9F9)),
+                    ),
                   ),
                 ]))));
   }
