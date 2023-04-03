@@ -1,4 +1,5 @@
 import 'package:artifact/Screens/clothing_page_original.dart';
+import 'package:collection/collection.dart';
 import "package:flutter/material.dart";
 import 'package:artifact/Screens/clothing_confirmation_page.dart';
 import 'package:artifact/home_page.dart';
@@ -23,7 +24,9 @@ class _ClothingMultiPageState extends State<ClothingMultiPage> {
     // forms.add(ClothingPageData());
     for (int i = 0; i < forms.length; i++) {
       requests.add(ClothingPageForm(
-          key: GlobalKey(), page: forms[i], onDelete: () => onDelete(i)));
+        page: forms[i],
+        onDelete: () => onDelete(i),
+      ));
     }
     return Scaffold(
       body: SingleChildScrollView(
@@ -63,9 +66,10 @@ class _ClothingMultiPageState extends State<ClothingMultiPage> {
                       itemCount: forms.length,
                       // itemBuilder: (_, i) => requests,
                       itemBuilder: ((_, i) => ClothingPageForm(
-                          key: GlobalKey(),
-                          page: forms[i],
-                          onDelete: () => onDelete(i))),
+                            key: GlobalKey(),
+                            page: forms[i],
+                            onDelete: () => onDelete(i),
+                          )),
                     ),
             ),
             TextButton(
@@ -87,23 +91,35 @@ class _ClothingMultiPageState extends State<ClothingMultiPage> {
     );
   }
 
-  void onDelete(ClothingData data) {
+  // void onDelete(ClothingData data) {
+  //   setState(() {
+  //     var find = requests.firstWhereOrNull(
+  //       (it) => it.page == data,
+  //     );
+  //     if (find != null) requests.removeAt(requests.indexOf(find));
+  //   });
+  // }
+
+  void onDelete(int i) {
     setState(() {
-      var find = requests.firstWhere(
-        (it) => it.page == data,
-        orElse: () => null,
-      );
-      if (find != null) requests.removeAt(requests.indexOf(find));
+      forms.removeAt(i);
     });
   }
 
+  // void onAddForm() {
+  //   setState(() {
+  //     var _form = ClothingData();
+  //     print("got inside on add form");
+  //     requests.add(ClothingPageForm(
+  //       page: _form,
+  //       onDelete: () => onDelete(_form),
+  //     ));
+  //   });
+  // }
+
   void onAddForm() {
     setState(() {
-      var _form = ClothingData();
-      requests.add(ClothingPageForm(
-        page: _form,
-        onDelete: () => onDelete(_form),
-      ));
+      forms.add(ClothingData());
     });
   }
 

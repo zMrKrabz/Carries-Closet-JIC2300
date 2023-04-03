@@ -179,13 +179,17 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
   }
 
   bool validate() {
-    var valid = _formKey.currentState!.validate();
+    print(_formKey);
+    print("above is the form key");
+    var valid = _formKey.currentState?.validate();
+    print(_formKey.currentState);
+    print("the thing above is currentState");
     if (valid != null) {
       _formKey.currentState?.save();
       print("form is finally valid");
     }
-    print("validate inside clothing_page");
-    print(valid);
+    // print("validate inside clothing_page");
+    // print(valid);
     if (valid == null) {
       return false;
     } else {
