@@ -265,27 +265,16 @@ class _RequestWidgetState extends State<RequestWidget> {
     return response.body;
   }
 
-  void updateRequest(String id) async {
+  void updateRequest(String requestno, String status) async {
     print('update request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/update?id=' + id)
-        : Uri.parse('http://10.0.2.2:8080/requests/update?id=' + id);
+        ? Uri.parse(
+            'http://127.0.0.1:8080/requests/update?requestno=$requestno')
+        : Uri.parse(
+            'http://10.0.2.2:8080/requests/update?requestno=$requestno');
 
-    var response = await http.put(url, body: {'permissions': 'true'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-  }
-
-  void deleteRequest(String id) async {
-    print('delete request called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/remove?id=' +
-            '6KEpYXHpb2rJEBRco35D')
-        : Uri.parse('http://10.0.2.2:8080/requests/remove?id=' + id);
-
-    var response = await http.delete(url);
+    var response = await http.put(url, body: {'status': status});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }

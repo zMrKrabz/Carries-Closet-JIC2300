@@ -43,8 +43,7 @@ class _ViewUsersPageState extends State<ViewUsersPage> {
                     const Text('Users',
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold))
-                  ])
-                  )
+                  ]))
             ]),
             const ViewUsers(),
           ]),
@@ -85,8 +84,8 @@ class _ViewUsersState extends State<ViewUsers> {
                       child: ListTile(
                           title: Text(decode[index]['id']),
                           subtitle: Text(decode[index]['email']),
-                          visualDensity:
-                              const VisualDensity(vertical: 1.0, horizontal: 0.25),
+                          visualDensity: const VisualDensity(
+                              vertical: 1.0, horizontal: 0.25),
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(16),
@@ -157,7 +156,10 @@ class _ViewUsersState extends State<ViewUsers> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: ((context) {
+                                return ViewUsersPage();
+                              })));
                             },
                             icon: const Icon(Icons.arrow_back))),
                     Align(
@@ -179,7 +181,8 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text(decode[index]['id'], style: const TextStyle(fontSize: 15))
+                      Text(decode[index]['id'],
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -272,7 +275,8 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text(decode[index]['zip'], style: const TextStyle(fontSize: 15))
+                      Text(decode[index]['zip'],
+                          style: const TextStyle(fontSize: 15))
                     ],
                   ),
                   SizedBox(height: height * 1.0 / 36.0),
@@ -339,8 +343,8 @@ class _ViewUsersState extends State<ViewUsers> {
     print('make admin called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/update?id=' + id)
-        : Uri.parse('http://10.0.2.2:8080/users/update?id=' + id);
+        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$id')
+        : Uri.parse('http://10.0.2.2:8080/users/update?id=$id');
 
     var response = await http.put(url, body: {'permissions': 'true'});
     print('Response status: ${response.statusCode}');
@@ -351,8 +355,8 @@ class _ViewUsersState extends State<ViewUsers> {
     print('delete user called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=' + id)
-        : Uri.parse('http://10.0.2.2:8080/users/remove?id=' + id);
+        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=$id')
+        : Uri.parse('http://10.0.2.2:8080/users/remove?id=$id');
 
     var response = await http.delete(url);
     print('Response status: ${response.statusCode}');

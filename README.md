@@ -5,6 +5,28 @@ through the ability to submit requests, save contact information, view donation 
 
 # Release Notes
 
+## Version 0.4.0
+
+### Features
+
+- Delete user as Admin: Admins can now view the users in the system and also delete users
+- Update user to be an Admin as Admin: Admins can update a regular user to be an Admin
+- Delete request as User: users can delete their requests from the database
+
+### Bug Fixes
+
+- Fixed issue sign up not properly sending in all information to the database
+- System now checks whether a user is an admin or not to redirect the user to the correct page. This fixed issues of users being redirected to admin pages when they were not admins.
+
+### Known Issues
+
+- If a user is an admin already, the "Make admin" button should be greyed out to signify that when viewing users as Admin
+- Users should only be able to view the requests that they have made, not all requests in the database
+- Admins are not able to complete or deny the status of the requests yet
+- After an admin submits a request, the page goes to the user home page instead of the admin home page
+- If there are multiple requests, there's no scroll down feature to view the requests below in the view requests page
+
+
 ## Version 0.3.0
 
 ### Features
