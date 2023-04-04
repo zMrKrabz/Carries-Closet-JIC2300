@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: Column(children: [

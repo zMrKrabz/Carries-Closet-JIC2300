@@ -23,6 +23,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            backgroundColor: Color(0xFFF9F9F9),
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
@@ -48,14 +49,14 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                         ))
                   ]),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: width / 10.0,
+                        vertical: height * 1.0 / 55.0),
                     child: const Text(
                         "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
                         style: TextStyle(
                             fontSize: 13.5, color: Color(0xFF2E2E2E))),
                   ),
-                  SizedBox(height: height * 1.0 / 55.0),
                   const RequestWidget(),
                 ]))));
   }
@@ -75,16 +76,19 @@ class _RequestWidgetState extends State<RequestWidget> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
-    return Card(
-      child: FutureBuilder<String>(
-          future: parseRequests(uid),
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            List<Widget> children;
-            if (snapshot.hasData) {
-              List<dynamic> decode = json.decode(snapshot.data.toString());
-              return ListView.builder(
+    return FutureBuilder<String>(
+      future: parseRequests(uid),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        List<Widget> children;
+        if (snapshot.hasData) {
+          List<dynamic> decode = json.decode(snapshot.data.toString());
+          return MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: decode.length,
                   itemBuilder: (context, index) {
@@ -92,6 +96,12 @@ class _RequestWidgetState extends State<RequestWidget> {
                       padding:
                           EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
                       child: Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(10), // if you need this
+                          side: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                        ),
                         child: Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: height * 1.0 / 55.0),
@@ -127,24 +137,15 @@ class _RequestWidgetState extends State<RequestWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        TextButton(
-                                          onPressed: null,
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7)),
-                                            minimumSize: Size(
-                                                width * 11.0 / 42.0,
-                                                height * 1.0 / 25.0),
-                                            backgroundColor:
-                                                const Color(0xFFFFF3C8),
-                                          ),
-                                          child: Text(decode[index]['status'],
-                                              style: const TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFFDCB631))),
-                                        ),
+                                        // processedButton(context)
+                                        // if (decode[index]['status'] == "processed")
+                                        //   processedButton(context)
+                                        // else if (decode[index]['status'] ==
+                                        //     "delivered")
+                                        //   deliveredButton(context)
+                                        // else if (decode[index]['status'] ==
+                                        //     "denied")
+                                        //   deniedButton(context)
                                       ],
                                     )
                                   ]),
@@ -214,13 +215,17 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   )),
                               Padding(
                                   padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0,
                                       vertical: height * 1.0 / 50.0),
-                                  child: Column(children: [
+                                  child: Row(children: [
+                                    Text("Address: ",
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
                                     Text(
-                                      "Address: " + decode[index]['address'],
+                                      decode[index]['address'],
                                       style: const TextStyle(
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
@@ -229,7 +234,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   deleteRequest(decode[index]['requestno']);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: ((context) {
-                                    return const UserRequestsPage();
+                                    return const HomePage();
                                   })));
                                 },
                                 style: TextButton.styleFrom(
@@ -243,44 +248,67 @@ class _RequestWidgetState extends State<RequestWidget> {
                                   'Delete Request',
                                   style: TextStyle(
                                       fontSize: 12, color: Color(0xFF2E2E2E)),
+
+                                  // if (decode[index]['status'] == "denied")
+                                  //   TextButton(
+                                  //     onPressed: () {
+                                  //       // deleteRequest(decode[index]['requestno']);
+                                  //       Navigator.push(context,
+                                  //           MaterialPageRoute(builder: ((context) {
+                                  //         // return HomePage();
+                                  //         return const UserRequestsPage();
+                                  //       })));
+                                  //     },
+                                  //     style: TextButton.styleFrom(
+                                  //       shape: RoundedRectangleBorder(
+                                  //           borderRadius: BorderRadius.circular(7)),
+                                  //       minimumSize: Size(width * 11.0 / 42.0,
+                                  //           height * 1.0 / 25.0),
+                                  //       backgroundColor: const Color(0xFFC4DBFE),
+                                  //     ),
+                                  //     child: const Text(
+                                  //       'Delete Request',
+                                  //       style: TextStyle(
+                                  //           fontSize: 12, color: Color(0xFF2E2E2E)),
+                                  //     ),
                                 ),
-                              ),
+                              )
                             ])),
                       ),
                     );
-                  });
-            } else if (snapshot.hasError) {
-              children = <Widget>[
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text('Error: ${snapshot.error}'),
-                ),
-              ];
-            } else {
-              children = const <Widget>[
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text('Awaiting result...'),
-                ),
-              ];
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
-            );
-          }),
+                  }));
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            const Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text('Error: ${snapshot.error}'),
+            ),
+          ];
+        } else {
+          children = const <Widget>[
+            SizedBox(
+              width: 60,
+              height: 60,
+              child: CircularProgressIndicator(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text('Awaiting result...'),
+            ),
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
+          ),
+        );
+      },
     );
   }
 
@@ -311,3 +339,220 @@ class _RequestWidgetState extends State<RequestWidget> {
     print('Response body: ${response.body}');
   }
 }
+  // Widget processedButton(BuildContext context) {
+  //   double width = MediaQuery.of(context).size.width;
+  //   double height = MediaQuery.of(context).size.height;
+
+  //   return TextButton(
+  //     onPressed: null,
+  //     style: TextButton.styleFrom(
+  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+  //       backgroundColor: const Color(0xFFFFF3C8),
+  //     ),
+  //     child: Text("PROCESSED",
+  //         style: const TextStyle(
+  //             fontSize: 13,
+  //             fontWeight: FontWeight.bold,
+  //             color: Color(0xFFDCB631))),
+  //   );
+  // }
+
+  // Widget deliveredButton(BuildContext context) {
+  //   double width = MediaQuery.of(context).size.width;
+  //   double height = MediaQuery.of(context).size.height;
+
+  //   return TextButton(
+  //     onPressed: null,
+  //     style: TextButton.styleFrom(
+  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+  //       backgroundColor: const Color(0xFFE8F5E5),
+  //     ),
+  //     child: Text("DELIVERED",
+  //         style: const TextStyle(
+  //             fontSize: 13,
+  //             fontWeight: FontWeight.bold,
+  //             color: Color(0xFF7EB871))),
+  //   );
+  // }
+
+  // Widget deniedButton(BuildContext context) {
+  //   double width = MediaQuery.of(context).size.width;
+  //   double height = MediaQuery.of(context).size.height;
+
+  //   return TextButton(
+  //     onPressed: null,
+  //     style: TextButton.styleFrom(
+  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+  //       backgroundColor: const Color(0xFFF5E8E5),
+  //     ),
+  //     child: Text("DENIED",
+  //         style: const TextStyle(
+  //             fontSize: 13,
+  //             fontWeight: FontWeight.bold,
+  //             color: Color(0xFFC36551))),
+  //   );
+  // }
+
+  // void deleteRequest(String requestno) async {
+  //   print('delete request called');
+  //   bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+  //   var url = isIOS
+  //       ? Uri.parse(
+  //           'http://127.0.0.1:8080/requests/remove?requestno=' + requestno)
+  //       : Uri.parse(
+  //           'http://10.0.2.2:8080/requests/remove?requestno=' + requestno);
+
+  //   var response = await http.delete(url);
+  //   print('Response status: ${response.statusCode}');
+  //   print('Response body: ${response.body}');
+  // }
+
+
+
+
+
+// class _RequestWidgetState extends State<RequestWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     double width = MediaQuery.of(context).size.width;
+//     double height = MediaQuery.of(context).size.height;
+//     String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+
+//     return Padding(
+//       padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+//       child: Card(
+//         child: Padding(
+//             padding: EdgeInsets.symmetric(vertical: height * 1.0 / 55.0),
+//             child: Column(children: [
+//               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+//                 Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       "Request #1",
+//                       style: TextStyle(
+//                           fontSize: 18,
+//                           fontWeight: FontWeight.bold,
+//                           color: Color(0xFF2E2E2E)),
+//                       textAlign: TextAlign.left,
+//                     ),
+//                     Text(
+//                       "3/31/23",
+//                       style: TextStyle(
+//                           fontSize: 14,
+//                           fontStyle: FontStyle.italic,
+//                           color: Color(0xFF2E2E2E)),
+//                       textAlign: TextAlign.start,
+//                     )
+//                   ],
+//                 ),
+//                 Column(
+//                   crossAxisAlignment: CrossAxisAlignment.end,
+//                   children: [
+//                     TextButton(
+//                       onPressed: null,
+//                       style: TextButton.styleFrom(
+//                         shape: RoundedRectangleBorder(
+//                             borderRadius: BorderRadius.circular(7)),
+//                         minimumSize:
+//                             Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+//                         backgroundColor: const Color(0xFFFFF3C8),
+//                       ),
+//                       child: const Text("PROCESSED",
+//                           style: TextStyle(
+//                               fontSize: 13,
+//                               fontWeight: FontWeight.bold,
+//                               color: Color(0xFFDCB631))),
+//                     ),
+//                   ],
+//                 )
+//               ]),
+//               Padding(
+//                   padding: EdgeInsets.symmetric(
+//                       horizontal: width * 1.0 / 12.0,
+//                       vertical: height * 1.0 / 55.0),
+//                   child: Column(
+//                     //single item
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         "Item #: ",
+//                         style: TextStyle(
+//                             fontSize: 16,
+//                             fontWeight: FontWeight.bold,
+//                             color: Color(0xFF2E2E2E)),
+//                         textAlign: TextAlign.left,
+//                       ),
+//                       Row(
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                           children: [
+//                             Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: const [
+//                                 Text(
+//                                   "Size: ",
+//                                   textAlign: TextAlign.left,
+//                                   style: TextStyle(
+//                                       fontSize: 14, color: Color(0xFF808080)),
+//                                 ),
+//                                 Text(
+//                                   "Gender: ",
+//                                   textAlign: TextAlign.left,
+//                                   style: TextStyle(
+//                                       fontSize: 14, color: Color(0xFF808080)),
+//                                 ),
+//                               ],
+//                             ),
+//                             Column(
+//                               crossAxisAlignment: CrossAxisAlignment.end,
+//                               children: [
+//                                 Text(
+//                                   "*insert size*",
+//                                   textAlign: TextAlign.right,
+//                                   style: TextStyle(
+//                                       fontSize: 14, color: Color(0xFF2E2E2E)),
+//                                 ),
+//                                 Text(
+//                                   "*insert gender*",
+//                                   textAlign: TextAlign.right,
+//                                   style: TextStyle(
+//                                       fontSize: 14, color: Color(0xFF2E2E2E)),
+//                                 ),
+//                               ],
+//                             ),
+//                           ]),
+//                     ],
+//                   )),
+//               Padding(
+//                   padding: EdgeInsets.symmetric(vertical: height * 1.0 / 50.0),
+//                   child: Column(children: [
+//                     Text(
+//                       "Address ",
+//                       style: TextStyle(
+//                           fontSize: 16,
+//                           fontWeight: FontWeight.bold,
+//                           color: Color(0xFF2E2E2E)),
+//                     ),
+//                   ])),
+//               TextButton(
+//                 onPressed: null,
+//                 style: TextButton.styleFrom(
+//                   shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(7)),
+//                   minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+//                   backgroundColor: const Color(0xFFC4DBFE),
+//                 ),
+//                 child: const Text(
+//                   'Delete Request',
+//                   style: TextStyle(fontSize: 12, color: Color(0xFF2E2E2E)),
+//                 ),
+//               ),
+//             ])),
+//       ),
+//     );
+//   }
+// }
+
