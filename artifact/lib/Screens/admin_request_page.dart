@@ -24,6 +24,7 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
         theme: ThemeData(backgroundColor: Color(0xFFf9f9f9)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            backgroundColor: Color(0xFFF9F9F9),
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [

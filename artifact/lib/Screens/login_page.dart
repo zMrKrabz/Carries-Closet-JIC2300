@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             child: TextField(
               controller: emailController,
               textInputAction: TextInputAction.done,
-              cursorColor: Colors.white,
+              // cursorColor: Colors.white,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color(0xFFF1F1F1),
