@@ -110,7 +110,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('Request #$reqNum',
+                                          Text(
+                                              "Request #" +
+                                                  decode[index]['requestno'],
                                               style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
@@ -204,7 +206,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                                     onPressed: () {
                                       Navigator.push(context, MaterialPageRoute(
                                           builder: ((context) {
-                                        return FullRequestPage();
+                                        return FullRequestPage(
+                                            requestno:
+                                                '${decode[index]['requestno']}');
                                       })));
                                     },
                                     style: const ButtonStyle(
@@ -263,19 +267,5 @@ class _RequestWidgetState extends State<RequestWidget> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     return response.body;
-  }
-
-  void updateRequest(String requestno, String status) async {
-    print('update request called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/requests/update?requestno=$requestno')
-        : Uri.parse(
-            'http://10.0.2.2:8080/requests/update?requestno=$requestno');
-
-    var response = await http.put(url, body: {'status': status});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
   }
 }

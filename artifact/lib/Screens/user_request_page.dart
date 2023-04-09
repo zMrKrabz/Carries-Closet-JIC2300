@@ -80,11 +80,13 @@ class _RequestWidgetState extends State<RequestWidget> {
     String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
 
     return FutureBuilder<String>(
-      future: parseRequests(uid),
+      future: parseRequests(),
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         List<Widget> children;
         if (snapshot.hasData) {
           List<dynamic> decode = json.decode(snapshot.data.toString());
+          decode.removeWhere((element) => element['uid'] != uid);
+
           return MediaQuery.removePadding(
               context: context,
               removeTop: true,
@@ -312,7 +314,7 @@ class _RequestWidgetState extends State<RequestWidget> {
     );
   }
 
-  Future<String> parseRequests(String uid) async {
+  Future<String> parseRequests() async {
     print('parse requests called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
