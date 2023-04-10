@@ -2,7 +2,6 @@
 
 # Required imports
 import os
-import traceback
 
 from flask import Flask, request, jsonify
 from firebase_admin import credentials, initialize_app, firestore
@@ -162,6 +161,12 @@ def list_clothing_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
         if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             removed_documents = []
@@ -185,6 +190,12 @@ def list_hygiene_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
         if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             removed_documents = []
@@ -208,6 +219,12 @@ def list_all_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
         if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
             return jsonify(all_requests), 200
