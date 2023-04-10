@@ -293,6 +293,23 @@ def get_next_requestno():
         print(f"An Error Occurred: {e}")
         return error_500, 500
 
+# -1: Create user
+#  0: Get/Update User, Get/Create Request, Get requestno
+#  1: Delete User, Update/Delete Request
+def check_permissions(uid, perm):
+    exists = False
+    user_perms = -1
+    for doc in users_ref.stream():
+        if doc.id == uid:
+            exists = True
+            user_perms = 1 if str(doc.get('perms')).lower() == 'true' else 0
+            break
+    if user_perms >= perm:
+        return True
+    else:
+        return False
+
+
 # Dev server setup
 port = int(os.environ.get('PORT', 8080))
 if __name__ == '__main__':
