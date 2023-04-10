@@ -103,7 +103,6 @@ class ProfileFormState extends State<ProfileForm> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
 
-
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: width * 1.0 / 12.0,
