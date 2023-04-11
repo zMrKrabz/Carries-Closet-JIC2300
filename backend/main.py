@@ -293,9 +293,10 @@ def get_next_requestno():
         print(f"An Error Occurred: {e}")
         return error_500, 500
 
-# -1: Create user
-#  0: Get/Update User, Get/Create Request, Get requestno
-#  1: Delete User, Update/Delete Request
+# -1: Create user => No account required
+#  0: Get/Update User, Get/Create Request, Get requestno => Account required, elevated permission not required
+#  1: Delete User, Update/Delete Request => Account and elevated permissions required
+
 def check_permissions(uid, perm):
     exists = False
     user_perms = -1
