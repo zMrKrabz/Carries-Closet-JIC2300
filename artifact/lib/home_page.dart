@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/multi_clothing_form_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
@@ -157,7 +158,7 @@ class HomePage extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold)),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                  return ClothingMultiPage();
+                  return MultiClothingFormWidget();
                 })));
               },
               child: const Text('Clothing'),

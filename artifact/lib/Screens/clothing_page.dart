@@ -34,7 +34,11 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
   final List emergency = ["Yes", "No"];
   String? emergencyValue;
 
-  final _formKey = GlobalKey<FormState>();
+  final _clothingFormKey = GlobalKey<FormState>();
+  final genderController = TextEditingController();
+  final ageController = TextEditingController();
+  final articleController = TextEditingController();
+  final sizeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,7 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
       padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
       child: Card(
         child: Form(
-          key: _formKey,
+          key: _clothingFormKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -62,6 +66,7 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
                   Expanded(
                       flex: 2,
                       child: DropdownButtonFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         hint: Text("Gender*"),
                         value: genderValue,
                         onChanged: (value) {
@@ -90,8 +95,10 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      // controller:
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
-                        if (value != null) {
+                        if (value == null) {
                           print("please get inside");
                           return "Value is needed";
                         } else {
@@ -147,7 +154,10 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
                     sizeValue = val as String;
                   });
                 },
-                validator: (value) {},
+                validator: (value) {
+                  if (value == null) return "Please input a size";
+                  return null;
+                },
                 items: sizes.map((valueItem) {
                   return DropdownMenuItem(
                     value: valueItem,
@@ -179,13 +189,13 @@ class _ClothingPageFormState extends State<ClothingPageForm> {
   }
 
   bool validate() {
-    print(_formKey);
+    print(_clothingFormKey);
     print("above is the form key");
-    var valid = _formKey.currentState?.validate();
-    print(_formKey.currentState);
+    final valid = _clothingFormKey.currentState!.validate();
+    print(_clothingFormKey.currentState);
     print("the thing above is currentState");
     if (valid != null) {
-      _formKey.currentState?.save();
+      _clothingFormKey.currentState?.save();
       print("form is finally valid");
     }
     // print("validate inside clothing_page");
