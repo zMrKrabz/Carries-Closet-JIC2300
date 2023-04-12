@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/Screens/clothing_form_2.dart';
 
+
+// New page by Eph
+
 class MultiClothingFormWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
