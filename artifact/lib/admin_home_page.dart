@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
 import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
+import 'package:artifact/Screens/clothing_multiform_page.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -154,7 +155,6 @@ class AdminHomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-
     return ButtonBarTheme(
         data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(
@@ -210,6 +210,5 @@ class AdminHomePage extends StatelessWidget {
               ),
               SizedBox(height: height * 1.0 / 40.0)
             ]));
-
   }
 }

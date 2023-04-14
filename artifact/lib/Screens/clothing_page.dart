@@ -2,16 +2,26 @@ import "package:flutter/material.dart";
 import 'package:artifact/Screens/clothing_confirmation_page.dart';
 import 'package:artifact/home_page.dart';
 
-class ClothingPage extends StatefulWidget {
-  const ClothingPage({super.key});
+import 'clothingdata.dart';
 
+typedef OnDelete();
+
+class ClothingPageForm extends StatefulWidget {
+  // const ClothingPage({super.key});
+
+  final ClothingData page;
+  final state = _ClothingPageFormState();
+  final OnDelete onDelete;
+
+  ClothingPageForm({Key? key, required this.page, required this.onDelete})
+      : super(key: key);
   @override
-  _ClothingPageState createState() {
-    return _ClothingPageState();
-  }
+  _ClothingPageFormState createState() => state;
+
+  bool isValid() => state.validate();
 }
 
-class _ClothingPageState extends State<ClothingPage> {
+class _ClothingPageFormState extends State<ClothingPageForm> {
   final List genders = ["Male", "Female", "Non-binary", "Other"];
   String? genderValue;
 
@@ -24,22 +34,16 @@ class _ClothingPageState extends State<ClothingPage> {
   final List emergency = ["Yes", "No"];
   String? emergencyValue;
 
+  final _clothingFormKey = GlobalKey<FormState>();
   final genderController = TextEditingController();
   final ageController = TextEditingController();
-  final itemController = TextEditingController();
+  final articleController = TextEditingController();
   final sizeController = TextEditingController();
-  final emergencyController = TextEditingController();
-  final addressController = TextEditingController();
-  final notesController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-  bool _autovalidate = false;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
         body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -183,7 +187,10 @@ class _ClothingPageState extends State<ClothingPage> {
                       },
                       validator: (value) {
                         if (value == null) {
-                          return "Size is required";
+                          print("please get inside");
+                          return "Value is needed";
+                        } else {
+                          return null;
                         }
                       },
                       items: sizes.map((valueItem) {
@@ -257,6 +264,71 @@ class _ClothingPageState extends State<ClothingPage> {
                         hintText: 'Enter the address',
                       ),
                     ),
+                  )
+                ],
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              DropdownButtonFormField(
+                hint: Text("Article of Clothing*"),
+                value: itemValue,
+                onChanged: (val) {
+                  setState(() {
+                    itemValue = val as String;
+                  });
+                },
+                validator: (value) {
+                  if (value == null) {
+                    return "Piece of clothing is required";
+                  } else {
+                    return null;
+                  }
+                },
+                items: items.map((valueItem) {
+                  return DropdownMenuItem(
+                    value: valueItem,
+                    child: Text(valueItem),
+                  );
+                }).toList(),
+                decoration: InputDecoration(border: OutlineInputBorder()),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              DropdownButtonFormField(
+                hint: Text("Size*"),
+                value: sizeValue,
+                // onSaved: (val) {
+                //   if (val != null) {
+                //     widget.page?.itemValue = val.toString();
+                //   }
+                // },
+                onChanged: (val) {
+                  setState(() {
+                    sizeValue = val as String;
+                  });
+                },
+                validator: (value) {
+                  if (value == null) return "Please input a size";
+                  return null;
+                },
+                items: sizes.map((valueItem) {
+                  return DropdownMenuItem(
+                    value: valueItem,
+                    child: Text(valueItem),
+                  );
+                }).toList(),
+                decoration: InputDecoration(border: OutlineInputBorder()),
+              ),
+              SizedBox(height: height * 1.0 / 72.0),
+              SizedBox(
+                height: height * 1.0 / 6.0,
+                child: TextField(
+                  maxLines: null,
+                  expands: true,
+                  textInputAction: TextInputAction.done,
+                  cursorColor: Colors.white,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Other notes',
+                    hintText: 'Please enter any extra information if needed',
                   ),
                   SizedBox(height: height * 1.0 / 72.0),
                   Padding(
@@ -318,4 +390,10 @@ class _ClothingPageState extends State<ClothingPage> {
                   ),
                 ]))));
   }
+  // bool validate() {
+  //Validate Form Fields
+  //  bool validate = _formKey.currentState.validate();
+  //  if (validate) _formKey.currentState.save();
+  //  return validate;
+  // }
 }
