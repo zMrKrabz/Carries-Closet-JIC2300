@@ -1,5 +1,6 @@
 import 'package:artifact/Screens/admin_request_page.dart';
 import 'package:artifact/Screens/full_request_page.dart';
+import 'package:artifact/Screens/multi_clothing_form_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
@@ -179,7 +180,7 @@ class AdminHomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) {
-                      return const ClothingPage();
+                      return MultiClothingFormWidget();
                     })));
                   },
                   child: const Text('Clothing Item',

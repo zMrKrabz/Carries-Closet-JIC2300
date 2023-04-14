@@ -128,7 +128,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) {
-                      return const ClothingPage();
+                      return MultiClothingFormWidget();
                     })));
                   },
                   child: const Text('Clothing Item',

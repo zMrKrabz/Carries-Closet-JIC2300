@@ -20,7 +20,7 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Multi Contacts"),
+        title: const Text("Clothing Forms"),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -29,12 +29,12 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
           onPressed: () {
             onSave();
           },
-          child: Text("Save"),
+          child: const Text("Save"),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           onAdd();
         },
@@ -45,7 +45,7 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
               itemBuilder: (_, index) {
                 return clothingForms[index];
               })
-          : Center(child: Text("Tap on + to Add Contact")),
+          : const Center(child: Text("Tap on + to Add Contact")),
     );
   }
 
