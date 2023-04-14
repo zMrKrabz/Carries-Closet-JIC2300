@@ -1,14 +1,13 @@
 import 'package:artifact/Screens/admin_request_page.dart';
 import 'package:artifact/Screens/full_request_page.dart';
 import 'package:artifact/Screens/multi_clothing_form_page.dart';
+import 'package:artifact/Screens/multi_hygiene_form_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
-import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/view_users.dart';
-import 'package:artifact/Screens/clothing_multiform_page.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -202,7 +201,7 @@ class AdminHomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return const HygienePage();
+                        return MultiHygieneFormWidget();
                       })));
                     },
                     child: const Text('Hygiene Item',

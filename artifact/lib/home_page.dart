@@ -5,10 +5,7 @@ import 'package:artifact/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:artifact/Screens/hygiene_page.dart';
-import 'package:artifact/Screens/clothing_page.dart';
 import 'package:artifact/Screens/user_request_page.dart';
-
-import 'Screens/clothing_multiform_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -108,56 +105,53 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return ButtonBarTheme(
         data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
-        child: AlertDialog(
-            actions: <Widget>[
-              SizedBox(height: height * 1.0 / 40.0),
-              const Text('What type of item are you requesting?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              SizedBox(height: height * 1.0 / 40.0),
-              Align(
-                alignment: Alignment.center,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
-                    foregroundColor: const Color(0xFF2E2E2E),
-                    backgroundColor: const Color(0xFFC4DBFE),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) {
-                      return MultiClothingFormWidget();
-                    })));
-                  },
-                  child: const Text('Clothing Item',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        child: AlertDialog(actions: <Widget>[
+          SizedBox(height: height * 1.0 / 40.0),
+          const Text('What type of item are you requesting?',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          SizedBox(height: height * 1.0 / 40.0),
+          Align(
+            alignment: Alignment.center,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
+                foregroundColor: const Color(0xFF2E2E2E),
+                backgroundColor: const Color(0xFFC4DBFE),
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                  return MultiClothingFormWidget();
+                })));
+              },
+              child: const Text('Clothing Item',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+          ),
+          SizedBox(height: height * 1.0 / 40.0),
+          Align(
+            alignment: Alignment.center,
+            child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
+                  foregroundColor: const Color(0xFF2E2E2E),
+                  backgroundColor: const Color(0xFFC4DBFE),
                 ),
-              ),
-              SizedBox(height: height * 1.0 / 40.0),
-              Align(
-                alignment: Alignment.center,
-                child: TextButton(
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      minimumSize: Size(width / 2.0, height * 1.0 / 17.0),
-                      foregroundColor: const Color(0xFF2E2E2E),
-                      backgroundColor: const Color(0xFFC4DBFE),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
-                        return const HygienePage();
-                      })));
-                    },
-                    child: const Text('Hygiene Item',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold))),
-              ),
-              SizedBox(height: height * 1.0 / 40.0)
-            ]));
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) {
+                    return const HygienePage();
+                  })));
+                },
+                child: const Text('Hygiene Item',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+          ),
+          SizedBox(height: height * 1.0 / 40.0)
+        ]));
   }
 }

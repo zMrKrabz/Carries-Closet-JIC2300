@@ -1,10 +1,8 @@
-// New page by Eph
-
-class ClothingFormInfo {
+class HygieneFormInfo {
   final List genders = ["", "Male", "Female", "Non-binary", "Other"];
   String? genderValue;
 
-  final List items = ["", "Shirt", "Pants", "Jacket"];
+  final List items = ["", "Toothpaste", "Toothbrush", "Deodorant", "Other"];
   String? itemValue;
 
   final List sizes = ["", "Small", "Medium", "Large", "X-Large"];
@@ -18,7 +16,7 @@ class ClothingFormInfo {
 
   int? id;
 
-  ClothingFormInfo(
+  HygieneFormInfo(
       {this.genderValue,
       this.itemValue,
       this.sizeValue,

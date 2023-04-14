@@ -1,20 +1,18 @@
-import 'package:artifact/Screens/clothing_form_info.dart';
-import 'package:artifact/Screens/clothing_form.dart';
+import 'package:artifact/Screens/hygiene_form.dart';
+import 'package:artifact/Screens/hygiene_form_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
 
-// New page by Eph
-
-class MultiClothingFormWidget extends StatefulWidget {
+class MultiHygieneFormWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _MultiClothingFormWidgetState();
+    return _MultiHygieneFormWidgetState();
   }
 }
 
-class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
-  List<ClothingFormWidget> clothingForms = List.empty(growable: true);
+class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
+  List<HygieneFormWidget> hygieneForms = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -65,24 +63,24 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                         },
                         icon: const Icon(Icons.arrow_back))),
               ]),
-              const Text("Clothing Request",
+              const Text("Hygiene Request",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: width * 1.0 / 12.0,
                     vertical: height * 1.0 / 36.0),
                 child: const Text(
-                    "Please fill out information to request a clothing item. If you chose a teenager size, please the specific size in the “Other Notes” section.",
+                    "Please fill out information to request a hygiene item.",
                     textAlign: TextAlign.center),
               ),
               Flexible(
-                  child: clothingForms.isNotEmpty
+                  child: hygieneForms.isNotEmpty
                       ? ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: clothingForms.length,
+                          itemCount: hygieneForms.length,
                           itemBuilder: (_, index) {
-                            return clothingForms[index];
+                            return hygieneForms[index];
                           })
                       : Center(child: Text("Tap on + to Add a Request"))),
             ]
@@ -105,14 +103,14 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
     bool allValid = true;
 
     //If any form validation function returns false means all forms are not valid
-    clothingForms
+    hygieneForms
         .forEach((element) => allValid = (allValid && element.isValidated()));
 
     if (allValid) {
-      for (int i = 0; i < clothingForms.length; i++) {
-        ClothingFormWidget item = clothingForms[i];
-        debugPrint("Age: ${item.clothingFormInfo.ageValue}");
-        debugPrint("Notes: ${item.clothingFormInfo.notesValue}");
+      for (int i = 0; i < hygieneForms.length; i++) {
+        HygieneFormWidget item = hygieneForms[i];
+        debugPrint("Age: ${item.hygieneFormInfo.ageValue}");
+        debugPrint("Notes: ${item.hygieneFormInfo.notesValue}");
       }
       //Submit Form Here
     } else {
@@ -121,23 +119,22 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
   }
 
   //Delete specific form
-  onRemove(ClothingFormInfo form) {
+  onRemove(HygieneFormInfo form) {
     setState(() {
-      int index = clothingForms
-          .indexWhere((element) => element.clothingFormInfo.id == form.id);
-      if (clothingForms != null) clothingForms.removeAt(index);
+      int index = hygieneForms
+          .indexWhere((element) => element.hygieneFormInfo.id == form.id);
+      if (hygieneForms != null) hygieneForms.removeAt(index);
     });
   }
 
   //Add New Form
   onAdd() {
     setState(() {
-      ClothingFormInfo clothingForm =
-          ClothingFormInfo(id: clothingForms.length);
-      clothingForms.add(ClothingFormWidget(
-        index: clothingForms.length,
-        clothingFormInfo: clothingForm,
-        onRemove: () => onRemove(clothingForm),
+      HygieneFormInfo hygieneForm = HygieneFormInfo(id: hygieneForms.length);
+      hygieneForms.add(HygieneFormWidget(
+        index: hygieneForms.length,
+        hygieneFormInfo: hygieneForm,
+        onRemove: () => onRemove(hygieneForm),
       ));
     });
   }
