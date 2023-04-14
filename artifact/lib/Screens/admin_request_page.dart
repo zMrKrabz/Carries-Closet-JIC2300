@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import "package:artifact/home_page.dart";
 import "package:artifact/admin_home_page.dart";
+import "package:artifact/Screens/full_request_page.dart";
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -21,12 +21,14 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
     double height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
+        theme: ThemeData(backgroundColor: Color(0xFFf9f9f9)),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            backgroundColor: Color(0xFFF9F9F9),
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
-                  SizedBox(height: height * 1.0 / 18.0),
+                  SizedBox(height: height * 1.0 / 13.5),
                   Stack(alignment: Alignment.topLeft, children: [
                     Align(
                         alignment: Alignment.topLeft,
@@ -35,18 +37,22 @@ class _AdminRequestPageState extends State<AdminRequestPage> {
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: ((context) {
-                                return AdminHomePage();
+                                return const AdminHomePage();
                               })));
                             },
                             icon: const Icon(Icons.arrow_back))),
                     Align(
                         alignment: Alignment.bottomCenter,
-                        child: Image.asset("assets/dsdf1.png",
-                            height: height * 1.0 / 6.75,
-                            width: height * 1.0 / 6.75,
-                            alignment: Alignment.center))
+                        child: Column(
+                          children: [
+                            SizedBox(height: height * 1.0 / 100.0),
+                            const Text('Orders',
+                                style: TextStyle(
+                                    fontSize: 26, fontWeight: FontWeight.bold))
+                          ],
+                        ))
                   ]),
-                  RequestWidget(),
+                  const RequestWidget(),
                 ]))));
   }
 }
@@ -63,7 +69,11 @@ class RequestWidget extends StatefulWidget {
 class _RequestWidgetState extends State<RequestWidget> {
   @override
   Widget build(BuildContext context) {
-    return Card(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return DefaultTextStyle(
+      style: const TextStyle(fontSize: 14),
       child: FutureBuilder<String>(
           future: parseRequests(),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -74,39 +84,142 @@ class _RequestWidgetState extends State<RequestWidget> {
                   shrinkWrap: true,
                   itemCount: decode.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          title: Text("Request #1"),
-                          subtitle: Text("${decode[index]['date']}"),
-                          trailing: Icon(Icons.more_vert),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text("Item: ${decode[index]['item']}"),
-                            Text("Size: ${decode[index]['size']}")
-                          ],
-                        ),
-                        Text("Gender: ${decode[index]['gender']}"),
-                        Text("Address: ${decode[index]['address']}"),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ElevatedButton(
-                                onPressed: null,
-                                child: const Text('Complete'),
-                              ),
-                              const SizedBox(width: 8),
-                              ElevatedButton(
-                                onPressed: null,
-                                child: Text('Deny'),
-                              ),
-                              const SizedBox(width: 8),
-                            ])
-                      ],
-                    );
+                    int reqNum = index + 1;
+                    return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: width * 1.0 / 12.0),
+                        child: Card(
+                          elevation: 0,
+                          color: const Color(0xFFF9F9F9),
+                          shape: const RoundedRectangleBorder(
+                              side: BorderSide(color: Color(0xFFD9D9D9)),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  bottomLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                  bottomRight: Radius.circular(16))),
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: height * 1.0 / 55.0),
+                              child: Column(children: [
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              "Request #" +
+                                                  decode[index]['requestno'],
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFF2E2E2E)),
+                                              textAlign: TextAlign.left),
+                                          Text(
+                                            '${decode[index]['date']}',
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                fontStyle: FontStyle.italic,
+                                                color: Color(0xFF2E2E2E)),
+                                            textAlign: TextAlign.start,
+                                          )
+                                        ],
+                                      ),
+                                      Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            SizedBox(width: width * 11.0 / 42.0)
+                                          ])
+                                    ]),
+                                Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width * 1.0 / 12.0,
+                                        vertical: height * 1.0 / 55.0),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              'Item #: ${decode[index]['item']}',
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFF2E2E2E)),
+                                              textAlign: TextAlign.left),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: const [
+                                                      Text('Size: ',
+                                                          style: TextStyle(
+                                                              fontSize: 14,
+                                                              color: Color(
+                                                                  0xFF808080)),
+                                                          textAlign:
+                                                              TextAlign.left),
+                                                      Text('Gender: ',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xFF808080),
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.left)
+                                                    ]),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text(
+                                                      decode[index]['size'],
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Color(
+                                                              0xFF2E2E2E)),
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                    ),
+                                                    Text(
+                                                      decode[index]['gender'],
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Color(
+                                                              0xFF2E2E2E)),
+                                                      textAlign:
+                                                          TextAlign.right,
+                                                    )
+                                                  ],
+                                                )
+                                              ])
+                                        ])),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: ((context) {
+                                        return FullRequestPage(
+                                            requestno:
+                                                '${decode[index]['requestno']}');
+                                      })));
+                                    },
+                                    style: const ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll<Color>(
+                                                Color(0xFFC4DBFE))),
+                                    child: const Text('View Full Request',
+                                        style: TextStyle(
+                                            color: Color(0xFF2E2E2E))))
+                              ])),
+                        ));
                   });
             } else if (snapshot.hasError) {
               children = <Widget>[
