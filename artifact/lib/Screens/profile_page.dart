@@ -1,4 +1,5 @@
 // import 'dart:html';
+import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,15 +67,20 @@ class ProfileFormState extends State<ProfileForm> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              if (AppUser.isAdmin) {
+                              if (AppUser.isAdmin == PermissionStatus.admin) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: ((context) {
                                   return const AdminHomePage();
                                 })));
-                              } else {
+                              } else if (AppUser.isAdmin == PermissionStatus.user) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: ((context) {
                                   return const HomePage();
+                                })));
+                              } else {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: ((context) {
+                                  return const OpenPage();
                                 })));
                               }
                             },
@@ -261,7 +267,7 @@ class ProfileFormState extends State<ProfileForm> {
     });
     debugPrint('Response status: ${response.statusCode}');
     debugPrint('Response body: ${response.body}');
-    if (AppUser.isAdmin) {
+    if (AppUser.isAdmin == PermissionStatus.admin) {
       Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return const AdminHomePage();
       })));

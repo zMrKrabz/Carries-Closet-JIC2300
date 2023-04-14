@@ -190,7 +190,7 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     ),
                     onPressed: () {
                       submitDB();
-                      if (AppUser.isAdmin) {
+                      if (AppUser.isAdmin == PermissionStatus.admin) {
                           Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
                           return const AdminHomePage();

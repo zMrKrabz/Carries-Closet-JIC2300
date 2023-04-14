@@ -40,9 +40,10 @@ class MainPage extends StatelessWidget {
                   future: checkPermissions(context, uid),
                   builder: (context, snapshot) {
                     if (snapshot.data == true) {
-                      user.setAdminStatus(true);
+                      user.setAdminStatus(PermissionStatus.admin);
                       return const AdminHomePage();
                     } else if (snapshot.data == false) {
+                      user.setAdminStatus(PermissionStatus.user);
                       return const HomePage();
                     } else {
                       return SizedBox(
