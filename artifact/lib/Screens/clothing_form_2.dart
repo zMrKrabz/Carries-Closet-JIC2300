@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'clothing_form_info.dart';
 
+// New page by Eph
+
 class ClothingFormWidget extends StatefulWidget {
   ClothingFormWidget(
       {Key? key,

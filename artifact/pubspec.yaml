@@ -73,6 +73,8 @@ flutter:
   assets:
     - assets/dsdf.png
     - assets/dsdf1.png
+    - assets/logo.png
+    - assets/butterfly.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import "package:artifact/home_page.dart";
-import "package:artifact/main.dart";
-import "package:artifact/admin_home_page.dart";
 
 import 'package:http/http.dart' as http;
 
@@ -170,7 +168,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                     style: TextButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                       foregroundColor: Colors.black,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -182,7 +180,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                     style: TextButton.styleFrom(
                       minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
                       foregroundColor: Colors.black,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -190,7 +188,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                       submitDB();
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return HomePage();
+                        return const HomePage();
                       })));
                     },
                     child: const Text('Submit Request'),

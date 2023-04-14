@@ -2,7 +2,6 @@
 
 # Required imports
 import os
-import traceback
 
 from flask import Flask, request, jsonify
 from firebase_admin import credentials, initialize_app, firestore
@@ -38,13 +37,9 @@ def add_user():
     """
     try:
         # should include username, password, email, and permissions
-        if request.form.get('id') is None:
-            # doc_id = users_ref.add(request.form)
-            # return jsonify({"success": True, "id": doc_id[1].id}), 201
-            return jsonify({"success": False, "reason": "No UID provided."}), 400
-        else:
-            users_ref.document(request.form['id']).set(request.form)
-            return jsonify({"success": True, "id": request.form['id']}), 201
+        doc_id = request.form['id']
+        users_ref.document(doc_id).set(request.form)
+        return jsonify({"success": True, "id": doc_id}), 201
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
@@ -91,8 +86,11 @@ def update_user():
             for doc in users_ref.stream():
                 if doc.get('username') == username:
                     document_id = doc.id
-        users_ref.document(document_id).update(request.form)
-        return jsonify({"success": True}), 200
+        if document_id is not None:
+            users_ref.document(document_id).update(request.form)
+            return jsonify({"success": True}), 200
+        else:
+            return jsonify("No user found matching given parameters."), 404
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
@@ -130,9 +128,8 @@ def create_hygiene_request():
         # later change to sending user in request instead of demographic information needing to be resubmitted 24/7
         form_data = request.form.to_dict()
         form_data['date'] = date.today().strftime("%m/%d/%Y")  # MM/DD/YYYY
-        form_data['timestamp'] = str(time.time())
         form_data['type'] = 'hygiene'
-        form_data['status'] = 'submitted'
+        form_data['status'] = 'received'
         doc_id = requests_ref.add(form_data)
         return jsonify({"success": True, "id": doc_id[1].id}), 201
     except Exception as e:
@@ -149,9 +146,8 @@ def create_clothing_request():
         # later change to sending user in request instead of demographic information needing to be resubmitted 24/7
         form_data = request.form.to_dict()
         form_data['date'] = date.today().strftime("%m/%d/%Y")  # MM/DD/YYYY
-        form_data['timestamp'] = str(time.time())
         form_data['type'] = 'clothing'
-        form_data['status'] = 'submitted'
+        form_data['status'] = 'received'
         doc_id = requests_ref.add(form_data)
         return jsonify({"success": True, "id": doc_id[1].id}), 201
     except Exception as e:
@@ -165,21 +161,14 @@ def list_clothing_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        uid = request.args.get('uid')
-        if uid is not None:
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
+        if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
-            removed_documents = []
-            for i in range(len(all_requests)):
-                request_document = all_requests[i]
-                if request_document['type'].lower() != 'clothing' or request_document['uid'] != uid:
-                    removed_documents.append(request_document)
-            for document in removed_documents:
-                all_requests.remove(document)
-            return jsonify(all_requests), 200
-        elif document_id is None:
-            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             removed_documents = []
             for i in range(len(all_requests)):
                 request_document = all_requests[i]
@@ -201,21 +190,14 @@ def list_hygiene_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        uid = request.args.get('uid')
-        if uid is not None:
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
+        if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
-            removed_documents = []
-            for i in range(len(all_requests)):
-                request_document = all_requests[i]
-                if request_document['type'].lower() != 'hygiene' or request_document['uid'] != uid:
-                    removed_documents.append(request_document)
-            for document in removed_documents:
-                all_requests.remove(document)
-            return jsonify(all_requests), 200
-        elif document_id is None:
-            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             removed_documents = []
             for i in range(len(all_requests)):
                 request_document = all_requests[i]
@@ -237,21 +219,14 @@ def list_all_requests():
     try:
         # Check for ID in request args
         document_id = request.args.get('id')
-        uid = request.args.get('uid')
-        if uid is not None:
+        requestno = request.args.get('requestno')
+        if requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
+        if document_id is None:
             all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
-            removed_documents = []
-            for i in range(len(all_requests)):
-                request_document = all_requests[i]
-                if request_document['uid'] != uid:
-                    removed_documents.append(request_document)
-            for document in removed_documents:
-                all_requests.remove(document)
-            return jsonify(all_requests), 200
-        elif document_id is None:
-            all_requests = [doc.to_dict() for doc in requests_ref.stream()]
-            all_requests = sorted(all_requests, key=lambda x: x['timestamp'])
             return jsonify(all_requests), 200
         else:
             return jsonify(requests_ref.document(document_id).get().to_dict()), 200
@@ -266,8 +241,17 @@ def remove_request():
     try:
         # Check for ID in URL query
         document_id = request.args.get('id')
-        requests_ref.document(document_id).delete()
-        return jsonify({"success": True}), 200
+        requestno = request.args.get('requestno')
+        if document_id is None and requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
+        if document_id is not None:
+            requests_ref.document(document_id).delete()
+            return jsonify({"success": True}), 200
+        else:
+            return jsonify("No request found matching given parameters."), 404
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
@@ -278,12 +262,21 @@ def remove_request():
 def update_request():
     try:
         document_id = request.args.get('id')
-        requests_ref.document(document_id).update(request.form)
-        return jsonify({"success": True}), 200
+        requestno = request.args.get('requestno')
+        if document_id is None and requestno is not None:
+            for doc in requests_ref.stream():
+                if doc.get('requestno') == requestno:
+                    document_id = doc.id
+                    break
+        if document_id is not None:
+            requests_ref.document(document_id).update(request.form)
+            return jsonify({"success": True}), 200
+        else:
+            return jsonify("No request found matching given parameters."), 404
+
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
-
 
 @app.route('/requestno', methods=['GET'])
 def get_next_requestno():
@@ -299,6 +292,22 @@ def get_next_requestno():
     except Exception as e:
         print(f"An Error Occurred: {e}")
         return error_500, 500
+
+# -1: Create user
+#  0: Get/Update User, Get/Create Request, Get requestno
+#  1: Delete User, Update/Delete Request
+def check_permissions(uid, perm):
+    exists = False
+    user_perms = -1
+    for doc in users_ref.stream():
+        if doc.id == uid:
+            exists = True
+            user_perms = 1 if str(doc.get('perms')).lower() == 'true' else 0
+            break
+    if user_perms >= perm:
+        return True
+    else:
+        return False
 
 
 # Dev server setup
