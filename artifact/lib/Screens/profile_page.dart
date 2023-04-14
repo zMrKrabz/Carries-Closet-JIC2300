@@ -207,20 +207,20 @@ class ProfileFormState extends State<ProfileForm> {
   }
 
   Future signUp() async {
-    print('signing up...');
+    debugPrint('signing up...');
 
     var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: widget.email,
       password: widget.password,
     );
-    print("uid: " + credential.user!.uid);
+    debugPrint("uid: " + credential.user!.uid);
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     Uri url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/users/create')
         : Uri.parse('http://10.0.2.2:8080/users/create');
 
     if (credential.user == null) {
-      print("Failed.");
+      debugPrint("Failed.");
       return;
     }
 
@@ -229,9 +229,9 @@ class ProfileFormState extends State<ProfileForm> {
       'email': credential.user!.email,
       'permissions': 'false'
     });
-    print("posted response");
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint("posted response");
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 
   Future update_user_info(bool isIOS, var context) async {
@@ -240,7 +240,7 @@ class ProfileFormState extends State<ProfileForm> {
     }
     var uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null || uid == "") {
-      print("failed: no current user");
+      debugPrint("failed: no current user");
       return;
     }
 
@@ -259,8 +259,8 @@ class ProfileFormState extends State<ProfileForm> {
       'state': ProfileFormState.stateController.text,
       'zip': ProfileFormState.zipController.text
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     if (AppUser.isAdmin) {
       Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return const AdminHomePage();
