@@ -1,4 +1,7 @@
 // import 'dart:html';
+import 'dart:convert';
+
+import 'package:artifact/Screens/open_page.dart';
 import 'package:artifact/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,25 +20,32 @@ class ProfileForm extends StatefulWidget {
   }
 }
 
+// Fix the country --> county typo in backend
 class ProfileFormState extends State<ProfileForm> {
+  static String userFullName = '';
+  static String userEmail= '';
+  static String userPhoneNum = '';
+  static String userCounty = '';
+  static String userAddress = '';
+  static String userCity = '';
+  static String userState = '';
+  static String userZip = '';
   static final _formKey = GlobalKey<FormState>();
-  static final firstNameController = TextEditingController();
-  static final lastNameController = TextEditingController();
-  static final emailController = TextEditingController();
-  static final phoneController = TextEditingController();
-  static final countryController = TextEditingController();
-  static final addressController = TextEditingController();
-  static final cityController = TextEditingController();
-  static final stateController = TextEditingController();
-  static final zipController = TextEditingController();
+  static final nameController = TextEditingController(text: userFullName);
+  static final emailController = TextEditingController(text: userEmail);
+  static final phoneController = TextEditingController(text: userPhoneNum);
+  static final countyController = TextEditingController(text: userCounty);
+  static final addressController = TextEditingController(text: userAddress);
+  static final cityController = TextEditingController(text: userCity);
+  static final stateController = TextEditingController(text: userState);
+  static final zipController = TextEditingController(text: userZip);
 
   @override
   void dispose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
+    nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    countryController.dispose();
+    countyController.dispose();
     addressController.dispose();
     cityController.dispose();
     stateController.dispose();
@@ -48,179 +58,351 @@ class ProfileFormState extends State<ProfileForm> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    final String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+    if (uid.isEmpty) {
+      return Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Form(
-            key: _formKey,
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                    Widget>[
-              Column(
-                children: [
-                  SizedBox(height: height * 1.0 / 18.0),
-                  Stack(alignment: Alignment.topLeft, children: [
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                            iconSize: width * 1.0 / 18.0,
-                            onPressed: () {
-                              if (AppUser.isAdmin) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: ((context) {
-                                  return const AdminHomePage();
-                                })));
-                              } else {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: ((context) {
-                                  return const HomePage();
-                                })));
-                              }
-                            },
-                            icon: const Icon(Icons.arrow_back))),
-                  ]),
-                  //Names
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                  //   child: Row(
-                  //     children: [
-                  //       SizedBox(
-                  //           height: 50, width: 150, child: firstNameTextField()),
-                  //       SizedBox(
-                  //         width: 50,
-                  //       ),
-                  //       SizedBox(
-                  //         height: 50,
-                  //         width: 150,
-                  //         child: lastNameTextField(),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  SizedBox(height: height * 1.0 / 32.0),
-                  const Text("User Information",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Form(
+              key: _formKey,
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+                      Widget>[
+                Column(
+                  children: [
+                    SizedBox(height: height * 1.0 / 18.0),
+                    Stack(alignment: Alignment.topLeft, children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                              iconSize: width * 1.0 / 18.0,
+                              onPressed: () {
+                                if (AppUser.isAdmin == PermissionStatus.admin) {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: ((context) {
+                                    return const AdminHomePage();
+                                  })));
+                                } else if (AppUser.isAdmin == PermissionStatus.user) {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: ((context) {
+                                    return const HomePage();
+                                  })));
+                                } else {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: ((context) {
+                                    return const OpenPage();
+                                  })));
+                                }
+                              },
+                              icon: const Icon(Icons.arrow_back))),
+                    ]),
+                    SizedBox(height: height * 1.0 / 32.0),
+                    const Text("User Information",
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: width * 1.0 / 12.0,
-                        vertical: height * 1.0 / 36.0),
-                    child: const Text(
-                        "Please fill out information to edit the account",
-                        textAlign: TextAlign.center),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: fullNameTextField(),
-                  ),
-
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: emailAddressTextField(),
-                  ),
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: phoneNumTextField(),
-                  ),
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: countyTextField(),
-                  ),
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: addressTextField(),
-                  ),
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          // height: height *,
-                          width: width * 1.0 / 2.0,
-                          child: cityTextField(),
-                        ),
-                        SizedBox(width: width * 1.0 / 7.5),
-                        SizedBox(
-                          width: width * 1.0 / 5.0,
-                          child: stateTextField(),
-                        )
-                      ],
-                    ),
-                  ), //City / State info
-
-                  SizedBox(height: height * 1.0 / 52.0),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          // height: height *,
-                          width: width * 1.0 / 2.0,
-                          child: zipTextField(),
-                        ),
-                        SizedBox(width: width * 1.0 / 20.0),
-                      ],
-                    ),
-                  ), //City / State info
-
-                  SizedBox(height: height * 1.0 / 20.0),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        minimumSize: Size(width / 2, height * 1.0 / 16),
-                        backgroundColor: const Color(0xFF7EA5F4),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          bool isIOS =
-                              Theme.of(context).platform == TargetPlatform.iOS;
-                          update_user_info(isIOS, context);
-                        }
-                      },
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * 1.0 / 12.0,
+                          vertical: height * 1.0 / 36.0),
                       child: const Text(
-                        'Save',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFF9F9F9)),
-                      )),
-                ],
-              )
-            ]),
-          ),
-        ));
+                          "Please fill out information to edit the account",
+                          textAlign: TextAlign.center),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: fullNameTextField(),
+                    ),
+
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: emailAddressTextField(),
+                    ),
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: phoneNumTextField(),
+                    ),
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: countyTextField(),
+                    ),
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: addressTextField(),
+                    ),
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            // height: height *,
+                            width: width * 1.0 / 2.0,
+                            child: cityTextField(),
+                          ),
+                          SizedBox(width: width * 1.0 / 7.5),
+                          SizedBox(
+                            width: width * 1.0 / 5.0,
+                            child: stateTextField(),
+                          )
+                        ],
+                      ),
+                    ), //City / State info
+
+                    SizedBox(height: height * 1.0 / 52.0),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            // height: height *,
+                            width: width * 1.0 / 2.0,
+                            child: zipTextField(),
+                          ),
+                          SizedBox(width: width * 1.0 / 20.0),
+                        ],
+                      ),
+                    ), //City / State info
+
+                    SizedBox(height: height * 1.0 / 20.0),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          minimumSize: Size(width / 2, height * 1.0 / 16),
+                          backgroundColor: const Color(0xFF7EA5F4),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            bool isIOS =
+                                Theme.of(context).platform == TargetPlatform.iOS;
+                            update_user_info(isIOS, context);
+                          }
+                        },
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFF9F9F9)),
+                        )),
+                  ],
+                )
+              ]),
+            ),
+          ));
+    } else {
+        return FutureBuilder(
+        future: fetchUserInformation(context, uid),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            userFullName = snapshot.data['name'];
+            userEmail = snapshot.data['email'];
+            userAddress = snapshot.data['address'];
+            userCity = snapshot.data['city'];
+            // It is supposed to be "county"
+            userCounty = snapshot.data['country'];
+            userPhoneNum = snapshot.data['phone'];
+            userZip = snapshot.data['zip'];
+            userState = snapshot.data['state'];
+            return Scaffold(
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Form(
+                key: _formKey,
+                child:
+                    Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+                        Widget>[
+                  Column(
+                    children: [
+                      SizedBox(height: height * 1.0 / 18.0),
+                      Stack(alignment: Alignment.topLeft, children: [
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                iconSize: width * 1.0 / 18.0,
+                                onPressed: () {
+                                  if (AppUser.isAdmin == PermissionStatus.admin) {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: ((context) {
+                                      return const AdminHomePage();
+                                    })));
+                                  } else if (AppUser.isAdmin == PermissionStatus.user) {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: ((context) {
+                                      return const HomePage();
+                                    })));
+                                  } else {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: ((context) {
+                                      return const OpenPage();
+                                    })));
+                                  }
+                                },
+                                icon: const Icon(Icons.arrow_back))),
+                      ]),
+                      SizedBox(height: height * 1.0 / 32.0),
+                      const Text("User Information",
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: width * 1.0 / 12.0,
+                            vertical: height * 1.0 / 36.0),
+                        child: const Text(
+                            "Please fill out information to edit the account",
+                            textAlign: TextAlign.center),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: fullNameTextField(),
+                      ),
+
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: emailAddressTextField(),
+                      ),
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: phoneNumTextField(),
+                      ),
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: countyTextField(),
+                      ),
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: addressTextField(),
+                      ),
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              // height: height *,
+                              width: width * 1.0 / 2.0,
+                              child: cityTextField(),
+                            ),
+                            SizedBox(width: width * 1.0 / 7.5),
+                            SizedBox(
+                              width: width * 1.0 / 5.0,
+                              child: stateTextField(),
+                            )
+                          ],
+                        ),
+                      ), //City / State info
+
+                      SizedBox(height: height * 1.0 / 52.0),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              // height: height *,
+                              width: width * 1.0 / 2.0,
+                              child: zipTextField(),
+                            ),
+                            SizedBox(width: width * 1.0 / 20.0),
+                          ],
+                        ),
+                      ), //City / State info
+
+                      SizedBox(height: height * 1.0 / 20.0),
+                      TextButton(
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            minimumSize: Size(width / 2, height * 1.0 / 16),
+                            backgroundColor: const Color(0xFF7EA5F4),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              bool isIOS =
+                                  Theme.of(context).platform == TargetPlatform.iOS;
+                              update_user_info(isIOS, context);
+                            }
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFF9F9F9)),
+                          )),
+                    ],
+                  )
+                ]),
+              ),
+            ));
+          } else {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        }
+      );
+    }
+  }
+
+  Future fetchUserInformation(BuildContext context, String uid) async{
+    debugPrint('getting user information');
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var url = isIOS
+        ? Uri.parse('http://127.0.0.1:8080/users?id=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users?id=$uid');
+    var response = await http.get(url);
+    var data = jsonDecode(response.body);
+    try {
+      return data;
+    } catch (e) {
+      debugPrint('Could not fetch user data');
+    }
   }
 
   Future signUp() async {
-    print('signing up...');
+    debugPrint('signing up...');
 
     var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: widget.email,
       password: widget.password,
     );
-    print("uid: " + credential.user!.uid);
+    debugPrint("uid: ${credential.user!.uid}");
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     Uri url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/users/create')
         : Uri.parse('http://10.0.2.2:8080/users/create');
 
     if (credential.user == null) {
-      print("Failed.");
+      debugPrint("Failed.");
       return;
     }
 
@@ -229,9 +411,9 @@ class ProfileFormState extends State<ProfileForm> {
       'email': credential.user!.email,
       'permissions': 'false'
     });
-    print("posted response");
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint("posted response");
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 
   Future update_user_info(bool isIOS, var context) async {
@@ -240,7 +422,7 @@ class ProfileFormState extends State<ProfileForm> {
     }
     var uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null || uid == "") {
-      print("failed: no current user");
+      debugPrint("failed: no current user");
       return;
     }
 
@@ -249,19 +431,19 @@ class ProfileFormState extends State<ProfileForm> {
         : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid&requester=$uid');
 
     var response = await http.patch(url, body: {
-      'name': ProfileFormState.firstNameController.text,
-      //'lastName': ProfileFormState.lastNameController.text,
+      'name': ProfileFormState.nameController.text.trim(),
+      //'lastName': ProfileFormState.lastNameController.text.trim(),
       //email would require special handling to change the firebase auth email, so ignoring for now
-      'phone': ProfileFormState.phoneController.text,
-      'country': ProfileFormState.countryController.text,
-      'address': ProfileFormState.addressController.text,
-      'city': ProfileFormState.cityController.text,
-      'state': ProfileFormState.stateController.text,
-      'zip': ProfileFormState.zipController.text
+      'phone': ProfileFormState.phoneController.text.trim(),
+      'country': ProfileFormState.countyController.text.trim(),
+      'address': ProfileFormState.addressController.text.trim(),
+      'city': ProfileFormState.cityController.text.trim(),
+      'state': ProfileFormState.stateController.text.trim(),
+      'zip': ProfileFormState.zipController.text.trim()
     });
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    if (AppUser.isAdmin) {
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
+    if (AppUser.isAdmin == PermissionStatus.admin) {
       Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return const AdminHomePage();
       })));
@@ -275,7 +457,7 @@ class ProfileFormState extends State<ProfileForm> {
 
 Widget fullNameTextField() {
   return TextFormField(
-    controller: ProfileFormState.firstNameController,
+    controller: ProfileFormState.nameController,
     decoration: InputDecoration(
       filled: true,
       fillColor: const Color(0xFFF1F1F1),
@@ -345,7 +527,7 @@ Widget phoneNumTextField() {
 
 Widget countyTextField() {
   return TextFormField(
-    controller: ProfileFormState.countryController,
+    controller: ProfileFormState.countyController,
     decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFF1F1F1),
