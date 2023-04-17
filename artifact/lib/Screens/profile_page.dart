@@ -30,7 +30,7 @@ class ProfileFormState extends State<ProfileForm> {
   static String userCity = '';
   static String userState = '';
   static String userZip = '';
-  static final _profileFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profileFormKey = GlobalKey<FormState>();
   static final nameController = TextEditingController(text: userFullName);
   static final emailController = TextEditingController(text: userEmail);
   static final phoneController = TextEditingController(text: userPhoneNum);
@@ -50,7 +50,6 @@ class ProfileFormState extends State<ProfileForm> {
     cityController.dispose();
     stateController.dispose();
     zipController.dispose();
-
     super.dispose();
   }
 
@@ -425,6 +424,8 @@ class ProfileFormState extends State<ProfileForm> {
       debugPrint("failed: no current user");
       return;
     }
+
+    _profileFormKey.currentState?.save();
 
     Uri url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid')
