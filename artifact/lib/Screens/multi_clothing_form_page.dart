@@ -1,5 +1,7 @@
 import 'package:artifact/Screens/clothing_form_info.dart';
 import 'package:artifact/Screens/clothing_form.dart';
+import 'package:artifact/admin_home_page.dart';
+import 'package:artifact/app_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
@@ -37,18 +39,18 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                 onPressed: () {
                   onSave();
                 },
-                child: Text("Save"),
+                child: const Text("Save"),
               ),
             )),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.orange,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             onAdd();
           },
         ),
         body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             // appBar: AppBar(actions: [Actions(actions: <Widget>[]>, child: child)]),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               SizedBox(height: height * 1.0 / 18.0),
@@ -58,10 +60,17 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                     child: IconButton(
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
-                          Navigator.push(context,
+                          if (AppUser.isAdmin == PermissionStatus.admin) {
+                              Navigator.push(context,
                               MaterialPageRoute(builder: ((context) {
-                            return HomePage();
-                          })));
+                                return const AdminHomePage();
+                              })));
+                          } else {
+                              Navigator.push(context,
+                              MaterialPageRoute(builder: ((context) {
+                                return const HomePage();
+                            })));
+                          }
                         },
                         icon: const Icon(Icons.arrow_back))),
               ]),
@@ -78,13 +87,13 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
               Flexible(
                   child: clothingForms.isNotEmpty
                       ? ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: clothingForms.length,
                           itemBuilder: (_, index) {
                             return clothingForms[index];
                           })
-                      : Center(child: Text("Tap on + to Add a Request"))),
+                      : const Center(child: Text("Tap on + to Add a Request"))),
             ]
                 // TextButton(
                 //   style: TextButton.styleFrom(
