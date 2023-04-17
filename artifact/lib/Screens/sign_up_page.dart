@@ -11,7 +11,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final reEnterController = TextEditingController();
@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
       debugShowCheckedModeBanner: false,
       home: SingleChildScrollView(
         child: Form(
-            key: _formKey,
+            key: _signUpFormKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -175,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void goToProfilePage() {
-    final isValidForm = _formKey.currentState!.validate();
+    final isValidForm = _signUpFormKey.currentState!.validate();
     debugPrint('going to profile page');
     if (isValidForm) {
       String emailString = emailController.text.trim();

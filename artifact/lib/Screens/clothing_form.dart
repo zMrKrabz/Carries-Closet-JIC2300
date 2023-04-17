@@ -31,7 +31,7 @@ class ClothingFormWidget extends StatefulWidget {
 }
 
 class _ClothingFormWidgetState extends State<ClothingFormWidget> {
-  final clothingFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> clothingFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
