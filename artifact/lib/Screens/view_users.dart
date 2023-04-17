@@ -98,7 +98,7 @@ class _ViewUsersState extends State<ViewUsers> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
-                              return IndividualUserPage(context, decode, index);
+                              return individualUserPage(context, decode, index);
                             })));
                           }));
                 });
@@ -138,7 +138,7 @@ class _ViewUsersState extends State<ViewUsers> {
     );
   }
 
-  Widget IndividualUserPage(
+  Widget individualUserPage(
       BuildContext context, List<dynamic> decode, int index) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
