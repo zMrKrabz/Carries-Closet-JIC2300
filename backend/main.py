@@ -53,6 +53,8 @@ def get_user():
     """
     try:
         # Check if ID was passed to URL query
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         user_id = request.args.get('id')
         username = request.args.get('username')
         if user_id is None and username is not None:
@@ -80,6 +82,8 @@ def update_user():
         e.g. form={'id': '1', 'title': 'Write a blog post today'}
     """
     try:
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         document_id = request.args.get('id')
         if document_id is None:
             username = request.args.get('username')
@@ -103,6 +107,8 @@ def delete_user():
         delete_user() : Delete a document from Firestore collection.
     """
     try:
+        if not check_permissions(request.args.get('requester'), 1):
+            return jsonify("Insufficient permissions."), 403
         # Check for ID in URL query
         document_id = request.args.get('id')
         if document_id is None:
@@ -126,6 +132,8 @@ def create_hygiene_request():
         # Expect: address, age, city, state, gender, item, notes, size, zip
         # Might be able to grab age, city, state, etc. from user profile information, so
         # later change to sending user in request instead of demographic information needing to be resubmitted 24/7
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         form_data = request.form.to_dict()
         form_data['date'] = date.today().strftime("%m/%d/%Y")  # MM/DD/YYYY
         form_data['type'] = 'hygiene'
@@ -144,6 +152,8 @@ def create_clothing_request():
         # Expect: address, age, city, state, gender, item, notes, size, zip
         # Might be able to grab age, city, state, etc. from user profile information, so
         # later change to sending user in request instead of demographic information needing to be resubmitted 24/7
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         form_data = request.form.to_dict()
         form_data['date'] = date.today().strftime("%m/%d/%Y")  # MM/DD/YYYY
         form_data['type'] = 'clothing'
@@ -159,6 +169,8 @@ def create_clothing_request():
 @app.route('/requests/clothing/list', methods=['GET'])
 def list_clothing_requests():
     try:
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         # Check for ID in request args
         document_id = request.args.get('id')
         requestno = request.args.get('requestno')
@@ -188,6 +200,8 @@ def list_clothing_requests():
 @app.route('/requests/hygiene/list', methods=['GET'])
 def list_hygiene_requests():
     try:
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         # Check for ID in request args
         document_id = request.args.get('id')
         requestno = request.args.get('requestno')
@@ -217,6 +231,8 @@ def list_hygiene_requests():
 @app.route('/requests/list', methods=['GET'])
 def list_all_requests():
     try:
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         # Check for ID in request args
         document_id = request.args.get('id')
         requestno = request.args.get('requestno')
@@ -239,6 +255,8 @@ def list_all_requests():
 @app.route('/requests/delete', methods=['DELETE'])
 def remove_request():
     try:
+        if not check_permissions(request.args.get('requester'), 1):
+            return jsonify("Insufficient permissions."), 403
         # Check for ID in URL query
         document_id = request.args.get('id')
         requestno = request.args.get('requestno')
@@ -261,6 +279,8 @@ def remove_request():
 @app.route('/requests/update', methods=['PUT', 'PATCH'])
 def update_request():
     try:
+        if not check_permissions(request.args.get('requester'), 1):
+            return jsonify("Insufficient permissions."), 403
         document_id = request.args.get('id')
         requestno = request.args.get('requestno')
         if document_id is None and requestno is not None:
@@ -281,6 +301,8 @@ def update_request():
 @app.route('/requestno', methods=['GET'])
 def get_next_requestno():
     try:
+        if not check_permissions(request.args.get('requester'), 0):
+            return jsonify("Insufficient permissions."), 403
         document_id = 'requestnum'
         next_id = requestno_ref.document(document_id).get().to_dict()
         next_id = next_id['nextID']
@@ -297,13 +319,13 @@ def get_next_requestno():
 #  0: Get/Update User, Get/Create Request, Get requestno => Account required, elevated permission not required
 #  1: Delete User, Update/Delete Request => Account and elevated permissions required
 
+
+
 def check_permissions(uid, perm):
-    exists = False
     user_perms = -1
     for doc in users_ref.stream():
         if doc.id == uid:
-            exists = True
-            user_perms = 1 if str(doc.get('perms')).lower() == 'true' else 0
+            user_perms = 1 if str(doc.get('permissions')).lower() == 'true' else 0
             break
     if user_perms >= perm:
         return True

@@ -64,8 +64,8 @@ class MainPage extends StatelessWidget {
   Future<bool> checkPermissions(BuildContext context, String uid) async {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users?id=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users?id=$uid');
+        ? Uri.parse('http://127.0.0.1:8080/users?id=$uid&requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users?id=$uid&requester=$uid');
     var response = await http.get(url);
     var data = jsonDecode(response.body);
     try {

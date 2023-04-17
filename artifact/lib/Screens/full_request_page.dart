@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:artifact/Screens/admin_request_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -372,9 +373,12 @@ class _FullRequestPageState extends State<FullRequestPage> {
   Future<String> getRequest(String requestno) async {
     print('get request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests?requestno=$requestno')
-        : Uri.parse('http://10.0.2.2:8080/requests?requestno=$requestno');
+        ? Uri.parse(
+            'http://127.0.0.1:8080/requests?requestno=$requestno&requester=$uid')
+        : Uri.parse(
+            'http://10.0.2.2:8080/requests?requestno=$requestno&requester=$uid');
 
     var response = await http.get(url);
     print('Response status: ${response.statusCode}');
@@ -385,12 +389,15 @@ class _FullRequestPageState extends State<FullRequestPage> {
   Future<String> getUser(String requestno) async {
     print('get user called');
     final request = await getRequest(requestno);
+    var uid_requester = FirebaseAuth.instance.currentUser!.uid;
     var decode = json.decode(request.toString());
     String uid = decode['uid'];
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users?id=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users?id=$uid');
+        ? Uri.parse(
+            'http://127.0.0.1:8080/users?id=$uid&requester=$uid_requester')
+        : Uri.parse(
+            'http://10.0.2.2:8080/users?id=$uid&requester=$uid_requester');
 
     var response = await http.get(url);
     print('Response status: ${response.statusCode}');
@@ -401,11 +408,12 @@ class _FullRequestPageState extends State<FullRequestPage> {
   void updateRequest(String requestno, String status) async {
     print('update request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
         ? Uri.parse(
-            'http://127.0.0.1:8080/requests/update?requestno=$requestno')
+            'http://127.0.0.1:8080/requests/update?requestno=$requestno&requester=$uid')
         : Uri.parse(
-            'http://10.0.2.2:8080/requests/update?requestno=$requestno');
+            'http://10.0.2.2:8080/requests/update?requestno=$requestno&requester=$uid');
 
     var response = await http.put(url, body: {'status': status});
     print('Response status: ${response.statusCode}');

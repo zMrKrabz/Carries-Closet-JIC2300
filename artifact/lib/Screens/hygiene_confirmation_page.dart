@@ -25,7 +25,6 @@ class HygieneConfirmationPage extends StatefulWidget {
 }
 
 class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -191,13 +190,13 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
                     onPressed: () {
                       submitDB();
                       if (AppUser.isAdmin) {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) {
                           return const AdminHomePage();
                         })));
                       } else {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: ((context) {
                           return const HomePage();
                         })));
                       }
@@ -209,15 +208,17 @@ class _HygieneConfirmationPageState extends State<HygieneConfirmationPage> {
 
   Future submitDB() async {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/hygiene/create')
-        : Uri.parse('http://10.0.2.2:8080/requests/hygiene/create');
+        ? Uri.parse(
+            'http://127.0.0.1:8080/requests/hygiene/create?requester=$uid')
+        : Uri.parse(
+            'http://10.0.2.2:8080/requests/hygiene/create?requester=$uid');
 
     var id_url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requestno')
-        : Uri.parse('http://10.0.2.2:8080/requestno');
+        ? Uri.parse('http://127.0.0.1:8080/requestno?requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/requestno?requester=$uid');
 
-    var uid = FirebaseAuth.instance.currentUser!.uid;
     if (uid == null || uid == "") {
       //print("failed: no current user");
       return;
