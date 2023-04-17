@@ -30,7 +30,7 @@ class ProfileFormState extends State<ProfileForm> {
   static String userCity = '';
   static String userState = '';
   static String userZip = '';
-  static final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profileFormKey = GlobalKey<FormState>();
   static final nameController = TextEditingController(text: userFullName);
   static final emailController = TextEditingController(text: userEmail);
   static final phoneController = TextEditingController(text: userPhoneNum);
@@ -50,7 +50,6 @@ class ProfileFormState extends State<ProfileForm> {
     cityController.dispose();
     stateController.dispose();
     zipController.dispose();
-
     super.dispose();
   }
 
@@ -65,7 +64,7 @@ class ProfileFormState extends State<ProfileForm> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Form(
-              key: _formKey,
+              key: _profileFormKey,
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.center, children: <
                       Widget>[
@@ -185,7 +184,7 @@ class ProfileFormState extends State<ProfileForm> {
                           backgroundColor: const Color(0xFF7EA5F4),
                         ),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (_profileFormKey.currentState!.validate()) {
                             bool isIOS =
                                 Theme.of(context).platform == TargetPlatform.iOS;
                             update_user_info(isIOS, context);
@@ -222,7 +221,7 @@ class ProfileFormState extends State<ProfileForm> {
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Form(
-                key: _formKey,
+                key: _profileFormKey,
                 child:
                     Column(mainAxisAlignment: MainAxisAlignment.center, children: <
                         Widget>[
@@ -342,7 +341,7 @@ class ProfileFormState extends State<ProfileForm> {
                             backgroundColor: const Color(0xFF7EA5F4),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (_profileFormKey.currentState!.validate()) {
                               bool isIOS =
                                   Theme.of(context).platform == TargetPlatform.iOS;
                               update_user_info(isIOS, context);
@@ -425,6 +424,8 @@ class ProfileFormState extends State<ProfileForm> {
       debugPrint("failed: no current user");
       return;
     }
+
+    _profileFormKey.currentState?.save();
 
     Uri url = isIOS
         ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid&requester=$uid')
