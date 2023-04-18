@@ -41,6 +41,17 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
             color: Theme.of(context).primaryColor,
             onPressed: () {
               submitDB();
+              if (AppUser.isAdmin == PermissionStatus.admin) {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) {
+                    return const AdminHomePage();
+                  })));
+              } else {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) {
+                    return const HomePage();
+                })));
+              }
             },
             child: const Text("Save"),
           ),
@@ -330,27 +341,22 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
       var request_number = value.body.toString().substring(
           value.body.toString().indexOf(':') + 1,
           value.body.toString().indexOf('}'));
-      var postBody = <String, dynamic>{};
       for (var i = 0; i < widget.items.length; i++) {
+        var postBody = <String, dynamic>{};
         postBody.addEntries(
           [
-            MapEntry('gender${widget.genders[i]}', widget.genders[i]),
-            MapEntry('age$i', widget.ages[i]),
-            MapEntry('item$i', widget.items[i]),
-            MapEntry('size$i', widget.sizes[i]),
-            MapEntry('emergency$i', widget.emergencies[i]),
-            MapEntry('notes$i', widget.notes[i]),
+            MapEntry('gender', widget.genders[i]),
+            MapEntry('age', widget.ages[i]),
+            MapEntry('item', widget.items[i]),
+            MapEntry('size', widget.sizes[i]),
+            MapEntry('emergency', widget.emergencies[i]),
+            MapEntry('notes', widget.notes[i]),
+            MapEntry('uid', uid),
+            MapEntry('requestno', request_number)
           ]
         );
-      }
-      postBody.addEntries(
-        [
-          MapEntry('uid', uid),
-          MapEntry('requestno', request_number),
-        ]
-      );
       var response = await http.post(url, body: postBody);
-      debugPrint('Response status: ${response.statusCode}');
+      }
       // print('Response body: ${response.body}');
     });
   }

@@ -124,10 +124,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 90.0),
                                       child: Text(
-                                          "Name: " +
-                                              user['firstName'] +
-                                              " " +
-                                              user['lastName'],
+                                          "Name: ${user['name']}",
                                           style: TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
