@@ -1,4 +1,5 @@
 import 'package:artifact/Screens/multi_clothing_form_page.dart';
+import 'package:artifact/Screens/multi_hygiene_form_page.dart';
 import 'package:artifact/Screens/profile_page.dart';
 import 'package:artifact/Screens/user_request_page.dart';
 import 'package:artifact/main.dart';
@@ -144,7 +145,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return const HygienePage();
+                    return MultiHygieneFormWidget();
                   })));
                 },
                 child: const Text('Hygiene Item',

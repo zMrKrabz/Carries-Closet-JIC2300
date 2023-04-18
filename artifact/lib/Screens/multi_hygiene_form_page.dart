@@ -1,5 +1,7 @@
 import 'package:artifact/Screens/hygiene_form.dart';
 import 'package:artifact/Screens/hygiene_form_info.dart';
+import 'package:artifact/admin_home_page.dart';
+import 'package:artifact/app_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
@@ -24,23 +26,28 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
         // ),
 
         bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(
-                top: height * 1.0 / 32.0,
-                left: width * 1.0 / 5.0,
-                right: width * 1.0 / 5.0,
-                bottom: height * 1.0 / 32.0),
-            child: SizedBox(
-              child: CupertinoButton(
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
-                  onSave();
-                },
-                child: const Text("Save"),
+          padding: EdgeInsets.only(
+              top: height * 1.0 / 32.0,
+              left: width * 1.0 / 5.0,
+              right: width * 1.0 / 5.0,
+              bottom: height * 1.0 / 32.0),
+          child: SizedBox(
+            child: CupertinoButton(
+              color: Color(0xFF7EA5F4),
+              onPressed: () {
+                onSave();
+              },
+              child: Text(
+                "Save",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-            )),
+            ),
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.orange,
-          child: const Icon(Icons.add),
+          backgroundColor: Color(0xFFEEE0FF),
+          child: Icon(Icons.add, color: Color(0xFF000000)),
           onPressed: () {
             onAdd();
           },
@@ -56,10 +63,17 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
                     child: IconButton(
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                            return const HomePage();
-                          })));
+                          if (AppUser.isAdmin) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const AdminHomePage();
+                            })));
+                          } else {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const HomePage();
+                            })));
+                          }
                         },
                         icon: const Icon(Icons.arrow_back))),
               ]),

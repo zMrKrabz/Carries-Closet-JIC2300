@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
 
+
 // New page by Eph
 
 class MultiClothingFormWidget extends StatefulWidget {
@@ -36,16 +37,23 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                 bottom: height * 1.0 / 32.0),
             child: SizedBox(
               child: CupertinoButton(
-                color: Theme.of(context).primaryColor,
+                color: Color(0xFF7EA5F4),
                 onPressed: () {
                   onSave();
                 },
-                child: const Text("Save"),
+                child: Text(
+                  "Save",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
             )),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.orange,
-          child: const Icon(Icons.add),
+          backgroundColor: Color(0xFFEEE0FF),
+          child: Icon(
+            Icons.add,
+            color: Color(0xFF000000),
+          ),
           onPressed: () {
             onAdd();
           },
