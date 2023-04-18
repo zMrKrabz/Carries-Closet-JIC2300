@@ -63,7 +63,7 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
                     child: IconButton(
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
-                          if (AppUser.isAdmin) {
+                          if (AppUser.isAdmin == PermissionStatus.admin) {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
                               return const AdminHomePage();
