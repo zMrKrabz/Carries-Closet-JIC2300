@@ -31,7 +31,7 @@ class ClothingFormWidget extends StatefulWidget {
 }
 
 class _ClothingFormWidgetState extends State<ClothingFormWidget> {
-  final clothingFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> clothingFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +115,11 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                               widget.genderValue = value as String;
                             });
                           },
+                          onSaved: (value) {
+                            setState(() {
+                              widget.clothingFormInfo.genderValue = value as String;
+                            });
+                          },
                           validator: (value) {
                             return !(widget.genderValue == '')
                                 ? null
@@ -140,6 +145,11 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                           onChanged: (value) {
                             setState(() {
                               widget.itemValue = value as String;
+                            });
+                          },
+                          onSaved: (value) {
+                            setState(() {
+                            widget.clothingFormInfo.itemValue = value as String;
                             });
                           },
                           validator: (value) {
@@ -169,6 +179,11 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                               widget.sizeValue = value as String;
                             });
                           },
+                          onSaved: (value) {
+                            setState(() {
+                              widget.clothingFormInfo.sizeValue = value as String;
+                            });
+                          },
                           validator: (value) {
                             return !(widget.sizeValue == '')
                                 ? null
@@ -195,7 +210,12 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                           onChanged: (value) {
                             setState(() {
                               widget.emergencyValue = value as String;
-                            });
+                            }); 
+                          },
+                          onSaved: (value) => {
+                            setState(() {
+                              widget.clothingFormInfo.emergencyValue = value as String;
+                            })
                           },
                           validator: (value) {
                             return !(widget.emergencyValue == '')

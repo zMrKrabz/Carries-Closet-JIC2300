@@ -2,15 +2,21 @@
 // Instantiate object with static field that can be referenced across the app
 // Just set the field once we get a value once the user logs in
 
-class AppUser {
-
-  static late bool isAdmin;
-
-  AppUser() {
-    isAdmin = false;
+  enum PermissionStatus {
+    admin,
+    user,
+    unknown,
   }
 
-  void setAdminStatus(bool adminStatus) {
+class AppUser {
+
+  static late PermissionStatus isAdmin;
+
+  AppUser() {
+    isAdmin = PermissionStatus.unknown;
+  }
+
+  void setAdminStatus(PermissionStatus adminStatus) {
     isAdmin = adminStatus;
   }
 }

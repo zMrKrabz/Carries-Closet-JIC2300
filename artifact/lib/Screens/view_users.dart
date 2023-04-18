@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import '../admin_home_page.dart';
 import 'package:http/http.dart' as http;
@@ -97,7 +98,7 @@ class _ViewUsersState extends State<ViewUsers> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
-                              return IndividualUserPage(context, decode, index);
+                              return individualUserPage(context, decode, index);
                             })));
                           }));
                 });
@@ -137,7 +138,7 @@ class _ViewUsersState extends State<ViewUsers> {
     );
   }
 
-  Widget IndividualUserPage(
+  Widget individualUserPage(
       BuildContext context, List<dynamic> decode, int index) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -326,40 +327,43 @@ class _ViewUsersState extends State<ViewUsers> {
   }
 
   Future<String> parseUsers() async {
-    print('parse users called');
+    debugPrint('parse users called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/list')
-        : Uri.parse('http://10.0.2.2:8080/users/list');
+        ? Uri.parse('http://127.0.0.1:8080/users/list?requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users/list?requester=$uid');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 
   void makeAdmin(String id) async {
     //need to implement logic of make admin button greyed out if they're alrdy admin
-    print('make admin called');
+    debugPrint('make admin called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$id')
-        : Uri.parse('http://10.0.2.2:8080/users/update?id=$id');
+        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$id&requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users/update?id=$id&requester=$uid');
 
     var response = await http.put(url, body: {'permissions': 'true'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 
   void deleteUser(String id) async {
-    print('delete user called');
+    debugPrint('delete user called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=$id')
-        : Uri.parse('http://10.0.2.2:8080/users/remove?id=$id');
+        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=$id&requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/users/remove?id=$id&requester=$uid');
 
     var response = await http.delete(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 }

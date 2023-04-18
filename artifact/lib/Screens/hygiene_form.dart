@@ -29,7 +29,7 @@ class HygieneFormWidget extends StatefulWidget {
 }
 
 class _HygieneFormWidgetState extends State<HygieneFormWidget> {
-  final hygieneFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> hygieneFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

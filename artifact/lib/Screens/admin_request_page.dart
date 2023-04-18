@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:artifact/admin_home_page.dart";
 import "package:artifact/Screens/full_request_page.dart";
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -257,15 +257,16 @@ class _RequestWidgetState extends State<RequestWidget> {
   }
 
   Future<String> parseRequests() async {
-    print('parse requests called');
+    debugPrint('parse requests called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/list')
-        : Uri.parse('http://10.0.2.2:8080/requests/list');
+        ? Uri.parse('http://127.0.0.1:8080/requests/list?requester=$uid')
+        : Uri.parse('http://10.0.2.2:8080/requests/list?requester=$uid');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 }

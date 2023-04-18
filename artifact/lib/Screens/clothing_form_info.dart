@@ -18,10 +18,13 @@ class ClothingFormInfo {
 
   int? id;
 
-  ClothingFormInfo(
-      {this.genderValue,
+  ClothingFormInfo (
+    {
+      this.genderValue,
       this.itemValue,
       this.sizeValue,
       this.emergencyValue,
-      this.id});
+      this.id
+    }
+  );
 }
