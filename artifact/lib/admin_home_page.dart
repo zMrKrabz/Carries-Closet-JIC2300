@@ -156,7 +156,7 @@ class AdminHomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return ButtonBarTheme(
-        data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
+        data: const ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(
             // actionsAlignment: MainAxisAlignment.center,
             //title: const Text('Please select the type of request form:'),

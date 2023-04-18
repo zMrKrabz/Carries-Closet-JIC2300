@@ -327,7 +327,7 @@ class _ViewUsersState extends State<ViewUsers> {
   }
 
   Future<String> parseUsers() async {
-    print('parse users called');
+    debugPrint('parse users called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -335,14 +335,14 @@ class _ViewUsersState extends State<ViewUsers> {
         : Uri.parse('http://10.0.2.2:8080/users/list?requester=$uid');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 
   void makeAdmin(String id) async {
     //need to implement logic of make admin button greyed out if they're alrdy admin
-    print('make admin called');
+    debugPrint('make admin called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -350,12 +350,12 @@ class _ViewUsersState extends State<ViewUsers> {
         : Uri.parse('http://10.0.2.2:8080/users/update?id=$id&requester=$uid');
 
     var response = await http.put(url, body: {'permissions': 'true'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 
   void deleteUser(String id) async {
-    print('delete user called');
+    debugPrint('delete user called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -363,7 +363,7 @@ class _ViewUsersState extends State<ViewUsers> {
         : Uri.parse('http://10.0.2.2:8080/users/remove?id=$id&requester=$uid');
 
     var response = await http.delete(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 }

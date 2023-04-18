@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return ButtonBarTheme(
-        data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
+        data: const ButtonBarThemeData(alignment: MainAxisAlignment.center),
         child: AlertDialog(actions: <Widget>[
           SizedBox(height: height * 1.0 / 40.0),
           const Text('What type of item are you requesting?',
