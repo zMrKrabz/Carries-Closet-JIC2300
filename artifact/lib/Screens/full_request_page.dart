@@ -124,11 +124,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 90.0),
                                       child: Text(
-                                          "Name: " +
-                                              user['firstName'] +
-                                              " " +
-                                              user['lastName'],
-                                          style: TextStyle(
+                                          "Name: ${user['name']}",
+                                          style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
                                     ),
@@ -136,8 +133,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                       padding: EdgeInsets.only(
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 130.0),
-                                      child: Text("Phone: " + user['phone'],
-                                          style: TextStyle(
+                                      child: Text("Phone: ${user['phone']}",
+                                          style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
                                     ),
@@ -145,8 +142,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                       padding: EdgeInsets.only(
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 130.0),
-                                      child: Text("Email: " + user['email'],
-                                          style: TextStyle(
+                                      child: Text("Email: ${user['email']}",
+                                          style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
                                     ),
@@ -179,7 +176,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 90.0),
                                       child: Text(user['address'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
                                     ),
@@ -193,7 +190,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                               user['state'] +
                                               " " +
                                               user['zip'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),
                                     ),
@@ -371,7 +368,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
   }
 
   Future<String> getRequest(String requestno) async {
-    print('get request called');
+    debugPrint('get request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -381,13 +378,13 @@ class _FullRequestPageState extends State<FullRequestPage> {
             'http://10.0.2.2:8080/requests?requestno=$requestno&requester=$uid');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 
   Future<String> getUser(String requestno) async {
-    print('get user called');
+    debugPrint('get user called');
     final request = await getRequest(requestno);
     var uid_requester = FirebaseAuth.instance.currentUser!.uid;
     var decode = json.decode(request.toString());
@@ -400,13 +397,13 @@ class _FullRequestPageState extends State<FullRequestPage> {
             'http://10.0.2.2:8080/users?id=$uid&requester=$uid_requester');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 
   void updateRequest(String requestno, String status) async {
-    print('update request called');
+    debugPrint('update request called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -416,7 +413,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
             'http://10.0.2.2:8080/requests/update?requestno=$requestno&requester=$uid');
 
     var response = await http.put(url, body: {'status': status});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
   }
 }

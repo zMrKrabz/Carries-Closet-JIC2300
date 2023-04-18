@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/clothing_confirmation_page.dart';
 import 'package:artifact/Screens/clothing_form_info.dart';
 import 'package:artifact/Screens/clothing_form.dart';
 import 'package:artifact/admin_home_page.dart';
@@ -118,12 +119,32 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
         .forEach((element) => allValid = (allValid && element.isValidated()));
 
     if (allValid) {
+      var genders = [];
+      var items = [];
+      var sizes = [];
+      var emergencies = [];
+      var ages = [];
+      var notes = [];
       for (int i = 0; i < clothingForms.length; i++) {
         ClothingFormWidget item = clothingForms[i];
-        debugPrint("Age: ${item.clothingFormInfo.ageValue}");
-        debugPrint("Notes: ${item.clothingFormInfo.notesValue}");
+        genders.add(item.clothingFormInfo.genderValue);
+        items.add(item.clothingFormInfo.itemValue);
+        sizes.add(item.clothingFormInfo.sizeValue);
+        emergencies.add(item.clothingFormInfo.emergencyValue);
+        ages.add(item.clothingFormInfo.ageValue);
+        notes.add(item.clothingFormInfo.notesValue);
       }
-      //Submit Form Here
+      Navigator.push(context,
+        MaterialPageRoute(builder: ((context) {
+          return ClothingConfirmationPage(
+            genders: genders,
+            items: items,
+            sizes: sizes,
+            emergencies: emergencies,
+            ages: ages,
+            notes: notes,
+          );
+      })));
     } else {
       debugPrint("Form is Not Valid");
     }

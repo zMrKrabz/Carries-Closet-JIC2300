@@ -257,7 +257,7 @@ class _RequestWidgetState extends State<RequestWidget> {
   }
 
   Future<String> parseRequests() async {
-    print('parse requests called');
+    debugPrint('parse requests called');
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
     var url = isIOS
@@ -265,8 +265,8 @@ class _RequestWidgetState extends State<RequestWidget> {
         : Uri.parse('http://10.0.2.2:8080/requests/list?requester=$uid');
 
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
     return response.body;
   }
 }
