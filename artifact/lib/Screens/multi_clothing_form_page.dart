@@ -1,8 +1,11 @@
 import 'package:artifact/Screens/clothing_form_info.dart';
 import 'package:artifact/Screens/clothing_form.dart';
+import 'package:artifact/admin_home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
+
+import '../app_user.dart';
 
 // New page by Eph
 
@@ -33,16 +36,23 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                 bottom: height * 1.0 / 32.0),
             child: SizedBox(
               child: CupertinoButton(
-                color: Theme.of(context).primaryColor,
+                color: Color(0xFF7EA5F4),
                 onPressed: () {
                   onSave();
                 },
-                child: Text("Save"),
+                child: Text(
+                  "Save",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
             )),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.orange,
-          child: Icon(Icons.add),
+          backgroundColor: Color(0xFFEEE0FF),
+          child: Icon(
+            Icons.add,
+            color: Color(0xFF000000),
+          ),
           onPressed: () {
             onAdd();
           },
@@ -58,10 +68,17 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                     child: IconButton(
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                            return HomePage();
-                          })));
+                          if (AppUser.isAdmin) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const AdminHomePage();
+                            })));
+                          } else {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const HomePage();
+                            })));
+                          }
                         },
                         icon: const Icon(Icons.arrow_back))),
               ]),

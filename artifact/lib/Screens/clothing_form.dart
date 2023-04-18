@@ -65,7 +65,7 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Item ${widget.index}"),
+                            Text("Item"),
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -85,7 +85,10 @@ class _ClothingFormWidgetState extends State<ClothingFormWidget> {
                                 ),
                                 TextButton(
                                   onPressed: () => widget.onRemove(),
-                                  child: const Text("Delete Form"),
+                                  child: const Text(
+                                    "Delete Form",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 )
                               ],
                             )
