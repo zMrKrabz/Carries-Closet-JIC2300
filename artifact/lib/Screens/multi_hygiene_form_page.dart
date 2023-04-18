@@ -35,18 +35,18 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
                 onPressed: () {
                   onSave();
                 },
-                child: Text("Save"),
+                child: const Text("Save"),
               ),
             )),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.orange,
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             onAdd();
           },
         ),
         body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             // appBar: AppBar(actions: [Actions(actions: <Widget>[]>, child: child)]),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               SizedBox(height: height * 1.0 / 18.0),
@@ -58,7 +58,7 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: ((context) {
-                            return HomePage();
+                            return const HomePage();
                           })));
                         },
                         icon: const Icon(Icons.arrow_back))),
@@ -76,13 +76,13 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
               Flexible(
                   child: hygieneForms.isNotEmpty
                       ? ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: hygieneForms.length,
                           itemBuilder: (_, index) {
                             return hygieneForms[index];
                           })
-                      : Center(child: Text("Tap on + to Add a Request"))),
+                      : const Center(child: Text("Tap on + to Add a Request"))),
             ]
                 // TextButton(
                 //   style: TextButton.styleFrom(
