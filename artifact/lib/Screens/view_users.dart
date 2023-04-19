@@ -328,11 +328,8 @@ class _ViewUsersState extends State<ViewUsers> {
 
   Future<String> parseUsers() async {
     debugPrint('parse users called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/list?requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users/list?requester=$uid');
+    var url = Uri.parse('http://35.211.220.99/users/list?requester=$uid');
 
     var response = await http.get(url);
     debugPrint('Response status: ${response.statusCode}');
@@ -343,11 +340,9 @@ class _ViewUsersState extends State<ViewUsers> {
   void makeAdmin(String id) async {
     //need to implement logic of make admin button greyed out if they're alrdy admin
     debugPrint('make admin called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$id&requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users/update?id=$id&requester=$uid');
+    var url =
+        Uri.parse('http://35.211.220.99/users/update?id=$id&requester=$uid');
 
     var response = await http.put(url, body: {'permissions': 'true'});
     debugPrint('Response status: ${response.statusCode}');
@@ -356,11 +351,9 @@ class _ViewUsersState extends State<ViewUsers> {
 
   void deleteUser(String id) async {
     debugPrint('delete user called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/remove?id=$id&requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users/remove?id=$id&requester=$uid');
+    var url =
+        Uri.parse('http://35.211.220.99/users/remove?id=$id&requester=$uid');
 
     var response = await http.delete(url);
     debugPrint('Response status: ${response.statusCode}');
