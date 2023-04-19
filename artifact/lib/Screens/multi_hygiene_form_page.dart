@@ -1,3 +1,4 @@
+import 'package:artifact/Screens/hygiene_confirmation_page.dart';
 import 'package:artifact/Screens/hygiene_form.dart';
 import 'package:artifact/Screens/hygiene_form_info.dart';
 import 'package:artifact/admin_home_page.dart';
@@ -119,13 +120,32 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
     //If any form validation function returns false means all forms are not valid
     hygieneForms
         .forEach((element) => allValid = (allValid && element.isValidated()));
-
     if (allValid) {
+      var genders = [];
+      var items = [];
+      var sizes = [];
+      var emergencies = [];
+      var ages = [];
+      var notes = [];
       for (int i = 0; i < hygieneForms.length; i++) {
         HygieneFormWidget item = hygieneForms[i];
-        debugPrint("Age: ${item.hygieneFormInfo.ageValue}");
-        debugPrint("Notes: ${item.hygieneFormInfo.notesValue}");
+        genders.add(item.hygieneFormInfo.genderValue);
+        items.add(item.hygieneFormInfo.itemValue);
+        sizes.add(item.hygieneFormInfo.sizeValue);
+        emergencies.add(item.hygieneFormInfo.emergencyValue);
+        ages.add(item.hygieneFormInfo.ageValue);
+        notes.add(item.hygieneFormInfo.notesValue);
       }
+      Navigator.push(context, MaterialPageRoute(builder: ((context) {
+        return HygieneConfirmationPage(
+          genders: genders,
+          items: items,
+          sizes: sizes,
+          emergencies: emergencies,
+          ages: ages,
+          notes: notes,
+        );
+      })));
       //Submit Form Here
     } else {
       debugPrint("Form is Not Valid");

@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:artifact/home_page.dart';
 
-
 // New page by Eph
 
 class MultiClothingFormWidget extends StatefulWidget {
@@ -70,14 +69,14 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                         iconSize: width * 1.0 / 18.0,
                         onPressed: () {
                           if (AppUser.isAdmin == PermissionStatus.admin) {
-                              Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                                return const AdminHomePage();
-                              })));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const AdminHomePage();
+                            })));
                           } else {
-                              Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) {
-                                return const HomePage();
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: ((context) {
+                              return const HomePage();
                             })));
                           }
                         },
@@ -103,19 +102,7 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
                             return clothingForms[index];
                           })
                       : const Center(child: Text("Tap on + to Add a Request"))),
-            ]
-                // TextButton(
-                //   style: TextButton.styleFrom(
-                //     minimumSize: Size(width * 1.0 / 2.0, height * 1.0 / 13.5),
-                //     foregroundColor: Colors.black,
-                //     backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                //     textStyle: const TextStyle(
-                //         fontSize: 20, fontWeight: FontWeight.bold),
-                //   ),
-                //   onPressed: onSave(),
-                //   child: const Text('Confirm'),
-                // )
-                )));
+            ])));
   }
 
   //Validate all forms and submit
@@ -142,16 +129,15 @@ class _MultiClothingFormWidgetState extends State<MultiClothingFormWidget> {
         ages.add(item.clothingFormInfo.ageValue);
         notes.add(item.clothingFormInfo.notesValue);
       }
-      Navigator.push(context,
-        MaterialPageRoute(builder: ((context) {
-          return ClothingConfirmationPage(
-            genders: genders,
-            items: items,
-            sizes: sizes,
-            emergencies: emergencies,
-            ages: ages,
-            notes: notes,
-          );
+      Navigator.push(context, MaterialPageRoute(builder: ((context) {
+        return ClothingConfirmationPage(
+          genders: genders,
+          items: items,
+          sizes: sizes,
+          emergencies: emergencies,
+          ages: ages,
+          notes: notes,
+        );
       })));
     } else {
       debugPrint("Form is Not Valid");
