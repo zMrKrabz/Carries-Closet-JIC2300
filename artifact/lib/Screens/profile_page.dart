@@ -20,7 +20,6 @@ class ProfileForm extends StatefulWidget {
   }
 }
 
-// Fix the country --> county typo in backend
 class ProfileFormState extends State<ProfileForm> {
   static String userFullName = '';
   static String userEmail = '';
@@ -214,7 +213,7 @@ class ProfileFormState extends State<ProfileForm> {
               userAddress = snapshot.data['address'];
               userCity = snapshot.data['city'];
               // It is supposed to be "county"
-              userCounty = snapshot.data['country'];
+              userCounty = snapshot.data['county'];
               userPhoneNum = snapshot.data['phone'];
               userZip = snapshot.data['zip'];
               userState = snapshot.data['state'];
