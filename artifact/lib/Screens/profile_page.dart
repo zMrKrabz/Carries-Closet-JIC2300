@@ -57,7 +57,7 @@ class ProfileFormState extends State<ProfileForm> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+    String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
     if (uid.isEmpty) {
       return Scaffold(
           backgroundColor: Colors.white,
@@ -440,7 +440,7 @@ class ProfileFormState extends State<ProfileForm> {
       //'lastName': ProfileFormState.lastNameController.text.trim(),
       //email would require special handling to change the firebase auth email, so ignoring for now
       'phone': ProfileFormState.phoneController.text.trim(),
-      'country': ProfileFormState.countyController.text.trim(),
+      'county': ProfileFormState.countyController.text.trim(),
       'address': ProfileFormState.addressController.text.trim(),
       'city': ProfileFormState.cityController.text.trim(),
       'state': ProfileFormState.stateController.text.trim(),
