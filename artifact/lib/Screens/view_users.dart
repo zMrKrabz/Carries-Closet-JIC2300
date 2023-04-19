@@ -228,7 +228,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      const Text('*insert county here*',
+                      Text(decode[index]['county'],
                           style: TextStyle(fontSize: 15))
                     ],
                   ),

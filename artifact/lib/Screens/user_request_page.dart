@@ -215,6 +215,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           ]),
                                     ],
                                   )),
+                              /*
                               Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: width * 1.0 / 12.0,
@@ -231,6 +232,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
+                              */
                               TextButton(
                                 onPressed: () {
                                   deleteRequest(decode[index]['requestno']);
