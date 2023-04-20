@@ -12,7 +12,7 @@ import time
 app = Flask(__name__)
 
 # Initialize Firestore DB
-cred = credentials.Certificate(os.environ['PATH_TO_KEY'])
+cred = credentials.Certificate("/home/teejosity/key.json")
 default_app = initialize_app(cred)
 db = firestore.client()
 users_ref = db.collection('users')
@@ -255,7 +255,7 @@ def list_all_requests():
 @app.route('/requests/delete', methods=['DELETE'])
 def remove_request():
     try:
-        if not check_permissions(request.args.get('requester'), 1):
+        if not check_permissions(request.args.get('requester'), 0):
             return jsonify("Insufficient permissions."), 403
         # Check for ID in URL query
         document_id = request.args.get('id')
@@ -316,11 +316,8 @@ def get_next_requestno():
         return error_500, 500
 
 # -1: Create user => No account required
-#  0: Get/Update User, Get/Create Request, Get requestno => Account required, elevated permission not required
-#  1: Delete User, Update/Delete Request => Account and elevated permissions required
-
-
-
+#  0: Get/Update User, Get/Create/Delete Request, Get requestno => Account required, elevated permission not required
+#  1: Delete User, Update Request => Account and elevated permissions required
 def check_permissions(uid, perm):
     user_perms = -1
     for doc in users_ref.stream():
@@ -334,6 +331,6 @@ def check_permissions(uid, perm):
 
 
 # Dev server setup
-port = int(os.environ.get('PORT', 8080))
+port = int(os.environ.get('PORT', 80))
 if __name__ == '__main__':
     app.run(threaded=True, host='0.0.0.0', port=port)

@@ -20,10 +20,9 @@ class ProfileForm extends StatefulWidget {
   }
 }
 
-// Fix the country --> county typo in backend
 class ProfileFormState extends State<ProfileForm> {
   static String userFullName = '';
-  static String userEmail= '';
+  static String userEmail = '';
   static String userPhoneNum = '';
   static String userCounty = '';
   static String userAddress = '';
@@ -57,327 +56,335 @@ class ProfileFormState extends State<ProfileForm> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+    String uid = FirebaseAuth.instance.currentUser?.uid ?? "";
     if (uid.isEmpty) {
       return Scaffold(
-        backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Form(
               key: _profileFormKey,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                      Widget>[
-                Column(
-                  children: [
-                    SizedBox(height: height * 1.0 / 18.0),
-                    Stack(alignment: Alignment.topLeft, children: [
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: IconButton(
-                              iconSize: width * 1.0 / 18.0,
-                              onPressed: () {
-                                if (AppUser.isAdmin == PermissionStatus.admin) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: ((context) {
-                                    return const AdminHomePage();
-                                  })));
-                                } else if (AppUser.isAdmin == PermissionStatus.user) {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: ((context) {
-                                    return const HomePage();
-                                  })));
-                                } else {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: ((context) {
-                                    return const OpenPage();
-                                  })));
-                                }
-                              },
-                              icon: const Icon(Icons.arrow_back))),
-                    ]),
-                    SizedBox(height: height * 1.0 / 32.0),
-                    const Text("User Information",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        SizedBox(height: height * 1.0 / 18.0),
+                        Stack(alignment: Alignment.topLeft, children: [
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: IconButton(
+                                  iconSize: width * 1.0 / 18.0,
+                                  onPressed: () {
+                                    if (AppUser.isAdmin ==
+                                        PermissionStatus.admin) {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: ((context) {
+                                        return const AdminHomePage();
+                                      })));
+                                    } else if (AppUser.isAdmin ==
+                                        PermissionStatus.user) {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: ((context) {
+                                        return const HomePage();
+                                      })));
+                                    } else {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: ((context) {
+                                        return const OpenPage();
+                                      })));
+                                    }
+                                  },
+                                  icon: const Icon(Icons.arrow_back))),
+                        ]),
+                        SizedBox(height: height * 1.0 / 32.0),
+                        const Text("User Information",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 32)),
 
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: width * 1.0 / 12.0,
-                          vertical: height * 1.0 / 36.0),
-                      child: const Text(
-                          "Please fill out information to edit the account",
-                          textAlign: TextAlign.center),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: fullNameTextField(),
-                    ),
-
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: emailAddressTextField(),
-                    ),
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: phoneNumTextField(),
-                    ),
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: countyTextField(),
-                    ),
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: addressTextField(),
-                    ),
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            // height: height *,
-                            width: width * 1.0 / 2.0,
-                            child: cityTextField(),
-                          ),
-                          SizedBox(width: width * 1.0 / 7.5),
-                          SizedBox(
-                            width: width * 1.0 / 5.0,
-                            child: stateTextField(),
-                          )
-                        ],
-                      ),
-                    ), //City / State info
-
-                    SizedBox(height: height * 1.0 / 52.0),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            // height: height *,
-                            width: width * 1.0 / 2.0,
-                            child: zipTextField(),
-                          ),
-                          SizedBox(width: width * 1.0 / 20.0),
-                        ],
-                      ),
-                    ), //City / State info
-
-                    SizedBox(height: height * 1.0 / 20.0),
-                    TextButton(
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          minimumSize: Size(width / 2, height * 1.0 / 16),
-                          backgroundColor: const Color(0xFF7EA5F4),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0,
+                              vertical: height * 1.0 / 36.0),
+                          child: const Text(
+                              "Please fill out information to edit the account",
+                              textAlign: TextAlign.center),
                         ),
-                        onPressed: () {
-                          if (_profileFormKey.currentState!.validate()) {
-                            bool isIOS =
-                                Theme.of(context).platform == TargetPlatform.iOS;
-                            update_user_info(isIOS, context);
-                          }
-                        },
-                        child: const Text(
-                          'Save',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFF9F9F9)),
-                        )),
-                  ],
-                )
-              ]),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: fullNameTextField(),
+                        ),
+
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: emailAddressTextField(),
+                        ),
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: phoneNumTextField(),
+                        ),
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: countyTextField(),
+                        ),
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: addressTextField(),
+                        ),
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                // height: height *,
+                                width: width * 1.0 / 2.0,
+                                child: cityTextField(),
+                              ),
+                              SizedBox(width: width * 1.0 / 7.5),
+                              SizedBox(
+                                width: width * 1.0 / 5.0,
+                                child: stateTextField(),
+                              )
+                            ],
+                          ),
+                        ), //City / State info
+
+                        SizedBox(height: height * 1.0 / 52.0),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 1.0 / 12.0),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                // height: height *,
+                                width: width * 1.0 / 2.0,
+                                child: zipTextField(),
+                              ),
+                              SizedBox(width: width * 1.0 / 20.0),
+                            ],
+                          ),
+                        ), //City / State info
+
+                        SizedBox(height: height * 1.0 / 20.0),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              minimumSize: Size(width / 2, height * 1.0 / 16),
+                              backgroundColor: const Color(0xFF7EA5F4),
+                            ),
+                            onPressed: () {
+                              if (_profileFormKey.currentState!.validate()) {
+                                bool isIOS = Theme.of(context).platform ==
+                                    TargetPlatform.iOS;
+                                update_user_info(isIOS, context);
+                              }
+                            },
+                            child: const Text(
+                              'Save',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFF9F9F9)),
+                            )),
+                      ],
+                    )
+                  ]),
             ),
           ));
     } else {
-        return FutureBuilder(
-        future: fetchUserInformation(context, uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            userFullName = snapshot.data['name'];
-            userEmail = snapshot.data['email'];
-            userAddress = snapshot.data['address'];
-            userCity = snapshot.data['city'];
-            // It is supposed to be "county"
-            userCounty = snapshot.data['country'];
-            userPhoneNum = snapshot.data['phone'];
-            userZip = snapshot.data['zip'];
-            userState = snapshot.data['state'];
-            return Scaffold(
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Form(
-                key: _profileFormKey,
-                child:
-                    Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-                        Widget>[
-                  Column(
-                    children: [
-                      SizedBox(height: height * 1.0 / 18.0),
-                      Stack(alignment: Alignment.topLeft, children: [
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: IconButton(
-                                iconSize: width * 1.0 / 18.0,
-                                onPressed: () {
-                                  if (AppUser.isAdmin == PermissionStatus.admin) {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: ((context) {
-                                      return const AdminHomePage();
-                                    })));
-                                  } else if (AppUser.isAdmin == PermissionStatus.user) {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: ((context) {
-                                      return const HomePage();
-                                    })));
-                                  } else {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: ((context) {
-                                      return const OpenPage();
-                                    })));
-                                  }
-                                },
-                                icon: const Icon(Icons.arrow_back))),
-                      ]),
-                      SizedBox(height: height * 1.0 / 32.0),
-                      const Text("User Information",
-                          style:
-                              TextStyle(fontWeight: FontWeight.bold, fontSize: 32)),
+      return FutureBuilder(
+          future: fetchUserInformation(context, uid),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              userFullName = snapshot.data['name'];
+              userEmail = snapshot.data['email'];
+              userAddress = snapshot.data['address'];
+              userCity = snapshot.data['city'];
+              // It is supposed to be "county"
+              userCounty = snapshot.data['county'];
+              userPhoneNum = snapshot.data['phone'];
+              userZip = snapshot.data['zip'];
+              userState = snapshot.data['state'];
+              return Scaffold(
+                  backgroundColor: Colors.white,
+                  body: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Form(
+                      key: _profileFormKey,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              children: [
+                                SizedBox(height: height * 1.0 / 18.0),
+                                Stack(alignment: Alignment.topLeft, children: [
+                                  Align(
+                                      alignment: Alignment.topLeft,
+                                      child: IconButton(
+                                          iconSize: width * 1.0 / 18.0,
+                                          onPressed: () {
+                                            if (AppUser.isAdmin ==
+                                                PermissionStatus.admin) {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) {
+                                                return const AdminHomePage();
+                                              })));
+                                            } else if (AppUser.isAdmin ==
+                                                PermissionStatus.user) {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) {
+                                                return const HomePage();
+                                              })));
+                                            } else {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) {
+                                                return const OpenPage();
+                                              })));
+                                            }
+                                          },
+                                          icon: const Icon(Icons.arrow_back))),
+                                ]),
+                                SizedBox(height: height * 1.0 / 32.0),
+                                const Text("User Information",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 32)),
 
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: width * 1.0 / 12.0,
-                            vertical: height * 1.0 / 36.0),
-                        child: const Text(
-                            "Please fill out information to edit the account",
-                            textAlign: TextAlign.center),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: fullNameTextField(),
-                      ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0,
+                                      vertical: height * 1.0 / 36.0),
+                                  child: const Text(
+                                      "Please fill out information to edit the account",
+                                      textAlign: TextAlign.center),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: fullNameTextField(),
+                                ),
 
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: emailAddressTextField(),
-                      ),
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: phoneNumTextField(),
-                      ),
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: countyTextField(),
-                      ),
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: addressTextField(),
-                      ),
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              // height: height *,
-                              width: width * 1.0 / 2.0,
-                              child: cityTextField(),
-                            ),
-                            SizedBox(width: width * 1.0 / 7.5),
-                            SizedBox(
-                              width: width * 1.0 / 5.0,
-                              child: stateTextField(),
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: emailAddressTextField(),
+                                ),
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: phoneNumTextField(),
+                                ),
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: countyTextField(),
+                                ),
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: addressTextField(),
+                                ),
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        // height: height *,
+                                        width: width * 1.0 / 2.0,
+                                        child: cityTextField(),
+                                      ),
+                                      SizedBox(width: width * 1.0 / 7.5),
+                                      SizedBox(
+                                        width: width * 1.0 / 5.0,
+                                        child: stateTextField(),
+                                      )
+                                    ],
+                                  ),
+                                ), //City / State info
+
+                                SizedBox(height: height * 1.0 / 52.0),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 1.0 / 12.0),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        // height: height *,
+                                        width: width * 1.0 / 2.0,
+                                        child: zipTextField(),
+                                      ),
+                                      SizedBox(width: width * 1.0 / 20.0),
+                                    ],
+                                  ),
+                                ), //City / State info
+
+                                SizedBox(height: height * 1.0 / 20.0),
+                                TextButton(
+                                    style: TextButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      minimumSize:
+                                          Size(width / 2, height * 1.0 / 16),
+                                      backgroundColor: const Color(0xFF7EA5F4),
+                                    ),
+                                    onPressed: () {
+                                      if (_profileFormKey.currentState!
+                                          .validate()) {
+                                        bool isIOS =
+                                            Theme.of(context).platform ==
+                                                TargetPlatform.iOS;
+                                        update_user_info(isIOS, context);
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Save',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFFF9F9F9)),
+                                    )),
+                              ],
                             )
-                          ],
-                        ),
-                      ), //City / State info
-
-                      SizedBox(height: height * 1.0 / 52.0),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: width * 1.0 / 12.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              // height: height *,
-                              width: width * 1.0 / 2.0,
-                              child: zipTextField(),
-                            ),
-                            SizedBox(width: width * 1.0 / 20.0),
-                          ],
-                        ),
-                      ), //City / State info
-
-                      SizedBox(height: height * 1.0 / 20.0),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            minimumSize: Size(width / 2, height * 1.0 / 16),
-                            backgroundColor: const Color(0xFF7EA5F4),
-                          ),
-                          onPressed: () {
-                            if (_profileFormKey.currentState!.validate()) {
-                              bool isIOS =
-                                  Theme.of(context).platform == TargetPlatform.iOS;
-                              update_user_info(isIOS, context);
-                            }
-                          },
-                          child: const Text(
-                            'Save',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFF9F9F9)),
-                          )),
-                    ],
-                  )
-                ]),
-              ),
-            ));
-          } else {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.3,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        }
-      );
+                          ]),
+                    ),
+                  ));
+            } else {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height / 1.3,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          });
     }
   }
 
-  Future fetchUserInformation(BuildContext context, String uid) async{
+  Future fetchUserInformation(BuildContext context, String uid) async {
     debugPrint('getting user information');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users?id=$uid&requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users?id=$uid&requester=$uid');
+    var url = Uri.parse('http://35.211.220.99/users?id=$uid&requester=$uid');
     var response = await http.get(url);
     var data = jsonDecode(response.body);
     try {
@@ -395,10 +402,7 @@ class ProfileFormState extends State<ProfileForm> {
       password: widget.password,
     );
     debugPrint("uid: ${credential.user!.uid}");
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    Uri url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/create')
-        : Uri.parse('http://10.0.2.2:8080/users/create');
+    Uri url = Uri.parse('http://35.211.220.99/users/create');
 
     if (credential.user == null) {
       debugPrint("Failed.");
@@ -427,16 +431,15 @@ class ProfileFormState extends State<ProfileForm> {
 
     _profileFormKey.currentState?.save();
 
-    Uri url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/users/update?id=$uid&requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/users/update?id=$uid&requester=$uid');
+    Uri url =
+        Uri.parse('http://35.211.220.99/users/update?id=$uid&requester=$uid');
 
     var response = await http.patch(url, body: {
       'name': ProfileFormState.nameController.text.trim(),
       //'lastName': ProfileFormState.lastNameController.text.trim(),
       //email would require special handling to change the firebase auth email, so ignoring for now
       'phone': ProfileFormState.phoneController.text.trim(),
-      'country': ProfileFormState.countyController.text.trim(),
+      'county': ProfileFormState.countyController.text.trim(),
       'address': ProfileFormState.addressController.text.trim(),
       'city': ProfileFormState.cityController.text.trim(),
       'state': ProfileFormState.stateController.text.trim(),
