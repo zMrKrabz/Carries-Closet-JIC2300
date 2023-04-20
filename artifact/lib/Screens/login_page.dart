@@ -28,8 +28,9 @@ class _LoginPageState extends State<LoginPage> {
     return MaterialApp(
         theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        home: SingleChildScrollView(
-            child: Column(children: [
+        home: Scaffold(
+            body: SingleChildScrollView(
+                child: Column(children: [
           SizedBox(height: height * 1.0 / 18.0),
           Stack(alignment: Alignment.topLeft, children: [
             Align(
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Color(0xFFF9F9F9)),
                 ),
               )),
-        ])));
+        ]))));
   }
 
   Future signIn() async {

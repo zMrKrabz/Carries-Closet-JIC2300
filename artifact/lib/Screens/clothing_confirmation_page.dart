@@ -110,16 +110,16 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
                   Icon(
-                    IconData(0xe59c, fontFamily: 'MaterialIcons'),
+                    Icons.shopping_cart_outlined,
+                    color: Color(0xFF808080),
                     size: 30,
                   ),
                   Text(
                     "Items",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  SizedBox(width: width * 1.0 / 1.75),
-                  Text(
-                    "Edit",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xFF808080)),
                   ),
                 ],
               ),
@@ -249,10 +249,14 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                   Icon(
                     IconData(0xee2d, fontFamily: 'MaterialIcons'),
                     size: 30,
+                    color: Color(0xFF808080),
                   ),
                   Text(
                     "Delivery Time",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xFF808080)),
                   ),
                 ],
               ),
@@ -307,17 +311,18 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
                   Icon(
-                    IconData(0xe3ab, fontFamily: 'MaterialIcons'),
+                    Icons.location_pin,
                     size: 30,
+                    color: Color(0xFF808080),
                   ),
                   Text(
                     "Address",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Color(0xFF808080)),
                   ),
                   SizedBox(width: width * 1.0 / 1.75),
-                  Text(
-                    "Edit",
-                  ),
                 ],
               ),
               Align(
@@ -349,17 +354,18 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
                   Icon(
-                    IconData(0xe18f, fontFamily: 'MaterialIcons'),
+                    Icons.person_outline,
+                    color: Color(0xFF808080),
                     size: 30,
                   ),
                   Text(
                     "Contact Information",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Color(0xFF808080)),
                   ),
                   SizedBox(width: width * 1.0 / 2.75),
-                  Text(
-                    "Edit",
-                  ),
                 ],
               ),
               Align(

@@ -78,7 +78,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           textAlign: TextAlign.left,
                                         ),
                                         SizedBox(
-                                            width: width * 2.0 / 7.0,
+                                            width: width * 1.5 / 8.0,
                                             height: 1),
                                         const TextButton(
                                             onPressed: null,
@@ -123,8 +123,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                       padding: EdgeInsets.only(
                                           left: width * 1.0 / 16,
                                           top: height * 1.0 / 90.0),
-                                      child: Text(
-                                          "Name: ${user['name']}",
+                                      child: Text("Name: ${user['name']}",
                                           style: const TextStyle(
                                               color: Color(0xFF2E2E2E),
                                               fontSize: 14)),

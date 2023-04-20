@@ -113,6 +113,12 @@ class _HygieneFormWidgetState extends State<HygieneFormWidget> {
                               widget.genderValue = value as String;
                             });
                           },
+                          onSaved: (value) {
+                            setState(() {
+                              widget.hygieneFormInfo.genderValue =
+                                  value as String;
+                            });
+                          },
                           validator: (value) {
                             return !(widget.genderValue == '')
                                 ? null
@@ -138,6 +144,12 @@ class _HygieneFormWidgetState extends State<HygieneFormWidget> {
                           onChanged: (value) {
                             setState(() {
                               widget.itemValue = value as String;
+                            });
+                          },
+                          onSaved: (value) {
+                            setState(() {
+                              widget.hygieneFormInfo.itemValue =
+                                  value as String;
                             });
                           },
                           validator: (value) {
@@ -167,6 +179,12 @@ class _HygieneFormWidgetState extends State<HygieneFormWidget> {
                               widget.sizeValue = value as String;
                             });
                           },
+                          onSaved: (value) {
+                            setState(() {
+                              widget.hygieneFormInfo.sizeValue =
+                                  value as String;
+                            });
+                          },
                           validator: (value) {
                             return !(widget.sizeValue == '')
                                 ? null
@@ -194,6 +212,12 @@ class _HygieneFormWidgetState extends State<HygieneFormWidget> {
                             setState(() {
                               widget.emergencyValue = value as String;
                             });
+                          },
+                          onSaved: (value) => {
+                            setState(() {
+                              widget.hygieneFormInfo.emergencyValue =
+                                  value as String;
+                            })
                           },
                           validator: (value) {
                             return !(widget.emergencyValue == '')
