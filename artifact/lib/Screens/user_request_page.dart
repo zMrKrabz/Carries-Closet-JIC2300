@@ -140,14 +140,15 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         // processedButton(context)
-                                        // if (decode[index]['status'] == "processed")
-                                        //   processedButton(context)
-                                        // else if (decode[index]['status'] ==
-                                        //     "delivered")
-                                        //   deliveredButton(context)
-                                        // else if (decode[index]['status'] ==
-                                        //     "denied")
-                                        //   deniedButton(context)
+                                        if (decode[index]['status'] ==
+                                            "received")
+                                          processedButton(context)
+                                        else if (decode[index]['status'] ==
+                                            "completed")
+                                          deliveredButton(context)
+                                        else if (decode[index]['status'] ==
+                                            "denied")
+                                          deniedButton(context)
                                       ],
                                     )
                                   ]),
@@ -338,62 +339,63 @@ class _RequestWidgetState extends State<RequestWidget> {
     debugPrint('Response body: ${response.body}');
   }
 }
-  // Widget processedButton(BuildContext context) {
-  //   double width = MediaQuery.of(context).size.width;
-  //   double height = MediaQuery.of(context).size.height;
 
-  //   return TextButton(
-  //     onPressed: null,
-  //     style: TextButton.styleFrom(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
-  //       backgroundColor: const Color(0xFFFFF3C8),
-  //     ),
-  //     child: Text("PROCESSED",
-  //         style: const TextStyle(
-  //             fontSize: 13,
-  //             fontWeight: FontWeight.bold,
-  //             color: Color(0xFFDCB631))),
-  //   );
-  // }
+Widget processedButton(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
 
-  // Widget deliveredButton(BuildContext context) {
-  //   double width = MediaQuery.of(context).size.width;
-  //   double height = MediaQuery.of(context).size.height;
+  return TextButton(
+    onPressed: null,
+    style: TextButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+      minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+      backgroundColor: const Color(0xFFFFF3C8),
+    ),
+    child: Text("PROCESSED",
+        style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFDCB631))),
+  );
+}
 
-  //   return TextButton(
-  //     onPressed: null,
-  //     style: TextButton.styleFrom(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
-  //       backgroundColor: const Color(0xFFE8F5E5),
-  //     ),
-  //     child: Text("DELIVERED",
-  //         style: const TextStyle(
-  //             fontSize: 13,
-  //             fontWeight: FontWeight.bold,
-  //             color: Color(0xFF7EB871))),
-  //   );
-  // }
+Widget deliveredButton(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
 
-  // Widget deniedButton(BuildContext context) {
-  //   double width = MediaQuery.of(context).size.width;
-  //   double height = MediaQuery.of(context).size.height;
+  return TextButton(
+    onPressed: null,
+    style: TextButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+      minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+      backgroundColor: const Color(0xFFE8F5E5),
+    ),
+    child: Text("DELIVERED",
+        style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF7EB871))),
+  );
+}
 
-  //   return TextButton(
-  //     onPressed: null,
-  //     style: TextButton.styleFrom(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-  //       minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
-  //       backgroundColor: const Color(0xFFF5E8E5),
-  //     ),
-  //     child: Text("DENIED",
-  //         style: const TextStyle(
-  //             fontSize: 13,
-  //             fontWeight: FontWeight.bold,
-  //             color: Color(0xFFC36551))),
-  //   );
-  // }
+Widget deniedButton(BuildContext context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+
+  return TextButton(
+    onPressed: null,
+    style: TextButton.styleFrom(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+      minimumSize: Size(width * 11.0 / 42.0, height * 1.0 / 25.0),
+      backgroundColor: const Color(0xFFF5E8E5),
+    ),
+    child: Text("DENIED",
+        style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFC36551))),
+  );
+}
 
 
   // void deleteRequest(String requestno) async {
