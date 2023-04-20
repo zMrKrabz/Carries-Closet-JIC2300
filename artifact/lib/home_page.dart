@@ -45,10 +45,10 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFF9F9F9))))
           ]),
-          Image.asset("assets/dsdf1.png",
-              alignment: Alignment.topCenter,
-              width: width * 2.0 / 3.0,
-              height: width * 2.0 / 3.0),
+          Image.asset("assets/logo.png",
+              alignment: Alignment.bottomCenter,
+              width: width * 3.0 / 4.0,
+              height: width * 3.0 / 4.0),
           SizedBox(height: height * 1.0 / 6.0),
           TextButton(
               style: TextButton.styleFrom(
