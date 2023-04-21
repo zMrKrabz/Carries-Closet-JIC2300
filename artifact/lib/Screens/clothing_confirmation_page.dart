@@ -394,17 +394,11 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
 
   Future submitDB() async {
     //print('submit clothing called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/requests/clothing/create?requester=$uid')
-        : Uri.parse(
-            'http://10.0.2.2:8080/requests/clothing/create?requester=$uid');
+    var url = Uri.parse(
+        'http://35.211.220.99/requests/clothing/create?requester=$uid');
 
-    var id_url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requestno?requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/requestno?requester=$uid');
+    var id_url = Uri.parse('http://35.211.220.99/requestno?requester=$uid');
 
     if (uid == null || uid == "") {
       //print("failed: no current user");

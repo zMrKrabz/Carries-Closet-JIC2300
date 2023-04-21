@@ -136,6 +136,14 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
         ages.add(item.hygieneFormInfo.ageValue);
         notes.add(item.hygieneFormInfo.notesValue);
       }
+
+      debugPrint("genders: $genders");
+      debugPrint("items: $items");
+      debugPrint("sizes: $sizes");
+      debugPrint("emergencies: $emergencies");
+      debugPrint("ages: $ages");
+      debugPrint("notes: $notes");
+
       Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return HygieneConfirmationPage(
           genders: genders,
@@ -146,7 +154,6 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
           notes: notes,
         );
       })));
-      //Submit Form Here
     } else {
       debugPrint("Form is Not Valid");
     }

@@ -368,13 +368,9 @@ class _FullRequestPageState extends State<FullRequestPage> {
 
   Future<String> getRequest(String requestno) async {
     debugPrint('get request called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/requests?requestno=$requestno&requester=$uid')
-        : Uri.parse(
-            'http://10.0.2.2:8080/requests?requestno=$requestno&requester=$uid');
+    var url = Uri.parse(
+        'http://35.211.220.99/requests?requestno=$requestno&requester=$uid');
 
     var response = await http.get(url);
     debugPrint('Response status: ${response.statusCode}');
@@ -388,12 +384,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
     var uid_requester = FirebaseAuth.instance.currentUser!.uid;
     var decode = json.decode(request.toString());
     String uid = decode['uid'];
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/users?id=$uid&requester=$uid_requester')
-        : Uri.parse(
-            'http://10.0.2.2:8080/users?id=$uid&requester=$uid_requester');
+    var url = Uri.parse(
+        'http://35.211.220.99/users?id=$uid&requester=$uid_requester');
 
     var response = await http.get(url);
     debugPrint('Response status: ${response.statusCode}');
@@ -403,13 +395,9 @@ class _FullRequestPageState extends State<FullRequestPage> {
 
   void updateRequest(String requestno, String status) async {
     debugPrint('update request called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/requests/update?requestno=$requestno&requester=$uid')
-        : Uri.parse(
-            'http://10.0.2.2:8080/requests/update?requestno=$requestno&requester=$uid');
+    var url = Uri.parse(
+        'http://35.211.220.99/requests/update?requestno=$requestno&requester=$uid');
 
     var response = await http.put(url, body: {'status': status});
     debugPrint('Response status: ${response.statusCode}');

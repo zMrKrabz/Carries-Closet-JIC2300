@@ -215,6 +215,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           ]),
                                     ],
                                   )),
+                              /*
                               Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: width * 1.0 / 12.0,
@@ -231,6 +232,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                           color: Color(0xFF2E2E2E)),
                                     ),
                                   ])),
+                              */
                               TextButton(
                                 onPressed: () {
                                   deleteRequest(decode[index]['requestno']);
@@ -316,11 +318,8 @@ class _RequestWidgetState extends State<RequestWidget> {
 
   Future<String> parseRequests() async {
     debugPrint('parse requests called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse('http://127.0.0.1:8080/requests/list?requester=$uid')
-        : Uri.parse('http://10.0.2.2:8080/requests/list?requester=$uid');
+    var url = Uri.parse('http://35.211.220.99/requests/list?requester=$uid');
 
     var response = await http.get(url);
     debugPrint('Response status: ${response.statusCode}');
@@ -330,13 +329,9 @@ class _RequestWidgetState extends State<RequestWidget> {
 
   void deleteRequest(String requestno) async {
     debugPrint('delete request called');
-    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    var url = isIOS
-        ? Uri.parse(
-            'http://127.0.0.1:8080/requests/remove?requestno=$requestno&requester=$uid')
-        : Uri.parse(
-            'http://10.0.2.2:8080/requests/remove?requestno=$requestno&requester=$uid');
+    var url = Uri.parse(
+        'http://35.211.220.99/requests/remove?requestno=$requestno&requester=$uid');
 
     var response = await http.delete(url);
     debugPrint('Response status: ${response.statusCode}');
