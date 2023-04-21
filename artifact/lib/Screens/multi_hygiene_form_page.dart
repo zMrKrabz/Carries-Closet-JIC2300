@@ -120,7 +120,6 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
     //If any form validation function returns false means all forms are not valid
     hygieneForms
         .forEach((element) => allValid = (allValid && element.isValidated()));
-
     if (allValid) {
       var genders = [];
       var items = [];
@@ -137,12 +136,14 @@ class _MultiHygieneFormWidgetState extends State<MultiHygieneFormWidget> {
         ages.add(item.hygieneFormInfo.ageValue);
         notes.add(item.hygieneFormInfo.notesValue);
       }
+
       debugPrint("genders: $genders");
       debugPrint("items: $items");
       debugPrint("sizes: $sizes");
       debugPrint("emergencies: $emergencies");
       debugPrint("ages: $ages");
       debugPrint("notes: $notes");
+
       Navigator.push(context, MaterialPageRoute(builder: ((context) {
         return HygieneConfirmationPage(
           genders: genders,

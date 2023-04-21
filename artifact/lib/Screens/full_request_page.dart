@@ -78,7 +78,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           textAlign: TextAlign.left,
                                         ),
                                         SizedBox(
-                                            width: width * 2.0 / 7.0,
+                                            width: width * 1.5 / 8.0,
                                             height: 1),
                                         const TextButton(
                                             onPressed: null,

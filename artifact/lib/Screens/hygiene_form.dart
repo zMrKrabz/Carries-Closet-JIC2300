@@ -213,11 +213,11 @@ class _HygieneFormWidgetState extends State<HygieneFormWidget> {
                               widget.emergencyValue = value as String;
                             });
                           },
-                          onSaved: (value) {
+                          onSaved: (value) => {
                             setState(() {
                               widget.hygieneFormInfo.emergencyValue =
                                   value as String;
-                            });
+                            })
                           },
                           validator: (value) {
                             return !(widget.emergencyValue == '')
