@@ -80,9 +80,17 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                         SizedBox(
                                             width: width * 1.5 / 8.0,
                                             height: 1),
-                                        const TextButton(
-                                            onPressed: null,
-                                            child: Align(
+                                        TextButton(
+                                            onPressed: () {
+                                              updateRequest(
+                                                  requestno, 'denied');
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) {
+                                                return const AdminRequestPage();
+                                              })));
+                                            },
+                                            child: const Align(
                                                 alignment:
                                                     Alignment.bottomRight,
                                                 child: Text(
