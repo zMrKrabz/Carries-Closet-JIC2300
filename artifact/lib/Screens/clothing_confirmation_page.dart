@@ -242,70 +242,70 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 width: width * 1.0,
                 color: Colors.grey,
               ),
-              SizedBox(height: height * 1.0 / 32.0),
-              Row(
-                children: [
-                  SizedBox(width: width * 1.0 / 22.0),
-                  const Icon(
-                    IconData(0xee2d, fontFamily: 'MaterialIcons'),
-                    size: 30,
-                    color: Color(0xFF808080),
-                  ),
-                  const Text(
-                    "Delivery Time",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Color(0xFF808080)),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: width * 1.0 / 12.0,
-                        vertical: height * 1.0 / 36.0),
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                            minimumSize:
-                                Size(width * 1.0 / 40.0, height * 1.0 / 50.0),
-                            backgroundColor: const Color(0xFFC4DBFE),
-                            textStyle: const TextStyle(fontSize: 18),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
-                        child: const Text('Standard Delivery',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF2E2E2E),
-                                fontSize: 13))),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: height * 1.0 / 36.0),
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                            minimumSize:
-                                Size(width * 1.0 / 40.0, height * 1.0 / 50.0),
-                            backgroundColor: const Color(0xFFC4DBFE),
-                            textStyle: const TextStyle(fontSize: 18),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
-                        child: const Text('As soon as possible',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF2E2E2E),
-                                fontSize: 13))),
-                  ),
-                ],
-              ),
-              Container(
-                height: 1.0,
-                width: width * 1.0,
-                color: Colors.grey,
-              ),
+              // SizedBox(height: height * 1.0 / 32.0),
+              // Row(
+              //   children: [
+              //     SizedBox(width: width * 1.0 / 22.0),
+              //     Icon(
+              //       IconData(0xee2d, fontFamily: 'MaterialIcons'),
+              //       size: 30,
+              //       color: Color(0xFF808080),
+              //     ),
+              //     Text(
+              //       "Delivery Time",
+              //       style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 20,
+              //           color: Color(0xFF808080)),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: EdgeInsets.symmetric(
+              //           horizontal: width * 1.0 / 12.0,
+              //           vertical: height * 1.0 / 36.0),
+              //       child: TextButton(
+              //           style: TextButton.styleFrom(
+              //               minimumSize:
+              //                   Size(width * 1.0 / 40.0, height * 1.0 / 50.0),
+              //               backgroundColor: const Color(0xFFC4DBFE),
+              //               textStyle: const TextStyle(fontSize: 18),
+              //               shape: RoundedRectangleBorder(
+              //                   borderRadius: BorderRadius.circular(10))),
+              //           onPressed: () {},
+              //           child: const Text('Standard Delivery',
+              //               style: TextStyle(
+              //                   fontWeight: FontWeight.bold,
+              //                   color: Color(0xFF2E2E2E),
+              //                   fontSize: 13))),
+              //     ),
+              //     Padding(
+              //       padding:
+              //           EdgeInsets.symmetric(vertical: height * 1.0 / 36.0),
+              //       child: TextButton(
+              //           style: TextButton.styleFrom(
+              //               minimumSize:
+              //                   Size(width * 1.0 / 40.0, height * 1.0 / 50.0),
+              //               backgroundColor: const Color(0xFFC4DBFE),
+              //               textStyle: const TextStyle(fontSize: 18),
+              //               shape: RoundedRectangleBorder(
+              //                   borderRadius: BorderRadius.circular(10))),
+              //           onPressed: () {},
+              //           child: const Text('As soon as possible',
+              //               style: TextStyle(
+              //                   fontWeight: FontWeight.bold,
+              //                   color: Color(0xFF2E2E2E),
+              //                   fontSize: 13))),
+              //     ),
+              //   ],
+              // ),
+              // Container(
+              //   height: 1.0,
+              //   width: width * 1.0,
+              //   color: Colors.grey,
+              // ),
               SizedBox(height: height * 1.0 / 32.0),
               Row(
                 children: [
@@ -405,7 +405,6 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
       return;
     }
     for (var i = 0; i < widget.items.length; i++) {
-
       await http.get(id_url).then((value) async {
         //var a = json.decode(value.toString());
         //print(a);
@@ -413,19 +412,19 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
         var requestNumber = value.body.toString().substring(
             value.body.toString().indexOf(':') + 1,
             value.body.toString().indexOf('}'));
-          var postBody = <String, dynamic>{};
-          postBody.addEntries([
-            MapEntry('gender', widget.genders[i]),
-            MapEntry('age', widget.ages[i]),
-            MapEntry('item', widget.items[i]),
-            MapEntry('size', widget.sizes[i]),
-            MapEntry('emergency', widget.emergencies[i]),
-            MapEntry('notes', widget.notes[i]),
-            MapEntry('uid', uid),
-            MapEntry('requestno', requestNumber)
-          ]);
-          var response = await http.post(url, body: postBody);
-      // print('Response body: ${response.body}');
+        var postBody = <String, dynamic>{};
+        postBody.addEntries([
+          MapEntry('gender', widget.genders[i]),
+          MapEntry('age', widget.ages[i]),
+          MapEntry('item', widget.items[i]),
+          MapEntry('size', widget.sizes[i]),
+          MapEntry('emergency', widget.emergencies[i]),
+          MapEntry('notes', widget.notes[i]),
+          MapEntry('uid', uid),
+          MapEntry('requestno', requestNumber)
+        ]);
+        var response = await http.post(url, body: postBody);
+        // print('Response body: ${response.body}');
       });
     }
   }
