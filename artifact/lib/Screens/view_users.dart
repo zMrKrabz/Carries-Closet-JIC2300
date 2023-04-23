@@ -183,7 +183,7 @@ class _ViewUsersState extends State<ViewUsers> {
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 10.0),
-                      Text(decode[index]['id'],
+                      Text(decode[index]['name'],
                           style: const TextStyle(fontSize: 15))
                     ],
                   ),
