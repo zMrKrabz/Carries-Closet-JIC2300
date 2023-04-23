@@ -55,6 +55,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 },
                 child: const Text(
                   "Submit Request",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),

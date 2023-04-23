@@ -24,7 +24,9 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             backgroundColor: Color(0xFFF9F9F9),
-            body: SingleChildScrollView(
+            body: Padding(
+              padding: EdgeInsets.all(10),
+              child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(children: [
                   SizedBox(height: height * 1.0 / 13.0),
@@ -34,10 +36,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                         child: IconButton(
                             iconSize: width * 1.0 / 18.0,
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: ((context) {
-                                return const HomePage();
-                              })));
+                              Navigator.pop(context);
                             },
                             icon: const Icon(Icons.arrow_back))),
                     const Align(
@@ -58,7 +57,7 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
                             fontSize: 13.5, color: Color(0xFF2E2E2E))),
                   ),
                   const RequestWidget(),
-                ]))));
+                ])))));
   }
 }
 
@@ -92,6 +91,7 @@ class _RequestWidgetState extends State<RequestWidget> {
               removeTop: true,
               child: ListView.builder(
                   shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
                   itemCount: decode.length,
                   itemBuilder: (context, index) {
                     return Padding(

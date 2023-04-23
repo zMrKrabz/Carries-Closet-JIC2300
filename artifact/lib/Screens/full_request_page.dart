@@ -69,6 +69,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xFF2E2E2E))),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Date Created: " + request['date'],
@@ -78,7 +79,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                           textAlign: TextAlign.left,
                                         ),
                                         SizedBox(
-                                            width: width * 1.5 / 8.0,
+                                            width: width / 8.0,
                                             height: 1),
                                         TextButton(
                                             onPressed: () {

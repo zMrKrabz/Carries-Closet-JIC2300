@@ -78,6 +78,7 @@ class _ViewUsersState extends State<ViewUsers> {
             return ListView.builder(
                 padding: const EdgeInsets.all(20.0),
                 shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
                 itemCount: decode.length,
                 itemBuilder: (context, index) {
                   return Card(
@@ -165,12 +166,12 @@ class _ViewUsersState extends State<ViewUsers> {
                             icon: const Icon(Icons.arrow_back))),
                     Align(
                         alignment: Alignment.bottomCenter,
-                        child: Image.asset("assets/dsdf1.png",
-                            height: width * 1.0 / 2.0,
-                            width: width * 1.0 / 2.0,
+                        child: Image.asset("assets/butterfly.png",
+                            height: width * 1.0 / 2.25,
+                            width: width * 1.0 / 2.25,
                             alignment: Alignment.center))
                   ]),
-                  SizedBox(height: height * 1.0 / 24.0),
+                  SizedBox(height: height * 1.0 / 48.0),
                   Row(
                     children: [
                       SizedBox(width: width * 1.0 / 20.0),
