@@ -162,7 +162,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Item #: " + decode[index]['item'],
+                                        "" + decode[index]['item'],
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
