@@ -38,7 +38,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                 bottom: height * 1.0 / 32.0),
             child: SizedBox(
               child: CupertinoButton(
-                color: Color(0xFF7EA5F4),
+                color: const Color(0xFF7EA5F4),
                 onPressed: () {
                   submitDB();
                   if (AppUser.isAdmin == PermissionStatus.admin) {
@@ -77,7 +77,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                             },
                             icon: const Icon(Icons.arrow_back))),
                   ]),
-                  Text(
+                  const Text(
                     "   Review Order",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
@@ -86,7 +86,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                   ),
                   TextButton(
                       style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.zero))),
                       onPressed: () {
                         if (AppUser.isAdmin == PermissionStatus.admin) {
@@ -109,12 +109,12 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
-                  Icon(
+                  const Icon(
                     Icons.shopping_cart_outlined,
                     color: Color(0xFF808080),
                     size: 30,
                   ),
-                  Text(
+                  const Text(
                     "Items",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -134,7 +134,7 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                             horizontal: width * 1.0 / 12.0),
                         child: Card(
                             elevation: 0,
-                            color: Color(0xFFF9F9F9),
+                            color: const Color(0xFFF9F9F9),
                             shape: const RoundedRectangleBorder(
                                 side: BorderSide(color: Color(0xFFD9D9D9)),
                                 borderRadius: BorderRadius.only(
@@ -246,12 +246,12 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
-                  Icon(
+                  const Icon(
                     IconData(0xee2d, fontFamily: 'MaterialIcons'),
                     size: 30,
                     color: Color(0xFF808080),
                   ),
-                  Text(
+                  const Text(
                     "Delivery Time",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -310,12 +310,12 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
-                  Icon(
+                  const Icon(
                     Icons.location_pin,
                     size: 30,
                     color: Color(0xFF808080),
                   ),
-                  Text(
+                  const Text(
                     "Address",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -331,14 +331,14 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                   padding: EdgeInsets.symmetric(
                       vertical: height * 1.0 / 40.0,
                       horizontal: width * 1.0 / 28.0),
-                  child: Text("Name of User"),
+                  child: const Text("Name of User"),
                 ),
               ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 28.0),
-                  child: Text("Number of User"),
+                  child: const Text("Number of User"),
                 ),
               ),
               SizedBox(
@@ -353,12 +353,12 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
               Row(
                 children: [
                   SizedBox(width: width * 1.0 / 22.0),
-                  Icon(
+                  const Icon(
                     Icons.person_outline,
                     color: Color(0xFF808080),
                     size: 30,
                   ),
-                  Text(
+                  const Text(
                     "Contact Information",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -374,14 +374,14 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
                   padding: EdgeInsets.symmetric(
                       vertical: height * 1.0 / 40.0,
                       horizontal: width * 1.0 / 28.0),
-                  child: Text("Name of User"),
+                  child: const Text("Name of User"),
                 ),
               ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 1.0 / 28.0),
-                  child: Text("Number of User"),
+                  child: const Text("Number of User"),
                 ),
               ),
 
@@ -404,29 +404,29 @@ class _ClothingConfirmationPageState extends State<ClothingConfirmationPage> {
       //print("failed: no current user");
       return;
     }
+    for (var i = 0; i < widget.items.length; i++) {
 
-    await http.get(id_url).then((value) async {
-      //var a = json.decode(value.toString());
-      //print(a);
-      //print(value.body.toString());
-      var request_number = value.body.toString().substring(
-          value.body.toString().indexOf(':') + 1,
-          value.body.toString().indexOf('}'));
-      for (var i = 0; i < widget.items.length; i++) {
-        var postBody = <String, dynamic>{};
-        postBody.addEntries([
-          MapEntry('gender', widget.genders[i]),
-          MapEntry('age', widget.ages[i]),
-          MapEntry('item', widget.items[i]),
-          MapEntry('size', widget.sizes[i]),
-          MapEntry('emergency', widget.emergencies[i]),
-          MapEntry('notes', widget.notes[i]),
-          MapEntry('uid', uid),
-          MapEntry('requestno', request_number)
-        ]);
-        var response = await http.post(url, body: postBody);
-      }
+      await http.get(id_url).then((value) async {
+        //var a = json.decode(value.toString());
+        //print(a);
+        //print(value.body.toString());
+        var requestNumber = value.body.toString().substring(
+            value.body.toString().indexOf(':') + 1,
+            value.body.toString().indexOf('}'));
+          var postBody = <String, dynamic>{};
+          postBody.addEntries([
+            MapEntry('gender', widget.genders[i]),
+            MapEntry('age', widget.ages[i]),
+            MapEntry('item', widget.items[i]),
+            MapEntry('size', widget.sizes[i]),
+            MapEntry('emergency', widget.emergencies[i]),
+            MapEntry('notes', widget.notes[i]),
+            MapEntry('uid', uid),
+            MapEntry('requestno', requestNumber)
+          ]);
+          var response = await http.post(url, body: postBody);
       // print('Response body: ${response.body}');
-    });
+      });
+    }
   }
 }
