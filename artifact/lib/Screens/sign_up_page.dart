@@ -32,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
         theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Form(
                 key: _signUpFormKey,

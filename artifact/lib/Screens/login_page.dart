@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
                 child: Column(children: [
           SizedBox(height: height * 1.0 / 18.0),

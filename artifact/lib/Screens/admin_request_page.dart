@@ -82,6 +82,7 @@ class _RequestWidgetState extends State<RequestWidget> {
               List<dynamic> decode = json.decode(snapshot.data.toString());
               return ListView.builder(
                   shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
                   itemCount: decode.length,
                   itemBuilder: (context, index) {
                     int reqNum = index + 1;

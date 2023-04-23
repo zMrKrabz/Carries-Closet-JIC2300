@@ -1,4 +1,5 @@
 import 'package:artifact/Screens/admin_request_page.dart';
+import 'package:artifact/Screens/user_request_page.dart';
 import 'package:artifact/Screens/full_request_page.dart';
 import 'package:artifact/Screens/multi_clothing_form_page.dart';
 import 'package:artifact/Screens/multi_hygiene_form_page.dart';
@@ -104,7 +105,7 @@ class AdminHomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) {
-                        return const AdminRequestPage();
+                        return const UserRequestsPage();
                       })));
                     },
                     child: const Text('View \nRequests',
