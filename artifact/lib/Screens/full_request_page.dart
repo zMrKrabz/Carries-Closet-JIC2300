@@ -69,7 +69,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xFF2E2E2E))),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Date Created: " + request['date'],
@@ -78,9 +79,7 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                               color: Color(0xFF2E2E2E)),
                                           textAlign: TextAlign.left,
                                         ),
-                                        SizedBox(
-                                            width: width / 8.0,
-                                            height: 1),
+                                        SizedBox(width: width / 8.0, height: 1),
                                         TextButton(
                                             onPressed: () {
                                               updateRequest(
@@ -333,6 +332,8 @@ class _FullRequestPageState extends State<FullRequestPage> {
                                   minimumSize: Size(
                                       width * 11.0 / 42.0, height * 1.0 / 25.0),
                                   backgroundColor: const Color(0xFF7EA5F4),
+                                  elevation: 0.0,
+                                  shadowColor: Colors.transparent,
                                 ),
                                 child: const Text(
                                   "Complete Request",

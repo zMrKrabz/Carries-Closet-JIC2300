@@ -25,39 +25,39 @@ class _UserRequestsPageState extends State<UserRequestsPage> {
         home: Scaffold(
             backgroundColor: Color(0xFFF9F9F9),
             body: Padding(
-              padding: EdgeInsets.all(10),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(children: [
-                  SizedBox(height: height * 1.0 / 13.0),
-                  Stack(alignment: Alignment.centerLeft, children: [
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                            iconSize: width * 1.0 / 18.0,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.arrow_back))),
-                    const Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          "Requests",
-                          style: TextStyle(
-                              fontSize: 32, fontWeight: FontWeight.bold),
-                        ))
-                  ]),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: width / 10.0,
-                        vertical: height * 1.0 / 55.0),
-                    child: const Text(
-                        "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
-                        style: TextStyle(
-                            fontSize: 13.5, color: Color(0xFF2E2E2E))),
-                  ),
-                  const RequestWidget(),
-                ])))));
+                padding: EdgeInsets.all(10),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(children: [
+                      SizedBox(height: height * 1.0 / 13.0),
+                      Stack(alignment: Alignment.centerLeft, children: [
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                iconSize: width * 1.0 / 18.0,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.arrow_back))),
+                        const Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              "Requests",
+                              style: TextStyle(
+                                  fontSize: 32, fontWeight: FontWeight.bold),
+                            ))
+                      ]),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: width / 10.0,
+                            vertical: height * 1.0 / 55.0),
+                        child: const Text(
+                            "Please contact mamie@carriesclosetofga.org if you want to edit or cancel your requests.",
+                            style: TextStyle(
+                                fontSize: 13.5, color: Color(0xFF2E2E2E))),
+                      ),
+                      const RequestWidget(),
+                    ])))));
   }
 }
 
@@ -162,7 +162,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Item #: " + decode[index]['item'],
+                                        "" + decode[index]['item'],
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
