@@ -10,6 +10,9 @@ class ClothingFormInfo {
   final List sizes = ["", "Small", "Medium", "Large", "X-Large"];
   String? sizeValue;
 
+  final List sizeFittingValue = ["", "Skinny", "Normal", "Stout"];
+  String? sizeFittingValue;
+
   final List emergency = ["", "Yes", "No"];
   String? emergencyValue;
 
@@ -19,12 +22,13 @@ class ClothingFormInfo {
   int? id;
 
   ClothingFormInfo (
-    {
-      this.genderValue,
-      this.itemValue,
-      this.sizeValue,
-      this.emergencyValue,
-      this.id
-    }
-  );
+      {
+        this.genderValue,
+        this.itemValue,
+        this.sizeValue,
+        this.sizeFittingValue,
+        this.emergencyValue,
+        this.id
+      }
+      );
 }
